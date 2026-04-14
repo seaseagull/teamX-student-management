@@ -12,9 +12,10 @@ spring:
 #    url: jdbc:mysql://202.194.14.120:3306/web_db?allowPublicKeyRetrieval=true&useSSL=false
 #    username: java_server
 #    password: JavaServer2025@
-    url: jdbc:mysql://202.194.14.120:3306/java_db?allowPublicKeyRetrieval=true&useSSL=false
-    username: java_server
-    password: JavaServer2025@
+    url: jdbc:mysql://localhost:22224/java_3_37?allowPublicKeyRetrieval=true&useSSL=false
+    username: java_3_37
+    password: JavaP37@
+    driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://202.194.14.120:3306/java_1_01?allowPublicKeyRetrieval=true&useSSL=false
 #    username: java_1_01
 #    password: JavaP101@
