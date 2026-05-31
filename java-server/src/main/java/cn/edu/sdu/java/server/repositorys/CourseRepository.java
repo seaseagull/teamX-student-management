@@ -1,6 +1,8 @@
 package cn.edu.sdu.java.server.repositorys;
 
 import cn.edu.sdu.java.server.models.Course;
+import cn.edu.sdu.java.server.models.Homework;
+import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,4 +21,12 @@ public interface CourseRepository extends JpaRepository<Course,Integer> {
 
     Optional<Course> findByNum(String num);
     List<Course> findByName(String name);
+
+    @Query("SELECT c FROM Course c WHERE" +
+            "(:search = '' OR c.name LIKE %:search%) " +
+            "AND (:state = -1 OR c.credit = :state) " +
+            "AND (:teacherId = -1 OR c.teacher.personId = :teacherId)")
+    List<Course> getCourseList(@Param("search") String search,
+                                   @Param("credit") Integer state,
+                                   @Param("teacherId") Integer teacherId);
 }

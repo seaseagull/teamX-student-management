@@ -35,6 +35,8 @@ public class CourseService {
                 m.put("preCourse",pc.getName());
                 m.put("preCourseId",pc.getCourseId());
             }
+            m.put("teacherName", c.getTeacher() != null ?
+                    c.getTeacher().getPerson().getName() : "");
             dataList.add(m);
         }
         return CommonMethod.getReturnData(dataList);

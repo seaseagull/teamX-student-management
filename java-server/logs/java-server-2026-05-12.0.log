@@ -1,0 +1,851 @@
+2026-05-12 10:09:21,046 [background-preinit] INFO  o.h.validator.internal.util.Version                - HV000001: Hibernate Validator 8.0.2.Final
+2026-05-12 10:09:21,088 [main] INFO  c.e.s.java.server.JavaServerApplication            - Starting JavaServerApplication using Java 21.0.10 with PID 22708 (E:\Programming\project\teamX-student-management\java-server\target\classes started by hp in E:\Programming\project\teamX-student-management\java-server)
+2026-05-12 10:09:21,089 [main] INFO  c.e.s.java.server.JavaServerApplication            - No active profile set, falling back to 1 default profile: "default"
+2026-05-12 10:09:21,705 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 10:09:21,706 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-12 10:09:21,884 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 170 ms. Found 17 JPA repository interfaces.
+2026-05-12 10:09:21,901 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 10:09:21,902 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-12 10:09:21,917 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.CourseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,918 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.DictionaryInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,918 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FamilyMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,918 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FeeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,919 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.HomeworkRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,919 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.MenuInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,919 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ModifyLogRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,920 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.PersonRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,920 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ScoreRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,920 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StatisticsDayRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,920 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentLeaveRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,920 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,920 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentStatisticsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,921 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.SystemInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,921 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.TeacherRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,921 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,921 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserTypeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:09:21,921 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2026-05-12 10:09:22,429 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat initialized with port 22224 (http)
+2026-05-12 10:09:22,436 [main] INFO  o.apache.coyote.http11.Http11NioProtocol           - Initializing ProtocolHandler ["http-nio-22224"]
+2026-05-12 10:09:22,437 [main] INFO  o.apache.catalina.core.StandardService             - Starting service [Tomcat]
+2026-05-12 10:09:22,437 [main] INFO  org.apache.catalina.core.StandardEngine            - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2026-05-12 10:09:22,477 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring embedded WebApplicationContext
+2026-05-12 10:09:22,477 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 1354 ms
+2026-05-12 10:09:22,551 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Starting...
+2026-05-12 10:09:27,217 [main] INFO  com.zaxxer.hikari.pool.HikariPool                  - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1231a1be
+2026-05-12 10:09:27,218 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Start completed.
+2026-05-12 10:09:27,253 [main] INFO  o.hibernate.jpa.internal.util.LogHelper            - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-12 10:09:27,287 [main] INFO  org.hibernate.Version                              - HHH000412: Hibernate ORM core version 6.6.5.Final
+2026-05-12 10:09:27,307 [main] INFO  o.h.c.internal.RegionFactoryInitiator              - HHH000026: Second-level cache disabled
+2026-05-12 10:09:27,534 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-12 10:09:27,699 [main] INFO  org.hibernate.orm.connections.pooling              - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.35
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-12 10:09:27,835 [main] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean     - Failed to initialize JPA EntityManagerFactory: Table [homework] contains physical column name [homework_id] referred to by multiple logical column names: [homework_id], [homeworkId]
+2026-05-12 10:09:27,835 [main] ERROR o.s.b.web.embedded.tomcat.TomcatStarter            - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtAuthenticationFilter' defined in file [E:\Programming\project\teamX-student-management\java-server\target\classes\cn\edu\sdu\java\server\configs\JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'userDetailsServiceImpl': Unsatisfied dependency expressed through field 'userRepository': Error creating bean with name 'userRepository' defined in cn.edu.sdu.java.server.repositorys.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
+2026-05-12 10:09:27,854 [main] INFO  o.apache.catalina.core.StandardService             - Stopping service [Tomcat]
+2026-05-12 10:09:27,855 [main] WARN  o.a.c.loader.WebappClassLoaderBase                 - The web application [ROOT] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2026-05-12 10:09:27,858 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2026-05-12 10:09:27,858 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown initiated...
+2026-05-12 10:09:27,862 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown completed.
+2026-05-12 10:09:27,865 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger          - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-12 10:09:27,873 [main] ERROR o.springframework.boot.SpringApplication           - Application run failed
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at cn.edu.sdu.java.server.JavaServerApplication.main(JavaServerApplication.java:10)
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:147)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:107)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:516)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:222)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
+	... 8 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtAuthenticationFilter' defined in file [E:\Programming\project\teamX-student-management\java-server\target\classes\cn\edu\sdu\java\server\configs\JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'userDetailsServiceImpl': Unsatisfied dependency expressed through field 'userRepository': Error creating bean with name 'userRepository' defined in cn.edu.sdu.java.server.repositorys.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1381)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1218)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:211)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:174)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:169)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:154)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:266)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:240)
+	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4426)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:437)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128)
+	... 13 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userDetailsServiceImpl': Unsatisfied dependency expressed through field 'userRepository': Error creating bean with name 'userRepository' defined in cn.edu.sdu.java.server.repositorys.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1445)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1631)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1519)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 54 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in cn.edu.sdu.java.server.repositorys.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1711)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1460)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1573)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1519)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
+	... 69 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaSharedEM_entityManagerFactory': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:691)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:513)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1361)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1191)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
+	... 81 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Table [homework] contains physical column name [homework_id] referred to by multiple logical column names: [homework_id], [homeworkId]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1812)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
+	... 93 common frames omitted
+Caused by: org.hibernate.DuplicateMappingException: Table [homework] contains physical column name [homework_id] referred to by multiple logical column names: [homework_id], [homeworkId]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl$TableColumnNameBinding.bindPhysicalToLogical(InFlightMetadataCollectorImpl.java:1135)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl$TableColumnNameBinding.addBinding(InFlightMetadataCollectorImpl.java:1104)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.addColumnNameBinding(InFlightMetadataCollectorImpl.java:1174)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.addColumnNameBinding(InFlightMetadataCollectorImpl.java:1155)
+	at org.hibernate.boot.model.internal.AnnotatedJoinColumn.addColumnBinding(AnnotatedJoinColumn.java:409)
+	at org.hibernate.boot.model.internal.AnnotatedColumn.linkWithValue(AnnotatedColumn.java:445)
+	at org.hibernate.boot.model.internal.TableBinder.linkJoinColumnWithValueOverridingNameIfImplicit(TableBinder.java:838)
+	at org.hibernate.boot.model.internal.TableBinder.bindImplicitPrimaryKeyReference(TableBinder.java:609)
+	at org.hibernate.boot.model.internal.TableBinder.bindExplicitColumns(TableBinder.java:587)
+	at org.hibernate.boot.model.internal.TableBinder.bindForeignKey(TableBinder.java:568)
+	at org.hibernate.boot.model.internal.ToOneFkSecondPass.doSecondPass(ToOneFkSecondPass.java:123)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processEndOfQueue(InFlightMetadataCollectorImpl.java:1937)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processFkSecondPassesInOrder(InFlightMetadataCollectorImpl.java:1886)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1794)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:334)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1431)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1502)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1859)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1808)
+	... 100 common frames omitted
+2026-05-12 10:10:20,210 [background-preinit] INFO  o.h.validator.internal.util.Version                - HV000001: Hibernate Validator 8.0.2.Final
+2026-05-12 10:10:20,242 [main] INFO  c.e.s.java.server.JavaServerApplication            - Starting JavaServerApplication using Java 21.0.10 with PID 15424 (E:\Programming\project\teamX-student-management\java-server\target\classes started by hp in E:\Programming\project\teamX-student-management\java-server)
+2026-05-12 10:10:20,242 [main] INFO  c.e.s.java.server.JavaServerApplication            - No active profile set, falling back to 1 default profile: "default"
+2026-05-12 10:10:20,676 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 10:10:20,677 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-12 10:10:20,765 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 83 ms. Found 17 JPA repository interfaces.
+2026-05-12 10:10:20,777 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 10:10:20,778 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-12 10:10:20,786 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.CourseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,786 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.DictionaryInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,786 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FamilyMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,787 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FeeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,787 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.HomeworkRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,787 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.MenuInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,787 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ModifyLogRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,787 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.PersonRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,788 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ScoreRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,788 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StatisticsDayRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,788 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentLeaveRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,788 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,788 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentStatisticsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,788 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.SystemInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,789 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.TeacherRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,789 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,789 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserTypeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:10:20,789 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-05-12 10:10:21,086 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat initialized with port 22224 (http)
+2026-05-12 10:10:21,092 [main] INFO  o.apache.coyote.http11.Http11NioProtocol           - Initializing ProtocolHandler ["http-nio-22224"]
+2026-05-12 10:10:21,093 [main] INFO  o.apache.catalina.core.StandardService             - Starting service [Tomcat]
+2026-05-12 10:10:21,093 [main] INFO  org.apache.catalina.core.StandardEngine            - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2026-05-12 10:10:21,129 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring embedded WebApplicationContext
+2026-05-12 10:10:21,129 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 861 ms
+2026-05-12 10:10:21,175 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Starting...
+2026-05-12 10:10:25,816 [main] INFO  com.zaxxer.hikari.pool.HikariPool                  - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3962ec84
+2026-05-12 10:10:25,817 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Start completed.
+2026-05-12 10:10:25,839 [main] INFO  o.hibernate.jpa.internal.util.LogHelper            - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-12 10:10:25,863 [main] INFO  org.hibernate.Version                              - HHH000412: Hibernate ORM core version 6.6.5.Final
+2026-05-12 10:10:25,877 [main] INFO  o.h.c.internal.RegionFactoryInitiator              - HHH000026: Second-level cache disabled
+2026-05-12 10:10:25,990 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-12 10:10:26,061 [main] INFO  org.hibernate.orm.connections.pooling              - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.35
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-12 10:10:26,160 [main] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean     - Failed to initialize JPA EntityManagerFactory: Table [homework] contains physical column name [homework_id] referred to by multiple logical column names: [homework_id], [homeworkId]
+2026-05-12 10:10:26,160 [main] ERROR o.s.b.web.embedded.tomcat.TomcatStarter            - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtAuthenticationFilter' defined in file [E:\Programming\project\teamX-student-management\java-server\target\classes\cn\edu\sdu\java\server\configs\JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'userDetailsServiceImpl': Unsatisfied dependency expressed through field 'userRepository': Error creating bean with name 'userRepository' defined in cn.edu.sdu.java.server.repositorys.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
+2026-05-12 10:10:26,172 [main] INFO  o.apache.catalina.core.StandardService             - Stopping service [Tomcat]
+2026-05-12 10:10:26,173 [main] WARN  o.a.c.loader.WebappClassLoaderBase                 - The web application [ROOT] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2026-05-12 10:10:26,174 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2026-05-12 10:10:26,174 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown initiated...
+2026-05-12 10:10:26,177 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown completed.
+2026-05-12 10:10:26,182 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger          - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-12 10:10:26,189 [main] ERROR o.springframework.boot.SpringApplication           - Application run failed
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at cn.edu.sdu.java.server.JavaServerApplication.main(JavaServerApplication.java:10)
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:147)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:107)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:516)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:222)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
+	... 8 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtAuthenticationFilter' defined in file [E:\Programming\project\teamX-student-management\java-server\target\classes\cn\edu\sdu\java\server\configs\JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'userDetailsServiceImpl': Unsatisfied dependency expressed through field 'userRepository': Error creating bean with name 'userRepository' defined in cn.edu.sdu.java.server.repositorys.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1381)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1218)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:211)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:174)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:169)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:154)
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:266)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:240)
+	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4426)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:437)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128)
+	... 13 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userDetailsServiceImpl': Unsatisfied dependency expressed through field 'userRepository': Error creating bean with name 'userRepository' defined in cn.edu.sdu.java.server.repositorys.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1445)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1631)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1519)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 54 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in cn.edu.sdu.java.server.repositorys.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1711)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1460)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1573)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1519)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
+	... 69 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaSharedEM_entityManagerFactory': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:691)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:513)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1361)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1191)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
+	... 81 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Table [homework] contains physical column name [homework_id] referred to by multiple logical column names: [homework_id], [homeworkId]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1812)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
+	... 93 common frames omitted
+Caused by: org.hibernate.DuplicateMappingException: Table [homework] contains physical column name [homework_id] referred to by multiple logical column names: [homework_id], [homeworkId]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl$TableColumnNameBinding.bindPhysicalToLogical(InFlightMetadataCollectorImpl.java:1135)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl$TableColumnNameBinding.addBinding(InFlightMetadataCollectorImpl.java:1104)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.addColumnNameBinding(InFlightMetadataCollectorImpl.java:1174)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.addColumnNameBinding(InFlightMetadataCollectorImpl.java:1155)
+	at org.hibernate.boot.model.internal.AnnotatedJoinColumn.addColumnBinding(AnnotatedJoinColumn.java:409)
+	at org.hibernate.boot.model.internal.AnnotatedColumn.linkWithValue(AnnotatedColumn.java:445)
+	at org.hibernate.boot.model.internal.TableBinder.linkJoinColumnWithValueOverridingNameIfImplicit(TableBinder.java:838)
+	at org.hibernate.boot.model.internal.TableBinder.bindImplicitPrimaryKeyReference(TableBinder.java:609)
+	at org.hibernate.boot.model.internal.TableBinder.bindExplicitColumns(TableBinder.java:587)
+	at org.hibernate.boot.model.internal.TableBinder.bindForeignKey(TableBinder.java:568)
+	at org.hibernate.boot.model.internal.ToOneFkSecondPass.doSecondPass(ToOneFkSecondPass.java:123)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processEndOfQueue(InFlightMetadataCollectorImpl.java:1937)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processFkSecondPassesInOrder(InFlightMetadataCollectorImpl.java:1886)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1794)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:334)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1431)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1502)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1859)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1808)
+	... 100 common frames omitted
+2026-05-12 10:14:41,478 [background-preinit] INFO  o.h.validator.internal.util.Version                - HV000001: Hibernate Validator 8.0.2.Final
+2026-05-12 10:14:41,504 [main] INFO  c.e.s.java.server.JavaServerApplication            - Starting JavaServerApplication using Java 21.0.10 with PID 5056 (E:\Programming\project\teamX-student-management\java-server\target\classes started by hp in E:\Programming\project\teamX-student-management\java-server)
+2026-05-12 10:14:41,505 [main] INFO  c.e.s.java.server.JavaServerApplication            - No active profile set, falling back to 1 default profile: "default"
+2026-05-12 10:14:41,906 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 10:14:41,906 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-12 10:14:41,997 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 88 ms. Found 17 JPA repository interfaces.
+2026-05-12 10:14:42,008 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 10:14:42,009 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-12 10:14:42,018 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.CourseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,018 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.DictionaryInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,018 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FamilyMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,018 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FeeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,019 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.HomeworkRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,019 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.MenuInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,019 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ModifyLogRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,019 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.PersonRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,019 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ScoreRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,019 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StatisticsDayRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,019 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentLeaveRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,019 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,020 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentStatisticsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,020 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.SystemInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,020 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.TeacherRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,020 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,020 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserTypeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 10:14:42,020 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-05-12 10:14:42,319 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat initialized with port 22224 (http)
+2026-05-12 10:14:42,326 [main] INFO  o.apache.coyote.http11.Http11NioProtocol           - Initializing ProtocolHandler ["http-nio-22224"]
+2026-05-12 10:14:42,326 [main] INFO  o.apache.catalina.core.StandardService             - Starting service [Tomcat]
+2026-05-12 10:14:42,326 [main] INFO  org.apache.catalina.core.StandardEngine            - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2026-05-12 10:14:42,359 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring embedded WebApplicationContext
+2026-05-12 10:14:42,359 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 828 ms
+2026-05-12 10:14:42,407 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Starting...
+2026-05-12 10:14:47,049 [main] INFO  com.zaxxer.hikari.pool.HikariPool                  - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3335afcf
+2026-05-12 10:14:47,050 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Start completed.
+2026-05-12 10:14:47,074 [main] INFO  o.hibernate.jpa.internal.util.LogHelper            - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-12 10:14:47,098 [main] INFO  org.hibernate.Version                              - HHH000412: Hibernate ORM core version 6.6.5.Final
+2026-05-12 10:14:47,111 [main] INFO  o.h.c.internal.RegionFactoryInitiator              - HHH000026: Second-level cache disabled
+2026-05-12 10:14:47,223 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-12 10:14:47,291 [main] INFO  org.hibernate.orm.connections.pooling              - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.35
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-12 10:14:47,899 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-12 10:14:47,901 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 10:14:48,062 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory               - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-12 10:14:48,448 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-12 10:14:48,612 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-12 10:14:48,613 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-12 10:14:49,040 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping              - Adding welcome page: class path resource [public/index.html]
+2026-05-12 10:14:49,429 [main] INFO  o.apache.coyote.http11.Http11NioProtocol           - Starting ProtocolHandler ["http-nio-22224"]
+2026-05-12 10:14:49,437 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat started on port 22224 (http) with context path '/'
+2026-05-12 10:14:49,441 [main] INFO  c.e.s.java.server.JavaServerApplication            - Started JavaServerApplication in 8.248 seconds (process running for 8.589)
+2026-05-12 10:14:49,443 [main] INFO  c.e.s.j.server.SystemApplicationListener           - org.springframework.boot.context.event.ApplicationReadyEvent[source=org.springframework.boot.SpringApplication@43fe629a]
+2026-05-12 10:14:49,443 [main] INFO  c.e.s.j.server.SystemApplicationListener           - SystemInitStart
+2026-05-12 10:14:49,599 [main] INFO  c.e.s.j.server.SystemApplicationListener           - systemInitEnd
+2026-05-12 10:14:55,966 [http-nio-22224-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-12 10:14:55,966 [http-nio-22224-exec-1] INFO  o.s.web.servlet.DispatcherServlet                  - Initializing Servlet 'dispatcherServlet'
+2026-05-12 10:14:55,966 [http-nio-22224-exec-1] INFO  o.s.web.servlet.DispatcherServlet                  - Completed initialization in 0 ms
+2026-05-12 10:14:56,447 [http-nio-22224-exec-3] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,2022030001,2026-05-12 10:14:56,0.057
+2026-05-12 10:14:56,588 [http-nio-22224-exec-9] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,2022030001,2026-05-12 10:14:56,0.135
+2026-05-12 10:15:03,246 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getTeacherItemOptionList,2022030001,2026-05-12 10:15:03,0.051
+2026-05-12 10:15:03,317 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDictionaryOptionItemList,2022030001,2026-05-12 10:15:03,0.061
+2026-05-12 10:15:03,350 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getStudentLeaveList,2022030001,2026-05-12 10:15:03,0.029
+2026-05-12 10:56:55,339 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 10:56:55,0.035
+2026-05-12 10:56:55,517 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 10:56:55,0.173
+2026-05-12 10:57:04,990 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuTreeNodeList,admin,2026-05-12 10:57:04,0.186
+2026-05-12 10:57:30,175 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDictionaryTreeNodeList,admin,2026-05-12 10:57:30,0.076
+2026-05-12 10:57:48,847 [http-nio-22224-exec-9] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/score/getStudentItemOptionList,admin,2026-05-12 10:57:48,0.093
+2026-05-12 10:57:48,938 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/score/getCourseItemOptionList,admin,2026-05-12 10:57:48,0.085
+2026-05-12 10:57:49,006 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/score/getScoreList,admin,2026-05-12 10:57:48,0.058
+2026-05-12 10:58:03,653 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/student/getStudentList,admin,2026-05-12 10:58:03,0.071
+2026-05-12 10:58:03,680 [http-nio-22224-exec-10] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDictionaryOptionItemList,admin,2026-05-12 10:58:03,0.021
+2026-05-12 11:01:25,169 [http-nio-22224-exec-9] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuSave,admin,2026-05-12 11:01:24,0.219
+2026-05-12 11:01:40,517 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuDelete,admin,2026-05-12 11:01:40,0.225
+2026-05-12 11:02:02,001 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuSave,admin,2026-05-12 11:02:01,0.292
+2026-05-12 11:02:18,745 [http-nio-22224-exec-1] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuDelete,admin,2026-05-12 11:02:18,0.223
+2026-05-12 11:02:40,351 [http-nio-22224-exec-7] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuSave,admin,2026-05-12 11:02:40,0.288
+2026-05-12 11:05:01,307 [http-nio-22224-exec-9] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuSave,admin,2026-05-12 11:05:01,0.053
+2026-05-12 11:05:47,302 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuSave,admin,2026-05-12 11:05:47,0.087
+2026-05-12 11:11:19,475 [http-nio-22224-exec-1] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,2022030001,2026-05-12 11:11:19,0.039
+2026-05-12 11:11:19,628 [http-nio-22224-exec-8] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,2022030001,2026-05-12 11:11:19,0.147
+2026-05-12 11:11:45,768 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 11:11:45,0.029
+2026-05-12 11:11:45,929 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 11:11:45,0.156
+2026-05-12 11:11:53,947 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuTreeNodeList,admin,2026-05-12 11:11:53,0.224
+2026-05-12 11:12:11,363 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuSave,admin,2026-05-12 11:12:11,0.2
+2026-05-12 11:12:29,904 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 11:12:29,0.037
+2026-05-12 11:12:30,099 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 11:12:29,0.187
+2026-05-12 11:12:34,770 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDictionaryTreeNodeList,admin,2026-05-12 11:12:34,0.078
+2026-05-12 11:12:36,301 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuTreeNodeList,admin,2026-05-12 11:12:36,0.19
+2026-05-12 11:12:46,127 [http-nio-22224-exec-7] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuDelete,admin,2026-05-12 11:12:45,0.19
+2026-05-12 11:13:12,956 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 11:13:12,0.031
+2026-05-12 11:13:13,187 [http-nio-22224-exec-10] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 11:13:12,0.226
+2026-05-12 11:13:17,161 [http-nio-22224-exec-8] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuTreeNodeList,admin,2026-05-12 11:13:16,0.185
+2026-05-12 11:13:30,361 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,2022030001,2026-05-12 11:13:30,0.016
+2026-05-12 11:13:30,425 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,2022030001,2026-05-12 11:13:30,0.058
+2026-05-12 11:14:06,459 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 11:14:06,0.038
+2026-05-12 11:14:06,645 [http-nio-22224-exec-3] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 11:14:06,0.18
+2026-05-12 11:14:17,193 [http-nio-22224-exec-7] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getTeacherItemOptionList,admin,2026-05-12 11:14:16,0.848
+2026-05-12 11:14:17,224 [http-nio-22224-exec-9] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDictionaryOptionItemList,admin,2026-05-12 11:14:17,0.024
+2026-05-12 11:14:17,251 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getStudentLeaveList,admin,2026-05-12 11:14:17,0.023
+2026-05-12 11:14:21,668 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuTreeNodeList,admin,2026-05-12 11:14:21,0.101
+2026-05-12 11:15:13,025 [http-nio-22224-exec-9] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuSave,admin,2026-05-12 11:15:12,0.164
+2026-05-12 11:15:32,076 [http-nio-22224-exec-10] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 11:15:32,0.047
+2026-05-12 11:15:32,280 [http-nio-22224-exec-1] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 11:15:32,0.199
+2026-05-12 11:15:37,568 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuTreeNodeList,admin,2026-05-12 11:15:37,0.187
+2026-05-12 11:16:35,041 [http-nio-22224-exec-9] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/menuSave,admin,2026-05-12 11:16:34,0.191
+2026-05-12 11:16:50,935 [http-nio-22224-exec-10] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 11:16:50,0.031
+2026-05-12 11:16:51,103 [http-nio-22224-exec-1] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 11:16:50,0.164
+2026-05-12 11:17:00,122 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDictionaryTreeNodeList,admin,2026-05-12 11:17:00,0.07
+2026-05-12 11:17:01,145 [http-nio-22224-exec-7] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuTreeNodeList,admin,2026-05-12 11:17:00,0.154
+2026-05-12 11:37:59,595 [SpringApplicationShutdownHook] INFO  o.s.b.w.embedded.tomcat.GracefulShutdown           - Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-12 11:37:59,599 [tomcat-shutdown] INFO  o.s.b.w.embedded.tomcat.GracefulShutdown           - Graceful shutdown complete
+2026-05-12 11:37:59,614 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 11:37:59,615 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown initiated...
+2026-05-12 11:37:59,616 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown completed.
+2026-05-12 22:16:35,338 [background-preinit] INFO  o.h.validator.internal.util.Version                - HV000001: Hibernate Validator 8.0.2.Final
+2026-05-12 22:16:35,373 [main] INFO  c.e.s.java.server.JavaServerApplication            - Starting JavaServerApplication using Java 21.0.10 with PID 19540 (E:\Programming\project\teamX-student-management\java-server\target\classes started by hp in E:\Programming\project\teamX-student-management\java-server)
+2026-05-12 22:16:35,373 [main] INFO  c.e.s.java.server.JavaServerApplication            - No active profile set, falling back to 1 default profile: "default"
+2026-05-12 22:16:35,861 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 22:16:35,862 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-12 22:16:35,971 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 105 ms. Found 17 JPA repository interfaces.
+2026-05-12 22:16:35,984 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 22:16:35,985 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-12 22:16:35,995 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.CourseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,995 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.DictionaryInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,995 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FamilyMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,996 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FeeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,996 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.HomeworkRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,996 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.MenuInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,996 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ModifyLogRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,996 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.PersonRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,996 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ScoreRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StatisticsDayRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentLeaveRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentStatisticsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.SystemInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.TeacherRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserTypeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:16:35,997 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2026-05-12 22:16:36,329 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat initialized with port 22224 (http)
+2026-05-12 22:16:36,336 [main] INFO  o.apache.coyote.http11.Http11NioProtocol           - Initializing ProtocolHandler ["http-nio-22224"]
+2026-05-12 22:16:36,336 [main] INFO  o.apache.catalina.core.StandardService             - Starting service [Tomcat]
+2026-05-12 22:16:36,337 [main] INFO  org.apache.catalina.core.StandardEngine            - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2026-05-12 22:16:36,370 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring embedded WebApplicationContext
+2026-05-12 22:16:36,370 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 972 ms
+2026-05-12 22:16:36,423 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Starting...
+2026-05-12 22:16:41,057 [main] INFO  com.zaxxer.hikari.pool.HikariPool                  - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@27d73d22
+2026-05-12 22:16:41,059 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Start completed.
+2026-05-12 22:16:41,090 [main] INFO  o.hibernate.jpa.internal.util.LogHelper            - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-12 22:16:41,129 [main] INFO  org.hibernate.Version                              - HHH000412: Hibernate ORM core version 6.6.5.Final
+2026-05-12 22:16:41,149 [main] INFO  o.h.c.internal.RegionFactoryInitiator              - HHH000026: Second-level cache disabled
+2026-05-12 22:16:41,329 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-12 22:16:41,409 [main] INFO  org.hibernate.orm.connections.pooling              - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.35
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-12 22:16:42,097 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-12 22:16:42,099 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 22:16:42,294 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory               - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-12 22:16:42,719 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-12 22:16:42,912 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-12 22:16:42,912 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-12 22:16:43,408 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping              - Adding welcome page: class path resource [public/index.html]
+2026-05-12 22:16:43,908 [main] INFO  o.apache.coyote.http11.Http11NioProtocol           - Starting ProtocolHandler ["http-nio-22224"]
+2026-05-12 22:16:43,919 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat started on port 22224 (http) with context path '/'
+2026-05-12 22:16:43,925 [main] INFO  c.e.s.java.server.JavaServerApplication            - Started JavaServerApplication in 8.893 seconds (process running for 9.451)
+2026-05-12 22:16:43,926 [main] INFO  c.e.s.j.server.SystemApplicationListener           - org.springframework.boot.context.event.ApplicationReadyEvent[source=org.springframework.boot.SpringApplication@4d236a2b]
+2026-05-12 22:16:43,926 [main] INFO  c.e.s.j.server.SystemApplicationListener           - SystemInitStart
+2026-05-12 22:16:44,039 [main] INFO  c.e.s.j.server.SystemApplicationListener           - systemInitEnd
+2026-05-12 22:16:46,550 [http-nio-22224-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-12 22:16:46,550 [http-nio-22224-exec-1] INFO  o.s.web.servlet.DispatcherServlet                  - Initializing Servlet 'dispatcherServlet'
+2026-05-12 22:16:46,552 [http-nio-22224-exec-1] INFO  o.s.web.servlet.DispatcherServlet                  - Completed initialization in 2 ms
+2026-05-12 22:16:47,275 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 22:16:47,0.048
+2026-05-12 22:16:47,388 [http-nio-22224-exec-9] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 22:16:47,0.107
+2026-05-12 22:17:21,531 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuTreeNodeList,admin,2026-05-12 22:17:21,0.104
+2026-05-12 22:17:48,112 [http-nio-22224-exec-10] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getTeacherItemOptionList,admin,2026-05-12 22:17:48,0.056
+2026-05-12 22:17:48,175 [http-nio-22224-exec-3] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDictionaryOptionItemList,admin,2026-05-12 22:17:48,0.055
+2026-05-12 22:17:48,205 [http-nio-22224-exec-1] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getStudentLeaveList,admin,2026-05-12 22:17:48,0.025
+2026-05-12 22:28:58,899 [SpringApplicationShutdownHook] INFO  o.s.b.w.embedded.tomcat.GracefulShutdown           - Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-12 22:28:58,904 [tomcat-shutdown] INFO  o.s.b.w.embedded.tomcat.GracefulShutdown           - Graceful shutdown complete
+2026-05-12 22:28:58,919 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 22:28:58,920 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown initiated...
+2026-05-12 22:28:58,923 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown completed.
+2026-05-12 22:29:01,863 [background-preinit] INFO  o.h.validator.internal.util.Version                - HV000001: Hibernate Validator 8.0.2.Final
+2026-05-12 22:29:01,893 [main] INFO  c.e.s.java.server.JavaServerApplication            - Starting JavaServerApplication using Java 21.0.10 with PID 15608 (E:\Programming\project\teamX-student-management\java-server\target\classes started by hp in E:\Programming\project\teamX-student-management\java-server)
+2026-05-12 22:29:01,894 [main] INFO  c.e.s.java.server.JavaServerApplication            - No active profile set, falling back to 1 default profile: "default"
+2026-05-12 22:29:02,272 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 22:29:02,273 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-12 22:29:02,362 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 84 ms. Found 17 JPA repository interfaces.
+2026-05-12 22:29:02,372 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 22:29:02,372 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-12 22:29:02,381 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.CourseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,381 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.DictionaryInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,381 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FamilyMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,381 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FeeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,381 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.HomeworkRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,382 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.MenuInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,382 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ModifyLogRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,382 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.PersonRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,383 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ScoreRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,383 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StatisticsDayRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,383 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentLeaveRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,383 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,383 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentStatisticsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,383 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.SystemInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,383 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.TeacherRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,383 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,383 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserTypeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:02,383 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-05-12 22:29:02,614 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2026-05-12 22:29:02,618 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger          - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-12 22:29:02,631 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter             - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Binding to target [Bindable@335f5c69 type = org.springframework.boot.autoconfigure.web.servlet.MultipartProperties, value = 'provided', annotations = array<Annotation>[@org.springframework.boot.context.properties.ConfigurationProperties(ignoreInvalidFields=false, ignoreUnknownFields=false, prefix="spring.servlet.multipart", value="spring.servlet.multipart")], bindMethod = JAVA_BEAN] failed:
+
+    Property: spring.servlet.multipart.encoding.charset
+    Value: "UTF-8"
+    Origin: class path resource [application.yml] - 47:18
+    Reason: The elements [spring.servlet.multipart.encoding.charset,spring.servlet.multipart.encoding.enabled,spring.servlet.multipart.encoding.force] were left unbound.
+    Property: spring.servlet.multipart.encoding.enabled
+    Value: "true"
+    Origin: class path resource [application.yml] - 48:18
+    Reason: The elements [spring.servlet.multipart.encoding.charset,spring.servlet.multipart.encoding.enabled,spring.servlet.multipart.encoding.force] were left unbound.
+    Property: spring.servlet.multipart.encoding.force
+    Value: "true"
+    Origin: class path resource [application.yml] - 49:16
+    Reason: The elements [spring.servlet.multipart.encoding.charset,spring.servlet.multipart.encoding.enabled,spring.servlet.multipart.encoding.force] were left unbound.
+
+Action:
+
+Update your application's configuration
+
+2026-05-12 22:29:42,280 [background-preinit] INFO  o.h.validator.internal.util.Version                - HV000001: Hibernate Validator 8.0.2.Final
+2026-05-12 22:29:42,310 [main] INFO  c.e.s.java.server.JavaServerApplication            - Starting JavaServerApplication using Java 21.0.10 with PID 12256 (E:\Programming\project\teamX-student-management\java-server\target\classes started by hp in E:\Programming\project\teamX-student-management\java-server)
+2026-05-12 22:29:42,310 [main] INFO  c.e.s.java.server.JavaServerApplication            - No active profile set, falling back to 1 default profile: "default"
+2026-05-12 22:29:42,678 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 22:29:42,679 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-12 22:29:42,766 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 82 ms. Found 17 JPA repository interfaces.
+2026-05-12 22:29:42,774 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 22:29:42,775 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-12 22:29:42,782 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.CourseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,782 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.DictionaryInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,782 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FamilyMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,782 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FeeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,782 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.HomeworkRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,782 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.MenuInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,783 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ModifyLogRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,783 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.PersonRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,783 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ScoreRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,783 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StatisticsDayRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,783 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentLeaveRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,784 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,784 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentStatisticsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,784 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.SystemInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,784 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.TeacherRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,784 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,784 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserTypeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:29:42,784 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2026-05-12 22:29:43,052 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat initialized with port 22224 (http)
+2026-05-12 22:29:43,058 [main] INFO  o.apache.coyote.http11.Http11NioProtocol           - Initializing ProtocolHandler ["http-nio-22224"]
+2026-05-12 22:29:43,059 [main] INFO  o.apache.catalina.core.StandardService             - Starting service [Tomcat]
+2026-05-12 22:29:43,059 [main] INFO  org.apache.catalina.core.StandardEngine            - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2026-05-12 22:29:43,088 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring embedded WebApplicationContext
+2026-05-12 22:29:43,088 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 755 ms
+2026-05-12 22:29:43,129 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Starting...
+2026-05-12 22:29:47,766 [main] INFO  com.zaxxer.hikari.pool.HikariPool                  - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@44dd0d38
+2026-05-12 22:29:47,767 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Start completed.
+2026-05-12 22:29:47,790 [main] INFO  o.hibernate.jpa.internal.util.LogHelper            - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-12 22:29:47,812 [main] INFO  org.hibernate.Version                              - HHH000412: Hibernate ORM core version 6.6.5.Final
+2026-05-12 22:29:47,825 [main] INFO  o.h.c.internal.RegionFactoryInitiator              - HHH000026: Second-level cache disabled
+2026-05-12 22:29:47,941 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-12 22:29:48,017 [main] INFO  org.hibernate.orm.connections.pooling              - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.35
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-12 22:29:48,930 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-12 22:29:48,933 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 22:29:49,136 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory               - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-12 22:29:49,647 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-12 22:29:49,832 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-12 22:29:49,832 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-12 22:29:50,414 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping              - Adding welcome page: class path resource [public/index.html]
+2026-05-12 22:29:50,825 [main] INFO  o.apache.coyote.http11.Http11NioProtocol           - Starting ProtocolHandler ["http-nio-22224"]
+2026-05-12 22:29:50,834 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat started on port 22224 (http) with context path '/'
+2026-05-12 22:29:50,843 [main] INFO  c.e.s.java.server.JavaServerApplication            - Started JavaServerApplication in 8.832 seconds (process running for 9.182)
+2026-05-12 22:29:50,845 [main] INFO  c.e.s.j.server.SystemApplicationListener           - org.springframework.boot.context.event.ApplicationReadyEvent[source=org.springframework.boot.SpringApplication@2c526883]
+2026-05-12 22:29:50,845 [main] INFO  c.e.s.j.server.SystemApplicationListener           - SystemInitStart
+2026-05-12 22:29:51,002 [main] INFO  c.e.s.j.server.SystemApplicationListener           - systemInitEnd
+2026-05-12 22:29:57,075 [http-nio-22224-exec-4] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-12 22:29:57,075 [http-nio-22224-exec-4] INFO  o.s.web.servlet.DispatcherServlet                  - Initializing Servlet 'dispatcherServlet'
+2026-05-12 22:29:57,076 [http-nio-22224-exec-4] INFO  o.s.web.servlet.DispatcherServlet                  - Completed initialization in 1 ms
+2026-05-12 22:29:57,642 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 22:29:57,0.057
+2026-05-12 22:29:57,877 [http-nio-22224-exec-1] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 22:29:57,0.231
+2026-05-12 22:39:22,676 [SpringApplicationShutdownHook] INFO  o.s.b.w.embedded.tomcat.GracefulShutdown           - Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-12 22:39:22,680 [tomcat-shutdown] INFO  o.s.b.w.embedded.tomcat.GracefulShutdown           - Graceful shutdown complete
+2026-05-12 22:39:22,693 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 22:39:22,694 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown initiated...
+2026-05-12 22:39:22,697 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown completed.
+2026-05-12 22:39:42,487 [background-preinit] INFO  o.h.validator.internal.util.Version                - HV000001: Hibernate Validator 8.0.2.Final
+2026-05-12 22:39:42,514 [main] INFO  c.e.s.java.server.JavaServerApplication            - Starting JavaServerApplication using Java 21.0.10 with PID 14664 (E:\Programming\project\teamX-student-management\java-server\target\classes started by hp in E:\Programming\project\teamX-student-management\java-server)
+2026-05-12 22:39:42,515 [main] INFO  c.e.s.java.server.JavaServerApplication            - No active profile set, falling back to 1 default profile: "default"
+2026-05-12 22:39:42,885 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 22:39:42,886 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-12 22:39:42,972 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 82 ms. Found 17 JPA repository interfaces.
+2026-05-12 22:39:42,981 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-12 22:39:42,982 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-12 22:39:42,990 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.CourseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,990 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.DictionaryInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,990 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FamilyMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,990 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.FeeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,990 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.HomeworkRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,990 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.MenuInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,990 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ModifyLogRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,991 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.PersonRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,991 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.ScoreRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,991 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StatisticsDayRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,991 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentLeaveRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,991 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,992 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.StudentStatisticsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,992 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.SystemInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,992 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.TeacherRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,992 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,992 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport  - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.edu.sdu.java.server.repositorys.UserTypeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-05-12 22:39:42,992 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2026-05-12 22:39:43,258 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat initialized with port 22224 (http)
+2026-05-12 22:39:43,266 [main] INFO  o.apache.coyote.http11.Http11NioProtocol           - Initializing ProtocolHandler ["http-nio-22224"]
+2026-05-12 22:39:43,267 [main] INFO  o.apache.catalina.core.StandardService             - Starting service [Tomcat]
+2026-05-12 22:39:43,267 [main] INFO  org.apache.catalina.core.StandardEngine            - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2026-05-12 22:39:43,296 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring embedded WebApplicationContext
+2026-05-12 22:39:43,296 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 757 ms
+2026-05-12 22:39:43,342 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Starting...
+2026-05-12 22:39:47,974 [main] INFO  com.zaxxer.hikari.pool.HikariPool                  - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@550c973e
+2026-05-12 22:39:47,977 [main] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Start completed.
+2026-05-12 22:39:48,020 [main] INFO  o.hibernate.jpa.internal.util.LogHelper            - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-12 22:39:48,051 [main] INFO  org.hibernate.Version                              - HHH000412: Hibernate ORM core version 6.6.5.Final
+2026-05-12 22:39:48,072 [main] INFO  o.h.c.internal.RegionFactoryInitiator              - HHH000026: Second-level cache disabled
+2026-05-12 22:39:48,216 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-12 22:39:48,285 [main] INFO  org.hibernate.orm.connections.pooling              - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.35
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-12 22:39:49,107 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-12 22:39:49,109 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 22:39:49,280 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory               - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-12 22:39:49,814 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-12 22:39:50,004 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-12 22:39:50,005 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-12 22:39:50,659 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping              - Adding welcome page: class path resource [public/index.html]
+2026-05-12 22:39:51,063 [main] INFO  o.apache.coyote.http11.Http11NioProtocol           - Starting ProtocolHandler ["http-nio-22224"]
+2026-05-12 22:39:51,072 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            - Tomcat started on port 22224 (http) with context path '/'
+2026-05-12 22:39:51,076 [main] INFO  c.e.s.java.server.JavaServerApplication            - Started JavaServerApplication in 8.872 seconds (process running for 9.205)
+2026-05-12 22:39:51,077 [main] INFO  c.e.s.j.server.SystemApplicationListener           - org.springframework.boot.context.event.ApplicationReadyEvent[source=org.springframework.boot.SpringApplication@72219922]
+2026-05-12 22:39:51,077 [main] INFO  c.e.s.j.server.SystemApplicationListener           - SystemInitStart
+2026-05-12 22:39:51,172 [main] INFO  c.e.s.j.server.SystemApplicationListener           - systemInitEnd
+2026-05-12 22:39:54,866 [http-nio-22224-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]                 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-12 22:39:54,866 [http-nio-22224-exec-1] INFO  o.s.web.servlet.DispatcherServlet                  - Initializing Servlet 'dispatcherServlet'
+2026-05-12 22:39:54,868 [http-nio-22224-exec-1] INFO  o.s.web.servlet.DispatcherServlet                  - Completed initialization in 2 ms
+2026-05-12 22:39:55,378 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 22:39:55,0.036
+2026-05-12 22:39:55,492 [http-nio-22224-exec-3] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 22:39:55,0.11
+2026-05-12 22:47:38,201 [http-nio-22224-exec-8] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 22:47:38,0.031
+2026-05-12 22:47:38,314 [http-nio-22224-exec-10] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 22:47:38,0.106
+2026-05-12 22:47:40,042 [http-nio-22224-exec-9] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/homework/getCourseItemOptionList,admin,2026-05-12 22:47:39,0.054
+2026-05-12 22:49:27,647 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 22:49:27,0.022
+2026-05-12 22:49:27,756 [http-nio-22224-exec-7] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 22:49:27,0.102
+2026-05-12 22:49:29,506 [http-nio-22224-exec-8] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/homework/getCourseItemOptionList,admin,2026-05-12 22:49:29,0.04
+2026-05-12 22:49:35,288 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,2022030001,2026-05-12 22:49:35,0.021
+2026-05-12 22:49:35,366 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,2022030001,2026-05-12 22:49:35,0.073
+2026-05-12 22:49:38,200 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/homework/getCourseItemOptionList,2022030001,2026-05-12 22:49:38,0.055
+2026-05-12 22:52:59,217 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 22:52:59,0.021
+2026-05-12 22:52:59,308 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 22:52:59,0.086
+2026-05-12 22:53:02,007 [http-nio-22224-exec-5] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/homework/getCourseItemOptionList,admin,2026-05-12 22:53:01,0.055
+2026-05-12 22:53:03,171 [http-nio-22224-exec-8] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/homework/getCourseItemOptionList,admin,2026-05-12 22:53:03,0.046
+2026-05-12 22:53:07,634 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getTeacherItemOptionList,admin,2026-05-12 22:53:07,0.049
+2026-05-12 22:53:07,700 [http-nio-22224-exec-1] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDictionaryOptionItemList,admin,2026-05-12 22:53:07,0.061
+2026-05-12 22:53:07,730 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getStudentLeaveList,admin,2026-05-12 22:53:07,0.024
+2026-05-12 22:53:10,777 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/homework/getCourseItemOptionList,admin,2026-05-12 22:53:10,0.055
+2026-05-12 22:53:27,106 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,2022030001,2026-05-12 22:53:27,0.045
+2026-05-12 22:53:27,188 [http-nio-22224-exec-1] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,2022030001,2026-05-12 22:53:27,0.077
+2026-05-12 22:53:30,483 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getTeacherItemOptionList,2022030001,2026-05-12 22:53:30,0.05
+2026-05-12 22:53:30,519 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDictionaryOptionItemList,2022030001,2026-05-12 22:53:30,0.027
+2026-05-12 22:53:30,545 [http-nio-22224-exec-3] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getStudentLeaveList,2022030001,2026-05-12 22:53:30,0.022
+2026-05-12 23:18:38,832 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 23:18:38,0.02
+2026-05-12 23:18:38,952 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 23:18:38,0.114
+2026-05-12 23:18:40,655 [http-nio-22224-exec-3] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/homework/getCourseItemOptionList,admin,2026-05-12 23:18:40,0.047
+2026-05-12 23:24:58,673 [http-nio-22224-exec-10] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/homework/getCourseItemOptionList,admin,2026-05-12 23:24:58,0.052
+2026-05-12 23:24:59,776 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/homework/getCourseItemOptionList,admin,2026-05-12 23:24:59,0.047
+2026-05-12 23:25:06,919 [http-nio-22224-exec-3] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 23:25:06,0.021
+2026-05-12 23:25:07,016 [http-nio-22224-exec-8] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 23:25:06,0.092
+2026-05-12 23:31:30,205 [http-nio-22224-exec-2] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDataBaseUserName,admin,2026-05-12 23:31:30,0.015
+2026-05-12 23:31:30,314 [http-nio-22224-exec-6] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getMenuList,admin,2026-05-12 23:31:30,0.104
+2026-05-12 23:31:32,325 [http-nio-22224-exec-1] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getTeacherItemOptionList,admin,2026-05-12 23:31:32,0.044
+2026-05-12 23:31:32,365 [http-nio-22224-exec-4] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/base/getDictionaryOptionItemList,admin,2026-05-12 23:31:32,0.034
+2026-05-12 23:31:32,393 [http-nio-22224-exec-3] INFO  c.e.s.j.s.c.JwtAuthenticationFilter                - /api/studentLeave/getStudentLeaveList,admin,2026-05-12 23:31:32,0.021
+2026-05-12 23:51:20,394 [SpringApplicationShutdownHook] INFO  o.s.b.w.embedded.tomcat.GracefulShutdown           - Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-12 23:51:20,400 [tomcat-shutdown] INFO  o.s.b.w.embedded.tomcat.GracefulShutdown           - Graceful shutdown complete
+2026-05-12 23:51:20,412 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 23:51:20,413 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown initiated...
+2026-05-12 23:51:20,414 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource                 - HikariPool-1 - Shutdown completed.
