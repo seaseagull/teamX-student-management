@@ -2,6 +2,7 @@ package cn.edu.sdu.java.server.controllers;
 
 import cn.edu.sdu.java.server.payload.request.DataRequest;
 import cn.edu.sdu.java.server.payload.response.DataResponse;
+import cn.edu.sdu.java.server.payload.response.OptionItemList;
 import cn.edu.sdu.java.server.services.CourseService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,12 @@ public class CourseController {
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
+
+    @PostMapping("/getPreCourseItemOptionList")
+    public OptionItemList getPreCourseItemOptionList(@Valid @RequestBody DataRequest dataRequest) {
+        return courseService.getPreCourseItemOptionList(dataRequest);
+    }
+
     @PostMapping("/getCourseList")
     public DataResponse getCourseList(@Valid @RequestBody DataRequest dataRequest) {
         return courseService.getCourseList(dataRequest);

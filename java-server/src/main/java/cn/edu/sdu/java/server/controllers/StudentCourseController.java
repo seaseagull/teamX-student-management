@@ -30,6 +30,12 @@ public class StudentCourseController {
         return studentCourseService.getCourseList(dataRequest);
     }
 
+    @PostMapping("/getStudentCourses")
+    @PreAuthorize("hasRole('STUDENT')")
+    public DataResponse getStudentCourses(@Valid @RequestBody DataRequest dataRequest) {
+        return studentCourseService.getStudentCourses(dataRequest);
+    }
+
     @PostMapping("/courseSelect")
     @PreAuthorize("hasRole('STUDENT') ")
     public DataResponse courseSelect(@Valid @RequestBody DataRequest dataRequest) {

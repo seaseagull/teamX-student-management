@@ -98,4 +98,21 @@ public class StudentCourseService {
 
         return CommonMethod.getReturnMessageOK();
     }
+
+    public DataResponse getStudentCourses(DataRequest dataRequest) {
+        Integer studentId = CommonMethod.getPersonId();
+
+        List<StudentCourse> scourses = studentCourseRepository.findByStudentPersonId(studentId);
+        List<Map<String, Object>> dataList = new ArrayList<>();
+        for (StudentCourse sc : scourses) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("courseId", sc.getCourse().getCourseId());
+            map.put("num", sc.getCourse().getNum());
+            map.put("name", sc.getCourse().getName());
+            map.put("credit", sc.getCourse().getCredit());
+            map.put("teacherName", sc.getCourse().getTeacher().getPerson().getName());
+            dataList.add(map);
+        }
+        return CommonMethod.getReturnData(dataList);
+    }
 }
