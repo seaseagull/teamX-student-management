@@ -24,8 +24,8 @@ public class VolunteerSignup {
     private VolunteerActivity activity;     // 关联活动
 
     @ManyToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "person_id")
-    private Student student;                 // 关联学生
+    @JoinColumn(name = "student_id")
+    private Student student;              // 关联学生
 
     private LocalDateTime signupTime;       // 报名时间
 
