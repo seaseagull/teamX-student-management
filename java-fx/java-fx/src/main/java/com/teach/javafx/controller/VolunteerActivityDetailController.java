@@ -30,7 +30,7 @@ public class VolunteerActivityDetailController extends ToolController {
     @FXML
     private Button startSignupButton, stopSignupButton, finishButton, signupButton;
     @FXML
-    private Label statusTag, nameLabel, timeLabel, locationLabel, hoursLabel, recruitLabel, workLabel, requirementsLabel, notesLabel, signupTimeLabel, volunteerCountLabel, titleLabel;
+    private Label statusTag, nameLabel, timeLabel, locationLabel, hoursLabel, recruitLabel, workLabel, requirementsLabel, notesLabel, signupTimeLabel, volunteerCountLabel;
     @FXML
     private VBox infoCard, requireCard, notesCard, volunteerCard;
     @FXML
@@ -86,7 +86,7 @@ public class VolunteerActivityDetailController extends ToolController {
 
         String name = (String) activity.get("name");
         String location = (String) activity.get("location");
-        String activityDate = (String) activity.get("activityData");
+        String activityDate = (String) activity.get("activityDate");
         String startTime = (String) activity.get("startTime");
         String endTime = (String) activity.get("endTime");
         Object hoursObj = activity.get("volunteerHours");
@@ -139,6 +139,14 @@ public class VolunteerActivityDetailController extends ToolController {
     }
 
     private void setupButtons(String status, int signed, int recruit) {
+        startSignupButton.setVisible(false);
+        startSignupButton.setManaged(false);
+        stopSignupButton.setVisible(false);
+        stopSignupButton.setManaged(false);
+        finishButton.setVisible(false);
+        finishButton.setManaged(false);
+        signupButton.setVisible(false);
+        signupButton.setManaged(false);
         if ("ROLE_ADMIN".equals(roleName)) {
             startSignupButton.setVisible(true);
             startSignupButton.setManaged(true);
@@ -163,7 +171,7 @@ public class VolunteerActivityDetailController extends ToolController {
         req.add("activityId", activityId);
 
         DataResponse res = HttpRequestUtil.request("/api/volunteer/checkSignup", req);
-        if (res != null && res.getCode() == 0) {
+        if (res != null && res.getCode() == 1) {
             signupButton.setText("取消报名");
             signupButton.setStyle("-fx-background-color: #FF4D4F; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;");
         }
@@ -240,6 +248,7 @@ public class VolunteerActivityDetailController extends ToolController {
                 MessageDialog.showDialog("已取消报名！");
                 signupButton.setText("我要报名");
                 signupButton.setStyle("-fx-background-color: #1677FF; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;");
+                refreshActivityData(activityId);
             }
         } else {
             // 报名
@@ -250,8 +259,29 @@ public class VolunteerActivityDetailController extends ToolController {
                 MessageDialog.showDialog("报名成功！");
                 signupButton.setText("取消报名");
                 signupButton.setStyle("-fx-background-color: #FF4D4F; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;");
+                refreshActivityData(activityId);
             } else {
                 MessageDialog.showDialog(res != null ? res.getMsg() : "报名失败");
+            }
+        }
+
+    }
+
+    private void refreshActivityData(Integer activityId) {
+        DataRequest req = new DataRequest();
+        DataResponse res = HttpRequestUtil.request("/api/volunteer/getActivityList", req);
+        if (res != null && res.getCode() == 0) {
+            List<Map> activityList = (ArrayList<Map>) res.getData();
+            if (activityList != null) {
+                for (Map a : activityList) {
+                    if (a.get("id") != null && activityId.equals(a.get("id") instanceof Double ?
+                            ((Double) a.get("id")).intValue() : a.get("id"))) {
+                        this.activity = a;
+                        activityData = a;
+                        renderDetail();
+                        return;
+                    }
+                }
             }
         }
     }
@@ -280,6 +310,13 @@ public class VolunteerActivityDetailController extends ToolController {
         MainFrameController mc = AppStore.getMainFrameController();
         if (mc != null) {
             mc.changeContent(backPage, backTitle);
+            ToolController controller = mc.getToolController(backPage);
+            if (controller instanceof VolunteerActivityController) {
+                ((VolunteerActivityController) controller).doRefresh();
+            }
+            if (controller instanceof StudentVolunteerController) {
+                ((StudentVolunteerController) controller).doRefresh();
+            }
         }
     }
 }

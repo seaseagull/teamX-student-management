@@ -157,14 +157,17 @@ public class VolunteerService {
         List<Map<String, Object>> activities = new ArrayList<>();
 
         for (VolunteerSignup s : signups) {
+            VolunteerActivity a = s.getActivity();
             Map<String, Object> map = new HashMap<>();
-            map.put("id", s.getActivity().getId());
-            map.put("name", s.getActivity().getName());
-            map.put("location", s.getActivity().getLocation());
-            map.put("activityDate", s.getActivity().getActivityDate() != null ?
-                    s.getActivity().getActivityDate().toString() : "");
+            map.put("id", a.getId());
+            map.put("name", a.getName());
+            map.put("location", a.getLocation());
+            map.put("activityDate", a.getActivityDate() != null ? a.getActivityDate().toString() : "");
             map.put("hoursEarned", s.getHoursEarned());
             map.put("signupStatus", s.getStatus());
+            map.put("status", a.getStatus());
+            map.put("recruitCount", a.getRecruitCount());
+            map.put("signedCount", signupRepository.countByActivityId(a.getId()));
 
             if ("COMPLETED".equals(s.getStatus())) {
                 totalHours += s.getHoursEarned() != null ? s.getHoursEarned().doubleValue() : 0;

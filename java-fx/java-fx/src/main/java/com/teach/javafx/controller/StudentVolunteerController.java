@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.awt.*;
@@ -25,10 +27,10 @@ public class StudentVolunteerController extends ToolController {
 
     @FXML
     public void initialize() {
-        loadSudentActivityList();
+        loadStudentActivityList();
     }
 
-    private void loadSudentActivityList() {
+    private void loadStudentActivityList() {
         DataRequest req = new DataRequest();
         DataResponse res = HttpRequestUtil.request("/api/volunteer/getStudentActivityList", req);
 
@@ -76,15 +78,16 @@ public class StudentVolunteerController extends ToolController {
         nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #1A1A1A;");
         Label statusTag = new Label(getStatusText(status));
         statusTag.setStyle(getStatusStyle(status) + "-fx-padding: 2 8; -fx-background-radius: 3; -fx-font-size: 11px;");
-        row1.getChildren().addAll(nameLabel, statusTag);
+        row1.getChildren().addAll(nameLabel,new Region(), statusTag);
+        HBox.setHgrow(row1.getChildren().get(1), Priority.ALWAYS);
 
-        // 第二行：日期 + 地点
+        HBox row2 = new HBox();
         Label infoLabel = new Label(activityDate + " | " + location);
         infoLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #999;");
-
-        // 第三行：志愿时长
         Label hoursLabel = new Label("志愿时长：" + hours + " 小时");
         hoursLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #1677FF; -fx-font-weight: bold;");
+        row2.getChildren().addAll(infoLabel, new Region(), hoursLabel);
+        HBox.setHgrow(row2.getChildren().get(1), Priority.ALWAYS);
 
         card.getChildren().addAll(row1, infoLabel, hoursLabel);
         card.setOnMouseClicked(e -> openDetail(activity));
@@ -118,5 +121,10 @@ public class StudentVolunteerController extends ToolController {
             case "CANCELLED" -> "-fx-background-color: #FFF1F0; -fx-text-fill: #FF4D4F;";
             default -> "";
         };
+    }
+
+    @Override
+    public void doRefresh() {
+        loadStudentActivityList();  // 重新加载
     }
 }

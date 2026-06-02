@@ -65,15 +65,15 @@ public class VolunteerActivityController extends ToolController {
     }
 
     private void setupTabs() {
-        allTab.setOnMouseClicked(e -> swtichTab("ALL", allTab));
-        pendingTab.setOnMouseClicked(e -> swtichTab("PENDING", pendingTab));
-        ongoingTab.setOnMouseClicked(e -> swtichTab("ONGOING", ongoingTab));
-        finishedTab.setOnMouseClicked(e -> swtichTab("FINISHED", finishedTab));
+        allTab.setOnMouseClicked(e -> switchTab("ALL", allTab));
+        pendingTab.setOnMouseClicked(e -> switchTab("PENDING", pendingTab));
+        ongoingTab.setOnMouseClicked(e -> switchTab("ONGOING", ongoingTab));
+        finishedTab.setOnMouseClicked(e -> switchTab("FINISHED", finishedTab));
 
         highlightTab(allTab);
     }
 
-    private void swtichTab(String status, Label tab) {
+    private void switchTab(String status, Label tab) {
         currentTab = status;
         highlightTab(tab);
         renderActivityList();
@@ -157,14 +157,18 @@ public class VolunteerActivityController extends ToolController {
         statusTag.setStyle(getStatusStyle(status) + "-fx-padding: 2 8; -fx-background-radius: 3; -fx-font-size: 11px;");
         Label nameLabel = new Label(name);
         nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #1A1A1A;");
-        row1.getChildren().addAll(statusTag, nameLabel);
+        row1.getChildren().addAll(nameLabel, new Region(), statusTag);
+        HBox.setHgrow(row1.getChildren().get(1), Priority.ALWAYS);
 
+        HBox row2 = new HBox(10);
         Label infoLabel = new Label(activityDate + "|" + location);
         infoLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #999;");
         Label recruitLabel = new Label("已报名 " + signed + "/" + recruit + "人");
         recruitLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: " + (signed >= recruit ? "#FF4D4F" : "#1677FF") + "; -fx-font-weight: bold;");
+        row2.getChildren().addAll(infoLabel, new Region(), recruitLabel);
+        HBox.setHgrow(row2.getChildren().get(1), Priority.ALWAYS);
 
-        card.getChildren().addAll(row1, infoLabel, recruitLabel);
+        card.getChildren().addAll(row1, row2);
         card.setOnMouseClicked(e -> openDetail(activity));
 
         return card;
@@ -186,7 +190,8 @@ public class VolunteerActivityController extends ToolController {
         Label statusLabel = new Label(getStatusText(status));
         statusLabel.setStyle(getStatusStyle(status) + "-fx-font-size: 10px;");
 
-        item.getChildren().addAll(nameLabel, statusLabel);
+        item.getChildren().addAll(nameLabel,new Region(), statusLabel);
+        HBox.setHgrow(item.getChildren().get(1), Priority.ALWAYS);
         item.setOnMouseClicked(e -> openDetail(activity));
 
         return item;
@@ -264,9 +269,9 @@ public class VolunteerActivityController extends ToolController {
 
         HBox countBox = new HBox(10, recruitField, hoursField);
 
-        TextArea requirementesField = new TextArea();
-        requirementesField.setPrefHeight(50);
-        requirementesField.setWrapText(true);
+        TextArea requirementsField = new TextArea();
+        requirementsField.setPrefHeight(50);
+        requirementsField.setWrapText(true);
 
         TextArea notesField = new TextArea();
         notesField.setPrefHeight(50);
@@ -283,14 +288,14 @@ public class VolunteerActivityController extends ToolController {
         HBox signupBox = new HBox(10, signupStartFiled, signupEndField);
 
         grid.addRow(0, new Label("活动名称:"), nameField);
-        grid.addRow(1, new Label("活动日期:"), locationField);
-        grid.addRow(2, new Label("时间:"), dateField);
-        grid.addRow(3, new Label("工作内容:"), timeBox);
-        grid.addRow(4, new Label("招募/时长:"), workField);
-        grid.addRow(5, new Label("活动要求:"), countBox);
-        grid.addRow(6, new Label("注意事项:"), requirementesField);
-        grid.addRow(7, new Label("报名时间:"), notesField);
-        grid.addRow(8, new Label("报名时间:"), signupBox);
+        grid.addRow(1, new Label("活动地点:"), locationField);
+        grid.addRow(2, new Label("活动日期:"), dateField);
+        grid.addRow(3, new Label("时间:"), timeBox);
+        grid.addRow(4, new Label("工作内容:"), workField);
+        grid.addRow(5, new Label("招募/时长:"), countBox);
+        grid.addRow(6, new Label("活动要求:"), requirementsField);
+        grid.addRow(7, new Label("注意事项:"), notesField);
+        grid.addRow(8, new Label("报名时间:"), signupBox);;
 
         Button saveButton = ButtonFactory.createSaveButton("保存");
         Button cancelButton = ButtonFactory.createCancelButton("取消");
@@ -346,9 +351,9 @@ public class VolunteerActivityController extends ToolController {
             req.add("startTime", startTimeField.getText());
             req.add("endTime", endTimeField.getText());
             req.add("workDescription", workField.getText());
-            req.add("recuritCount", Integer.parseInt(recruitField.getText()));
+            req.add("recruitCount", Integer.parseInt(recruitField.getText()));
             req.add("volunteerHours", hoursField.getText());
-            req.add("requirements", requirementesField.getText());
+            req.add("requirements", requirementsField.getText());
             req.add("notes", notesField.getText());
             req.add("signupStart", signupStartFiled.getText());
             req.add("signupEnd", signupEndField.getText());
@@ -366,5 +371,10 @@ public class VolunteerActivityController extends ToolController {
         ScrollPane scrollPane = new ScrollPane(root);
         stage.setScene(new Scene(scrollPane, 500, 600));
         stage.showAndWait();
+    }
+
+    @Override
+    public void doRefresh() {
+        loadActivityList();  // 重新加载
     }
 }

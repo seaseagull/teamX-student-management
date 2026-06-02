@@ -37,9 +37,11 @@
                 <VBox fx:id="infoCard" spacing="10.0"
                       style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8; -fx-border-color: #F0F0F0; -fx-border-radius: 8;">
                     <HBox spacing="10.0">
+                        <Label fx:id="nameLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1A1A1A;" wrapText="true" />
+                        <Region></Region>
                         <Label fx:id="statusTag" style="-fx-padding: 3 10; -fx-background-radius: 4; -fx-font-size: 12px;" />
                     </HBox>
-                    <Label fx:id="nameLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1A1A1A;" wrapText="true" />
+                    <Label fx:id="signupTimeLabel" style="-fx-font-size: 12px; -fx-text-fill: #999;" />
                     <Separator />
                     <Label fx:id="timeLabel" style="-fx-font-size: 14px; -fx-text-fill: #555;" />
                     <Label fx:id="locationLabel" style="-fx-font-size: 14px; -fx-text-fill: #555;" />
@@ -52,24 +54,20 @@
 
                 <!-- 活动要求 -->
                 <VBox fx:id="requireCard" spacing="8.0"
-                      style="-fx-background-color: #FFFBE6; -fx-padding: 15; -fx-background-radius: 8;">
+                style="-fx-background-color: #FFFBE6; -fx-padding: 15; -fx-background-radius: 8;">
                     <Label text="📋 活动要求" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #AD8B00;" />
                     <Label fx:id="requirementsLabel" wrapText="true"
-                           style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-line-spacing: 3px;" />
+                    style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-line-spacing: 3px;" />
                 </VBox>
 
                 <!-- 注意事项 -->
                 <VBox fx:id="notesCard" spacing="8.0"
-                      style="-fx-background-color: #F0F5FF; -fx-padding: 15; -fx-background-radius: 8;">
+                style="-fx-background-color: #F0F5FF; -fx-padding: 15; -fx-background-radius: 8;">
                     <Label text="⚠ 注意事项" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #1677FF;" />
                     <Label fx:id="notesLabel" wrapText="true"
-                           style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-line-spacing: 3px;" />
+                    style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-line-spacing: 3px;" />
                 </VBox>
 
-                <!-- 报名时间 -->
-                <VBox spacing="5.0" style="-fx-padding: 10 0;">
-                    <Label fx:id="signupTimeLabel" style="-fx-font-size: 12px; -fx-text-fill: #999;" />
-                </VBox>
 
                 <!-- 志愿者列表（管理员可见） -->
                 <VBox fx:id="volunteerCard" visible="false" managed="false" spacing="10.0"
