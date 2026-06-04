@@ -5,6 +5,7 @@ module com.teach.javafx {
     requires java.logging;
     requires com.google.gson;
     requires java.net.http;
+    requires org.json;
 
     opens com.teach.javafx to javafx.fxml;
     opens com.teach.javafx.request to com.google.gson, javafx.fxml;
