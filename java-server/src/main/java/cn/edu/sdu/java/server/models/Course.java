@@ -38,4 +38,9 @@ public class Course  {
     @Size(max = 12)
     private String coursePath;
 
+    // Course.java 加
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
+
 }
