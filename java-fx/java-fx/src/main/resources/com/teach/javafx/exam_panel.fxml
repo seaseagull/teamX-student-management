@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teach.javafx.controller.ExamManagementController">
+    <top>
+        <HBox spacing="10" style="padding:10;">
+            <Button text="新增考试" onAction="#addExam"/>
+            <Button text="编辑考试" onAction="#editExam"/>
+            <Button text="查看详情" onAction="#viewExamDetail"/>
+            <Button text="删除考试" onAction="#deleteExam"/>
+            <Button text="刷新列表" onAction="#refreshExamList"/>
+        </HBox>
+    </top>
+    <center>
+        <TableView fx:id="examTable" editable="false">
+            <columns>
+                <TableColumn fx:id="colExamId" text="考试ID" prefWidth="80"/>
+                <TableColumn fx:id="colExamName" text="考试名称" prefWidth="180"/>
+                <TableColumn fx:id="colExamType" text="考试类型" prefWidth="120"/>
+                <TableColumn fx:id="colStartTime" text="开始时间" prefWidth="180"/>
+                <TableColumn fx:id="colEndTime" text="结束时间" prefWidth="180"/>
+                <TableColumn fx:id="colDuration" text="时长(分钟)" prefWidth="100"/>
+                <TableColumn fx:id="colLocation" text="地点" prefWidth="120"/>
+                <TableColumn fx:id="colStatus" text="状态" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>
