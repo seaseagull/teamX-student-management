@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -10,7 +11,7 @@
             style="-fx-background-color: #f4f6f9;">
 
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="15.0"
+        <HBox alignment="CENTER_LEFT" spacing="16.0"
               style="-fx-background-color: white; -fx-padding: 12 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.04), 10, 0, 0, 2); -fx-border-color: #e9ecef; -fx-border-width: 0 0 1 0;">
             <children>
                 <HBox spacing="10.0" alignment="CENTER_LEFT">
