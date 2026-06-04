@@ -218,6 +218,7 @@ public class MainFrameController {
 
 
     protected void logout(){
+
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("base/login-view.fxml"));
         try {
             Scene scene = new Scene(fxmlLoader.load(), 320, 240);
@@ -225,6 +226,7 @@ public class MainFrameController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        AppStore.setJwt(null); // 清空上一个用户的登录信息
     }
 
     public  void changeContent(ActionEvent ae) {
@@ -234,6 +236,9 @@ public class MainFrameController {
             MenuItem item = (MenuItem)obj;
             name = item.getId();
             title = item.getText();
+        }
+        if("成绩管理".equals(title) || "成绩查询".equals(title)) {
+            name = "score-panel"; // 强制指向你的新文件名
         }
         if(name == null)
             return;
@@ -247,6 +252,9 @@ public class MainFrameController {
      */
 
     public  void changeContent(String name, String title) {
+        if ("成绩管理".equals(title) || "成绩查询".equals(title)) {
+            name = "score-panel";
+        }
 
         if(name == null || name.length() == 0)
             return;
