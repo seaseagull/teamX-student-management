@@ -1,5 +1,9 @@
 package com.teach.javafx.controller.base;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Tab;
+import java.io.IOException;
 import com.teach.javafx.AppStore;
 import com.teach.javafx.MainApplication;
 import com.teach.javafx.request.HttpRequestUtil;
@@ -8,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,7 +19,6 @@ import javafx.scene.input.MouseEvent;
 import com.teach.javafx.request.DataRequest;
 import com.teach.javafx.request.DataResponse;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -165,6 +167,7 @@ public class MainFrameController {
     }
     @FXML
     public void initialize() {
+
         handler =new ChangePanelHandler();
         DataRequest req= new DataRequest();
         DataResponse res;
@@ -176,8 +179,11 @@ public class MainFrameController {
         initMenuBar(mList);
         initMenuTree(mList);
         contentTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
-        contentTabPane.setStyle("-fx-background-image: url('shanda1.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: cover;");  //inline选择器
+        contentTabPane.setStyle("-fx-background-image: url('shanda1.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: cover;");
+        //inline选择器
+        // ====================== 【固定添加：天气查询】 ======================
 
+// ==================================================================
 
     }
 
@@ -189,6 +195,27 @@ public class MainFrameController {
     protected void onLogoutMenuClick(ActionEvent event){
         logout();
     }
+    @FXML
+    public void openExamManagement() {
+        try {
+            // 加载FXML，路径和你resources下的文件对应
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/teach/javafx/picture/exam-management.fxml"));
+            Parent root = loader.load();
+
+            // 创建新标签页
+            Tab examTab = new Tab("考试管理");
+            examTab.setContent(root);
+
+            // 添加到主界面的TabPane
+            contentTabPane.getTabs().add(examTab);
+            contentTabPane.getSelectionModel().select(examTab);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "打开考试管理页面失败：" + e.getMessage()).show();
+        }
+    }
+
 
     protected void logout(){
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("base/login-view.fxml"));
@@ -220,6 +247,7 @@ public class MainFrameController {
      */
 
     public  void changeContent(String name, String title) {
+
         if(name == null || name.length() == 0)
             return;
         Tab tab = tabMap.get(name);
@@ -228,7 +256,9 @@ public class MainFrameController {
         if(tab == null) {
             scene = sceneMap.get(name);
             if(scene == null) {
+
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(name + ".fxml"));
+
                 try {
                     scene = new Scene(fxmlLoader.load(), 1024, 768);
                     sceneMap.put(name, scene);
