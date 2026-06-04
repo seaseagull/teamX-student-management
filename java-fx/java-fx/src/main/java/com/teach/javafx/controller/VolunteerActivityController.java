@@ -246,19 +246,16 @@ public class VolunteerActivityController extends ToolController {
         TextField locationField = new TextField();
         locationField.setPrefWidth(350);
 
-        TextField dateField = new TextField();
-        dateField.setPrefWidth(350);
-        dateField.setPromptText("yyyy-MM-dd");
+        DatePicker datePicker = new DatePicker();
+        datePicker.setPrefWidth(350);
+        datePicker.setPromptText("选择日期");
 
-        TextField startTimeField = new TextField();
-        startTimeField.setPrefWidth(165);
-        startTimeField.setPromptText("HH:mm");
+        HBox startTimePicker = createTimePicker("09", "00");
+        HBox endTimePicker = createTimePicker("12", "00");
 
-        TextField endTimeField = new TextField();
-        endTimeField.setPrefWidth(165);
-        endTimeField.setPromptText("HH:mm");
-
-        HBox timeBox = new HBox(10, startTimeField, endTimeField);
+        HBox timeBox = new HBox(10,
+                new Label("开始:"), startTimePicker,
+                new Label("结束:"), endTimePicker);
 
         TextArea workField = new TextArea();
         workField.setPrefHeight(60);
@@ -277,19 +274,22 @@ public class VolunteerActivityController extends ToolController {
         notesField.setPrefHeight(50);
         notesField.setWrapText(true);
 
-        TextField signupStartFiled = new TextField();
-        signupStartFiled.setPromptText("yyyy-MM-dd HH:mm");
-        signupStartFiled.setPrefWidth(165);
+        DatePicker signupStartDate = new DatePicker();
+        signupStartDate.setPrefWidth(150);
+        HBox signupStartTimePicker = createTimePicker("00", "00");
+        HBox signupStartBox = new HBox(5, new Label("开始:"), signupStartDate, signupStartTimePicker);
 
-        TextField signupEndField = new TextField();
-        signupEndField.setPrefWidth(165);
-        signupEndField.setPromptText("yyyy-MM-dd HH:mm");
+// 报名截止时间
+        DatePicker signupEndDate = new DatePicker();
+        signupEndDate.setPrefWidth(150);
+        HBox signupEndTimePicker = createTimePicker("23", "59");
+        HBox signupEndBox = new HBox(5, new Label("截止:"), signupEndDate, signupEndTimePicker);
 
-        HBox signupBox = new HBox(10, signupStartFiled, signupEndField);
+        VBox signupBox = new VBox(5, signupStartBox, signupEndBox);
 
         grid.addRow(0, new Label("活动名称:"), nameField);
         grid.addRow(1, new Label("活动地点:"), locationField);
-        grid.addRow(2, new Label("活动日期:"), dateField);
+        grid.addRow(2, new Label("活动日期:"), datePicker);
         grid.addRow(3, new Label("时间:"), timeBox);
         grid.addRow(4, new Label("工作内容:"), workField);
         grid.addRow(5, new Label("招募/时长:"), countBox);
@@ -315,18 +315,6 @@ public class VolunteerActivityController extends ToolController {
                 MessageDialog.showDialog("活动地点为必填项！");
                 return;
             }
-            if (dateField.getText().isEmpty()) {
-                MessageDialog.showDialog("活动时间为必填项！");
-                return;
-            }
-            if (startTimeField.getText().isEmpty()) {
-                MessageDialog.showDialog("活动时间为必填项！");
-                return;
-            }
-            if (endTimeField.getText().isEmpty()) {
-                MessageDialog.showDialog("活动时间为必填项！");
-                return;
-            }
             if (workField.getText().isEmpty()) {
                 MessageDialog.showDialog("志愿工作内容为必填项！");
                 return;
@@ -339,7 +327,7 @@ public class VolunteerActivityController extends ToolController {
                 MessageDialog.showDialog("志愿时长为必填项！");
                 return;
             }
-            if (signupStartFiled.getText().isEmpty()) {
+            if (signupStartDate.getValue() == null) {
                 MessageDialog.showDialog("报名开始时间为必填项！");
                 return;
             }
@@ -347,16 +335,22 @@ public class VolunteerActivityController extends ToolController {
             DataRequest req = new DataRequest();
             req.add("name", nameField.getText());
             req.add("location", locationField.getText());
-            req.add("activityDate", dateField.getText());
-            req.add("startTime", startTimeField.getText());
-            req.add("endTime", endTimeField.getText());
+            String activityDate = datePicker.getValue() != null ? datePicker.getValue().toString() : "";
+            req.add("activityDate", activityDate);
+            req.add("startTime", getTimeValue(startTimePicker));
+            req.add("endTime", getTimeValue(endTimePicker));
             req.add("workDescription", workField.getText());
             req.add("recruitCount", Integer.parseInt(recruitField.getText()));
             req.add("volunteerHours", hoursField.getText());
             req.add("requirements", requirementsField.getText());
             req.add("notes", notesField.getText());
-            req.add("signupStart", signupStartFiled.getText());
-            req.add("signupEnd", signupEndField.getText());
+            String signupStart = (signupStartDate.getValue() != null ? signupStartDate.getValue().toString() : "")
+                    + " " + getTimeValue(signupStartTimePicker);
+            String signupEnd = (signupEndDate.getValue() != null ? signupEndDate.getValue().toString() : "")
+                    + " " + getTimeValue(signupEndTimePicker);
+
+            req.add("signupStart", signupStart);
+            req.add("signupEnd", signupEnd);
 
             DataResponse res = HttpRequestUtil.request("/api/volunteer/activitySave", req);
 
@@ -365,16 +359,47 @@ public class VolunteerActivityController extends ToolController {
                 stage.close();
                 loadActivityList();
             }
+            stage.close();
         });
 
         cancelButton.setOnAction(e -> stage.close());
         ScrollPane scrollPane = new ScrollPane(root);
-        stage.setScene(new Scene(scrollPane, 500, 600));
+        stage.setScene(new Scene(scrollPane, 700, 600));
         stage.showAndWait();
     }
 
     @Override
     public void doRefresh() {
         loadActivityList();  // 重新加载
+    }
+
+    // 时间选择器工具方法
+    private HBox createTimePicker(String defaultHour, String defaultMinute) {
+        ComboBox<String> hourBox = new ComboBox<>();
+        for (int i = 0; i < 24; i++) {
+            hourBox.getItems().add(String.format("%02d", i));
+        }
+        hourBox.setValue(defaultHour != null ? defaultHour : "09");
+        hourBox.setPrefWidth(70);
+
+        ComboBox<String> minuteBox = new ComboBox<>();
+        for (int i = 0; i < 60; i += 5) {
+            minuteBox.getItems().add(String.format("%02d", i));
+        }
+        minuteBox.setValue(defaultMinute != null ? defaultMinute : "00");
+        minuteBox.setPrefWidth(70);
+
+        hourBox.setId("hour");
+        minuteBox.setId("minute");
+
+        HBox timePicker = new HBox(5, hourBox, new Label(":"), minuteBox);
+        return timePicker;
+    }
+
+    // 获取时间值
+    private String getTimeValue(HBox timePicker) {
+        ComboBox<String> hourBox = (ComboBox<String>) timePicker.getChildren().get(0);
+        ComboBox<String> minuteBox = (ComboBox<String>) timePicker.getChildren().get(2);
+        return hourBox.getValue() + ":" + minuteBox.getValue();
     }
 }

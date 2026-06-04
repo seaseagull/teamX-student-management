@@ -25,7 +25,7 @@
                       style="-fx-background-color: #08BD91; -fx-padding: 20; -fx-background-radius: 10;">
                     <Label fx:id="activityCountLabel" text="0"
                            style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;" />
-                    <Label text="参与活动数"
+                    <Label text="已完成活动数"
                            style="-fx-font-size: 13px; -fx-text-fill: rgba(255,255,255,0.85);" />
                 </VBox>
             </HBox>

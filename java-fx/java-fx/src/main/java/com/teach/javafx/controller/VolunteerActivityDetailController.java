@@ -10,16 +10,49 @@ import com.teach.javafx.request.HttpRequestUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.MapValueFactory;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class VolunteerActivityDetailController extends ToolController {
+
+    // 时间选择器工具方法
+    private HBox createTimePicker(String defaultHour, String defaultMinute) {
+        ComboBox<String> hourBox = new ComboBox<>();
+        for (int i = 0; i < 24; i++) {
+            hourBox.getItems().add(String.format("%02d", i));
+        }
+        hourBox.setValue(defaultHour != null ? defaultHour : "09");
+        hourBox.setPrefWidth(70);
+
+        ComboBox<String> minuteBox = new ComboBox<>();
+        for (int i = 0; i < 60; i += 5) {
+            minuteBox.getItems().add(String.format("%02d", i));
+        }
+        minuteBox.setValue(defaultMinute != null ? defaultMinute : "00");
+        minuteBox.setPrefWidth(70);
+
+        hourBox.setId("hour");
+        minuteBox.setId("minute");
+
+        HBox timePicker = new HBox(5, hourBox, new Label(":"), minuteBox);
+        return timePicker;
+    }
+
+    // 获取时间值
+    private String getTimeValue(HBox timePicker) {
+        ComboBox<String> hourBox = (ComboBox<String>) timePicker.getChildren().get(0);
+        ComboBox<String> minuteBox = (ComboBox<String>) timePicker.getChildren().get(2);
+        return hourBox.getValue() + ":" + minuteBox.getValue();
+    }
 
     private static Map activityData;
     private Map activity;
@@ -28,7 +61,7 @@ public class VolunteerActivityDetailController extends ToolController {
     private static String backTitle = "志愿活动";
 
     @FXML
-    private Button startSignupButton, stopSignupButton, finishButton, signupButton;
+    private Button startSignupButton, stopSignupButton, finishButton, signupButton, editActivityButton, deleteActivityButton;
     @FXML
     private Label statusTag, nameLabel, timeLabel, locationLabel, hoursLabel, recruitLabel, workLabel, requirementsLabel, notesLabel, signupTimeLabel, volunteerCountLabel;
     @FXML
@@ -101,6 +134,9 @@ public class VolunteerActivityDetailController extends ToolController {
         String signupStart = (String) activity.get("signupStart");
         String signupEnd = (String) activity.get("signupEnd");
         String status = (String) activity.get("status");
+        if (status == null) {
+            status = (String) activity.get("signupStatus");
+        }
 
         nameLabel.setText(name);
         timeLabel.setText("📅 " + activityDate + "  " + startTime + " - " + endTime);
@@ -122,6 +158,10 @@ public class VolunteerActivityDetailController extends ToolController {
     }
 
     private void setStatusTag(String status) {
+        if (status == null) {
+            statusTag.setText("");
+            return;
+        }
         switch (status) {
             case "PENDING" -> {
                 statusTag.setText("待开始");
@@ -133,6 +173,14 @@ public class VolunteerActivityDetailController extends ToolController {
             }
             case "FINISHED" -> {
                 statusTag.setText("已结束");
+                statusTag.setStyle("-fx-background-color: #F5F5F5; -fx-text-fill: #999; -fx-padding: 3 10; -fx-background-radius: 4;");
+            }
+            case "SIGNED" -> {
+                statusTag.setText("已报名");
+                statusTag.setStyle("-fx-background-color: #F0F5FF; -fx-text-fill: #1677FF; -fx-padding: 3 10; -fx-background-radius: 4;");
+            }
+            case "COMPLETED" -> {
+                statusTag.setText("已完成");
                 statusTag.setStyle("-fx-background-color: #F5F5F5; -fx-text-fill: #999; -fx-padding: 3 10; -fx-background-radius: 4;");
             }
         }
@@ -147,6 +195,10 @@ public class VolunteerActivityDetailController extends ToolController {
         finishButton.setManaged(false);
         signupButton.setVisible(false);
         signupButton.setManaged(false);
+        editActivityButton.setVisible(false);
+        editActivityButton.setManaged(false);
+        deleteActivityButton.setVisible(false);
+        deleteActivityButton.setManaged(false);
         if ("ROLE_ADMIN".equals(roleName)) {
             startSignupButton.setVisible(true);
             startSignupButton.setManaged(true);
@@ -154,6 +206,10 @@ public class VolunteerActivityDetailController extends ToolController {
             stopSignupButton.setManaged(true);
             finishButton.setVisible(true);
             finishButton.setManaged(true);
+            editActivityButton.setVisible(true);
+            editActivityButton.setManaged(true);
+            deleteActivityButton.setVisible(true);
+            deleteActivityButton.setManaged(true);
         } else if ("ROLE_STUDENT".equals(roleName)) {
             if ("ONGOING".equals(status) && signed < recruit) {
                 signupButton.setVisible(true);
@@ -222,6 +278,8 @@ public class VolunteerActivityDetailController extends ToolController {
     @FXML
     private void onStartSignupClick() {
         changeActivityStatus("ONGOING");
+        statusTag.setText("进行中");
+        statusTag.setStyle("-fx-background-color: #F0F5FF; -fx-text-fill: #1677FF; -fx-padding: 3 10; -fx-background-radius: 4;");
     }
 
     @FXML
@@ -232,6 +290,8 @@ public class VolunteerActivityDetailController extends ToolController {
     @FXML
     private void onFinishClick() {
         changeActivityStatus("FINISHED");
+        statusTag.setText("已结束");
+        statusTag.setStyle("-fx-background-color: #F5F5F5; -fx-text-fill: #999; -fx-padding: 3 10; -fx-background-radius: 4;");
     }
 
     @FXML
@@ -286,6 +346,163 @@ public class VolunteerActivityDetailController extends ToolController {
         }
     }
 
+    @FXML
+    private void onEditActivityClick() {
+        showEditDialog(activity);
+    }
+
+    private void showEditDialog(Map data) {
+        Stage stage = new Stage();
+        stage.setTitle("编辑志愿活动");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(12);
+        grid.setPadding(new Insets(20));
+
+        TextField nameField = new TextField((String) data.get("name"));
+        nameField.setPrefWidth(350);
+
+        TextField locationField = new TextField((String) data.get("location"));
+        locationField.setPrefWidth(350);
+
+        // 日期
+        DatePicker datePicker = new DatePicker();
+        String activityDate = (String) data.get("activityDate");
+        if (activityDate != null && !activityDate.isEmpty()) {
+            datePicker.setValue(java.time.LocalDate.parse(activityDate));
+        }
+        datePicker.setPrefWidth(350);
+
+        // 时间
+        String startTime = (String) data.get("startTime");
+        String endTime = (String) data.get("endTime");
+        HBox startTimePicker = createTimePicker(
+                startTime != null ? startTime.substring(0, 2) : "09",
+                startTime != null ? startTime.substring(3, 5) : "00");
+        HBox endTimePicker = createTimePicker(
+                endTime != null ? endTime.substring(0, 2) : "12",
+                endTime != null ? endTime.substring(3, 5) : "00");
+        HBox timeBox = new HBox(10, new Label("开始:"), startTimePicker, new Label("结束:"), endTimePicker);
+
+        TextArea workField = new TextArea((String) data.get("workDescription"));
+        workField.setPrefHeight(60);
+        workField.setWrapText(true);
+
+        TextField recruitField = new TextField(String.valueOf(data.get("recruitCount")));
+        TextField hoursField = new TextField(String.valueOf(data.get("volunteerHours")));
+        HBox countBox = new HBox(10, recruitField, hoursField);
+
+        TextArea requireField = new TextArea((String) data.get("requirements"));
+        requireField.setPrefHeight(50);
+        requireField.setWrapText(true);
+
+        TextArea notesField = new TextArea((String) data.get("notes"));
+        notesField.setPrefHeight(50);
+        notesField.setWrapText(true);
+
+        // 报名时间
+        String signupStart = (String) data.get("signupStart");
+        String signupEnd = (String) data.get("signupEnd");
+
+        final DatePicker signupStartDate = new DatePicker();
+        HBox signupStartTimePicker;
+        if (signupStart != null && signupStart.contains(" ")) {
+            String[] parts = signupStart.split(" ");
+            signupStartDate.setValue(java.time.LocalDate.parse(parts[0]));
+            signupStartTimePicker = createTimePicker(parts[1].substring(0, 2), parts[1].substring(3, 5));
+        } else {
+            signupStartTimePicker = createTimePicker("00", "00");
+        }
+        final HBox finalSignupStartTimePicker = signupStartTimePicker;
+
+// 报名截止时间
+        final DatePicker signupEndDate = new DatePicker();
+        HBox signupEndTimePicker;
+        if (signupEnd != null && signupEnd.contains(" ")) {
+            String[] parts = signupEnd.split(" ");
+            signupEndDate.setValue(java.time.LocalDate.parse(parts[0]));
+            signupEndTimePicker = createTimePicker(parts[1].substring(0, 2), parts[1].substring(3, 5));
+        } else {
+            signupEndTimePicker = createTimePicker("23", "59");
+        }
+        final HBox finalSignupEndTimePicker = signupEndTimePicker;
+
+        signupStartDate.setPrefWidth(150);
+        signupEndDate.setPrefWidth(150);
+        HBox signupStartBox = new HBox(5, new Label("开始:"), signupStartDate, signupStartTimePicker);
+        HBox signupEndBox = new HBox(5, new Label("截止:"), signupEndDate, signupEndTimePicker);
+        VBox signupBox = new VBox(5, signupStartBox, signupEndBox);
+
+        grid.addRow(0, new Label("活动名称:"), nameField);
+        grid.addRow(1, new Label("活动地点:"), locationField);
+        grid.addRow(2, new Label("活动日期:"), datePicker);
+        grid.addRow(3, new Label("时间:"), timeBox);
+        grid.addRow(4, new Label("工作内容:"), workField);
+        grid.addRow(5, new Label("招募/时长:"), countBox);
+        grid.addRow(6, new Label("活动要求:"), requireField);
+        grid.addRow(7, new Label("注意事项:"), notesField);
+        grid.addRow(8, new Label("报名时间:"), signupBox);
+
+        Button saveButton = ButtonFactory.createSaveButton("保存");
+        Button cancelButton = ButtonFactory.createCancelButton("取消");
+
+        HBox buttons = new HBox(10, new Pane(), cancelButton, saveButton);
+        HBox.setHgrow(buttons.getChildren().get(0), Priority.ALWAYS);
+
+        VBox root = new VBox(15, grid, new Separator(), buttons);
+        root.setPadding(new Insets(10));
+
+        Integer activityId = data.get("id") instanceof Double ?
+                ((Double) data.get("id")).intValue() : (Integer) data.get("id");
+
+        saveButton.setOnAction(e -> {
+            DataRequest req = new DataRequest();
+            req.add("activityId", activityId);
+            req.add("name", nameField.getText());
+            req.add("location", locationField.getText());
+            req.add("activityDate", datePicker.getValue() != null ? datePicker.getValue().toString() : "");
+            req.add("startTime", getTimeValue(startTimePicker));
+            req.add("endTime", getTimeValue(endTimePicker));
+            req.add("workDescription", workField.getText());
+            req.add("recruitCount", Integer.parseInt(recruitField.getText()));
+            req.add("volunteerHours", hoursField.getText());
+            req.add("requirements", requireField.getText());
+            req.add("notes", notesField.getText());
+            req.add("signupStart", (signupStartDate.getValue() != null ? signupStartDate.getValue().toString() : "") + " " + getTimeValue(finalSignupStartTimePicker));
+            req.add("signupEnd", (signupEndDate.getValue() != null ? signupEndDate.getValue().toString() : "") + " " + getTimeValue(finalSignupEndTimePicker));
+            DataResponse res = HttpRequestUtil.request("/api/volunteer/activitySave", req);
+            if (res != null && res.getCode() == 0) {
+                MessageDialog.showDialog("保存成功！");
+                stage.close();
+                refreshActivityData(activityId);
+            }
+            stage.close();
+        });
+
+        cancelButton.setOnAction(e -> stage.close());
+
+        ScrollPane scrollPane = new ScrollPane(root);
+        stage.setScene(new Scene(scrollPane, 700, 600));
+        stage.showAndWait();
+    }
+
+    @FXML
+    private void onDeleteActivityClick() {
+        Object idObj = activity.get("id");
+        Integer activityId = idObj instanceof Double ? ((Double) idObj).intValue() : (Integer) idObj;
+
+        DataRequest req = new DataRequest();
+        req.add("activityId", activityId);
+        DataResponse res = HttpRequestUtil.request("/api/volunteer/deleteActivity", req);
+
+        if (res != null && res.getCode() == 0) {
+            MessageDialog.showDialog("删除成功！");
+            goBack();
+        }
+    }
+
     private void changeActivityStatus(String newStatus) {
         Object idObj = activity.get("id");
         Integer activityId = idObj instanceof Double ? ((Double) idObj).intValue() : (Integer) idObj;
@@ -297,7 +514,6 @@ public class VolunteerActivityDetailController extends ToolController {
 
         if (res != null && res.getCode() == 0) {
             MessageDialog.showDialog("操作成功！");
-            goBack();
         }
     }
 

@@ -23,6 +23,10 @@
                     style="-fx-background-color: #FF4D4F; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;" />
             <Button fx:id="finishButton" text="确认结束" onAction="#onFinishClick" visible="false" managed="false"
                     style="-fx-background-color: #08BD91; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;" />
+            <Button fx:id="editActivityButton" text="编辑活动" onAction="#onEditActivityClick" visible="false" managed="false"
+                    style="-fx-background-color: #1677FF; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;" />
+            <Button fx:id="deleteActivityButton" text="删除活动" onAction="#onDeleteActivityClick" visible="false" managed="false"
+                    style="-fx-background-color: #FF4D4F; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;" />
             <!-- 学生按钮 -->
             <Button fx:id="signupButton" text="我要报名" onAction="#onSignUpClick" visible="false" managed="false"
                     style="-fx-background-color: #1677FF; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;" />
@@ -74,7 +78,7 @@
                       style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8; -fx-border-color: #F0F0F0; -fx-border-radius: 8;">
                     <HBox alignment="CENTER_LEFT">
                         <Label text="已报名志愿者" style="-fx-font-weight: bold; -fx-font-size: 15px;" />
-                        <Pane HBox.hgrow="ALWAYS" />
+                        <Region HBox.hgrow="ALWAYS" />
                         <Label fx:id="volunteerCountLabel" style="-fx-font-size: 13px; -fx-text-fill: #1677FF;" />
                     </HBox>
                     <Separator />

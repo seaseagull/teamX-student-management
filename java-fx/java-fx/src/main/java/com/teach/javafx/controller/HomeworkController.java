@@ -13,15 +13,17 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.MapValueFactory;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,6 +73,27 @@ public class HomeworkController extends ToolController {
     private List<OptionItem> stateFilterList;
     private List<OptionItem> courseFilterList;
     private ObservableList<Map> observableList = FXCollections.observableArrayList();  // TableView渲染列表
+
+
+    private HBox createTimePicker(String defaultHour, String defaultMinute) {
+        ComboBox<String> hourBox = new ComboBox<>();
+        for (int i = 0; i < 24; i++) hourBox.getItems().add(String.format("%02d", i));
+        hourBox.setValue(defaultHour != null ? defaultHour : "23");
+        hourBox.setPrefWidth(70);
+
+        ComboBox<String> minuteBox = new ComboBox<>();
+        for (int i = 0; i < 60; i += 5) minuteBox.getItems().add(String.format("%02d", i));
+        minuteBox.setValue(defaultMinute != null ? defaultMinute : "59");
+        minuteBox.setPrefWidth(70);
+
+        return new HBox(5, hourBox, new Label(":"), minuteBox);
+    }
+
+    private String getTimeValue(HBox timePicker) {
+        ComboBox<String> hourBox = (ComboBox<String>) timePicker.getChildren().get(0);
+        ComboBox<String> minuteBox = (ComboBox<String>) timePicker.getChildren().get(2);
+        return hourBox.getValue() + ":" + minuteBox.getValue();
+    }
 
     /**
      * 将学生数据集合设置到面板上显示
@@ -144,28 +167,7 @@ public class HomeworkController extends ToolController {
     }
 
     private void showEditDialog(Map<String, Object> data) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/teach/javafx/homework-edit-dialog.fxml"));
-            Parent root = loader.load();
-
-            HomeworkEditDialogController controller = loader.getController();
-
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle(data == null ? "添加作业" : "编辑作业");
-            stage.setScene(new Scene(root));
-            controller.setStage(stage);
-
-            if (data == null) {
-                controller.setAddMode();
-            } else {
-                controller.setEditMode(data);
-            }
-            controller.setOnSaved(() -> onQueryButtonClick());
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        showHomeworkDialog(data);
     }
 
     public void onTableRowSelect(ListChangeListener.Change<? extends Integer> change) {
@@ -203,6 +205,129 @@ public class HomeworkController extends ToolController {
 
     @FXML
     protected void onAddButtonClick() {
-        showEditDialog(null);
+        showHomeworkDialog(null);
+    }
+
+    private void showHomeworkDialog(Map<String, Object> data) {
+        Stage stage = new Stage();
+        stage.setTitle(data == null ? "添加作业" : "编辑作业");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(12);
+        grid.setPadding(new Insets(20));
+
+        // 作业名称
+        TextField nameField = new TextField(data != null ? (String) data.get("homeworkName") : "");
+        nameField.setPrefWidth(300);
+
+        // 课程
+        ComboBox<OptionItem> courseBox = new ComboBox<>();
+        courseBox.getItems().addAll(courseList);
+        courseBox.setPrefWidth(300);
+        if (data != null) {
+            Object cidObj = data.get("courseId");
+            String cid = cidObj instanceof Double ? String.valueOf(((Double) cidObj).intValue()) : String.valueOf(cidObj);
+            for (OptionItem item : courseList) {
+                if (item.getValue().equals(cid)) { courseBox.setValue(item); break; }
+            }
+        }
+
+        // 截止日期
+        DatePicker datePicker = new DatePicker();
+        HBox timePicker = createTimePicker("23", "59");
+        HBox deadlineBox = new HBox(10, datePicker, timePicker);
+        if (data != null) {
+            String deadline = (String) data.get("deadline");
+            if (deadline != null && deadline.contains(" ")) {
+                String[] parts = deadline.split(" ");
+                datePicker.setValue(LocalDate.parse(parts[0]));
+                timePicker = createTimePicker(parts[1].substring(0, 2), parts[1].substring(3, 5));
+                deadlineBox.getChildren().set(1, timePicker);
+            }
+        }
+        final HBox finalTimePicker = timePicker;
+
+        // 备注
+        TextArea remarkField = new TextArea(data != null ? (String) data.get("remark") : "");
+        remarkField.setPrefHeight(60);
+        remarkField.setWrapText(true);
+
+        // 完成状态
+        ComboBox<OptionItem> stateBox = new ComboBox<>();
+        stateBox.getItems().addAll(new OptionItem(0, "0", "未完成"), new OptionItem(1, "1", "已完成"));
+        stateBox.setValue(stateBox.getItems().get(0));
+        if (data != null) {
+            Object sObj = data.get("state");
+            int s = sObj instanceof String ? Integer.parseInt((String) sObj) : sObj instanceof Double ? ((Double) sObj).intValue() : (Integer) sObj;
+            stateBox.setValue(stateBox.getItems().get(s == 1 ? 1 : 0));
+        }
+
+        grid.addRow(0, new Label("作业名称:"), nameField);
+        grid.addRow(1, new Label("课程:"), courseBox);
+        grid.addRow(2, new Label("截止日期:"), deadlineBox);
+        grid.addRow(3, new Label("备注:"), remarkField);
+        grid.addRow(4, new Label("完成状态:"), stateBox);
+
+        Button saveBtn = new Button("保存");
+        saveBtn.setStyle("-fx-background-color: #1677FF; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;");
+
+        Button deleteBtn = new Button("删除");
+        deleteBtn.setStyle("-fx-background-color: #FF4D4F; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;");
+        if (data == null) { deleteBtn.setVisible(false); deleteBtn.setManaged(false); }
+
+        Button cancelBtn = new Button("取消");
+        cancelBtn.setStyle("-fx-background-color: white; -fx-text-fill: #333; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-border-color: #D9D9D9; -fx-border-radius: 4; -fx-cursor: hand;");
+
+        HBox buttons = new HBox(10, deleteBtn, new Pane(), cancelBtn, saveBtn);
+        HBox.setHgrow(buttons.getChildren().get(1), Priority.ALWAYS);
+
+        VBox root = new VBox(15, grid, new Separator(), buttons);
+        root.setPadding(new Insets(10));
+
+        // 保存
+        Integer homeworkId = null;
+        if (data != null) {
+            Object idObj = data.get("homeworkId");
+            homeworkId = idObj instanceof Double ? ((Double) idObj).intValue() : (Integer) idObj;
+        }
+        final Integer finalHomeworkId = homeworkId;
+
+        saveBtn.setOnAction(e -> {
+            DataRequest req = new DataRequest();
+            req.add("homeworkId", finalHomeworkId);
+            req.add("homeworkName", nameField.getText());
+            req.add("courseId", Integer.parseInt(courseBox.getValue().getValue()));
+            req.add("deadline", (datePicker.getValue() != null ? datePicker.getValue().toString() : "") + " " + getTimeValue(finalTimePicker));
+            req.add("remark", remarkField.getText());
+            req.add("state", Integer.parseInt(stateBox.getValue().getValue()));
+
+            DataResponse res = HttpRequestUtil.request("/api/homework/homeworkSave", req);
+            if (res != null && res.getCode() == 0) {
+                MessageDialog.showDialog("保存成功！");
+                stage.close();
+                onQueryButtonClick();
+            } else {
+                MessageDialog.showDialog(res != null ? res.getMsg() : "保存失败");
+            }
+        });
+
+        // 删除
+        deleteBtn.setOnAction(e -> {
+            DataRequest req = new DataRequest();
+            req.add("homeworkId", finalHomeworkId);
+            DataResponse res = HttpRequestUtil.request("/api/homework/delete", req);
+            if (res != null && res.getCode() == 0) {
+                MessageDialog.showDialog("删除成功！");
+                stage.close();
+                onQueryButtonClick();
+            }
+        });
+
+        cancelBtn.setOnAction(e -> stage.close());
+
+        stage.setScene(new Scene(root, 650, 400));
+        stage.showAndWait();
     }
 }

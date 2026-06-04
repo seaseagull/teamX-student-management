@@ -48,8 +48,10 @@ public class VolunteerService {
             map.put("volunteerHours", a.getVolunteerHours());
             map.put("requirements", a.getRequirements());
             map.put("notes", a.getNotes());
-            map.put("signupStart", a.getSignupStart() != null ? a.getSignupStart().toString() : "");
-            map.put("signupEnd", a.getSignupEnd() != null ? a.getSignupEnd().toString() : "");
+            map.put("signupStart", a.getSignupStart() != null ?
+                    a.getSignupStart().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) : "");
+            map.put("signupEnd", a.getSignupEnd() != null ?
+                    a.getSignupEnd().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) : "");
             map.put("status", a.getStatus());
             map.put("signedCount", signupRepository.countByActivityId(a.getId()));
             dataList.add(map);
@@ -58,7 +60,14 @@ public class VolunteerService {
     }
 
     public DataResponse activitySave(DataRequest dataRequest) {
-        VolunteerActivity a = new VolunteerActivity();
+        Integer activityId = dataRequest.getInteger("activityId");
+
+        VolunteerActivity a;
+        if (activityId != null) {
+            a = activityRepository.findById(activityId).orElse(new VolunteerActivity());
+        } else {
+            a = new VolunteerActivity();
+        }
         a.setName(dataRequest.getString("name"));
         a.setLocation(dataRequest.getString("location"));
         String dateStr = dataRequest.getString("activityDate");
@@ -163,6 +172,18 @@ public class VolunteerService {
             map.put("name", a.getName());
             map.put("location", a.getLocation());
             map.put("activityDate", a.getActivityDate() != null ? a.getActivityDate().toString() : "");
+            // 补全字段
+            map.put("startTime", a.getStartTime() != null ? a.getStartTime().toString() : "");
+            map.put("endTime", a.getEndTime() != null ? a.getEndTime().toString() : "");
+            map.put("workDescription", a.getWorkDescription());
+            map.put("volunteerHours", a.getVolunteerHours());
+            map.put("requirements", a.getRequirements());
+            map.put("notes", a.getNotes());
+            map.put("signupStart", a.getSignupStart() != null ?
+                    a.getSignupStart().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) : "");
+            map.put("signupEnd", a.getSignupEnd() != null ?
+                    a.getSignupEnd().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) : "");
+
             map.put("hoursEarned", s.getHoursEarned());
             map.put("signupStatus", s.getStatus());
             map.put("status", a.getStatus());
@@ -204,6 +225,14 @@ public class VolunteerService {
     public DataResponse volunteerDelete(DataRequest dataRequest) {
         Integer signupId = dataRequest.getInteger("signupId");
         signupRepository.deleteById(signupId);
+        return CommonMethod.getReturnMessageOK();
+    }
+
+    public DataResponse deleteActivity(DataRequest dataRequest) {
+        Integer activityId = dataRequest.getInteger("activityId");
+        if (activityId != null) {
+            activityRepository.deleteById(activityId);
+        }
         return CommonMethod.getReturnMessageOK();
     }
 }

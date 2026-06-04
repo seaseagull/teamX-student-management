@@ -74,4 +74,10 @@ public class VolunteerController {
     public DataResponse volunteerDelete(@Valid @RequestBody DataRequest dataRequest) {
         return volunteerService.volunteerDelete(dataRequest);
     }
+
+    @PostMapping("/deleteActivity")
+    @PreAuthorize("hasRole('ADMIN')")
+    public DataResponse deleteActivity(@Valid @RequestBody DataRequest dataRequest) {
+        return volunteerService.deleteActivity(dataRequest);
+    }
 }

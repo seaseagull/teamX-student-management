@@ -89,7 +89,7 @@ public class StudentVolunteerController extends ToolController {
         row2.getChildren().addAll(infoLabel, new Region(), hoursLabel);
         HBox.setHgrow(row2.getChildren().get(1), Priority.ALWAYS);
 
-        card.getChildren().addAll(row1, infoLabel, hoursLabel);
+        card.getChildren().addAll(row1, row2);
         card.setOnMouseClicked(e -> openDetail(activity));
 
         return card;
