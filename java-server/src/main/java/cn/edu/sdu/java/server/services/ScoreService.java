@@ -45,6 +45,19 @@ public class ScoreService {
 
     public DataResponse getScoreList(DataRequest dataRequest) {
         Integer personId = dataRequest.getInteger("personId");
+
+        // ↓ 新加这一段：如果前端传了 num（学号），就先查出对应的 personId
+        if (personId == null || personId == 0) {
+            String num = dataRequest.getString("num");
+            if (num != null && !num.isEmpty()) {
+                List<Student> students = studentRepository.findStudentListByNumName(num);
+                if (!students.isEmpty()) {
+                    personId = students.get(0).getPersonId();
+                }
+            }
+        }
+        // ↑ 新加结束
+
         if(personId == null)
             personId = 0;
         Integer courseId = dataRequest.getInteger("courseId");
@@ -65,6 +78,11 @@ public class ScoreService {
             m.put("courseName",s.getCourse().getName());
             m.put("credit",""+s.getCourse().getCredit());
             m.put("mark",""+s.getMark());
+            // 👇 下面这三行是你需要新加的 👇
+            m.put("semester", s.getSemester());
+            m.put("gpa", s.getGpa() != null ? s.getGpa() + "" : "");
+            m.put("ranking", s.getRanking() != null ? s.getRanking() + "" : "");
+            // 👆 👆
             dataList.add(m);
         }
         return CommonMethod.getReturnData(dataList);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.teach.javafx.controller.WebsiteController">
+
+    <top>
+        <VBox spacing="10.0" style="-fx-padding: 15;">
+            <HBox alignment="CENTER_LEFT">
+                <Label text="山东大学常用网站" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+                <Pane HBox.hgrow="ALWAYS" />
+                <Button fx:id="addButton" text="添加网站" visible="false" managed="false"
+                        style="-fx-background-color: #1890ff; -fx-text-fill: white;" onAction="#onAddButtonClick"/>
+            </HBox>
+            <Separator />
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox fx:id="contentVBox" spacing="20.0" style="-fx-padding: 15;" />
+        </ScrollPane>
+    </center>
+</BorderPane>

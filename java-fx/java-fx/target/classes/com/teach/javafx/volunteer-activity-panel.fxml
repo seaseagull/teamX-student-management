@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.teach.javafx.controller.VolunteerActivityController"
+            prefHeight="650.0" prefWidth="900.0">
+    <top>
+        <VBox spacing="10.0" style="-fx-padding: 20">
+            <HBox alignment="CENTER_LEFT">
+                <Label text="志愿活动" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button fx:id="addButton" text="添加活动" onAction="#onAddButtonClick" visible="false" managed="false" style="-fx-font-size: 13px; -fx-background-color: #1677ff; -fx-text-fill: white;-fx-padding: 6 16; -fx-background-radius: 4;" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.78">
+            <VBox>
+                <HBox fx:id="tabBox" spacing="0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 6; -fx-padding: 3;" >
+                    <Label fx:id="allTab" text="全部" style="-fx-padding: 6 20; -fx-cursor: hand; -fx-background-radius: 4" />
+                    <Label fx:id="pendingTab" text="待开始" style="-fx-padding: 6 20; -fx-cursor: hand; -fx-background-radius: 4" />
+                    <Label fx:id="ongoingTab" text="进行中" style="-fx-padding: 6 20; -fx-cursor: hand; -fx-background-radius: 4" />
+                    <Label fx:id="finishedTab" text="已结束" style="-fx-padding: 6 20; -fx-cursor: hand; -fx-background-radius: 4" />
+                </HBox>
+                <ScrollPane fitToWidth="true">
+                    <VBox fx:id="activityListBox" spacing="12.0" style="-fx-padding: 15;"/>
+                </ScrollPane>
+            </VBox>
+            <VBox fx:id="studentActivityBox" visible="false" managed="false" spacing="10.0" style="-fx-padding: 15;">
+                <Label text="我的志愿活动" style="-fx-font-size: 15px; -fx-font-weight: bold;" />
+                <Separator />
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="studentActivityListBox" spacing="8.0" />
+                </ScrollPane>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>

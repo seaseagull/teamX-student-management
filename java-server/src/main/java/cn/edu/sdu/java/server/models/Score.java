@@ -8,9 +8,12 @@ import jakarta.persistence.*;
  * Course course 关联课程 course_id 关联课程的主键 course_id
  * Integer mark 成绩
  * Integer ranking 排名
+ * String semester 学期
+ * Double gpa 绩点
  */
 import lombok.Getter;
 import lombok.Setter;
+
 @Getter
 @Setter
 @Entity
@@ -33,4 +36,7 @@ public class Score {
     private Integer mark;
     private Integer ranking;
 
+    // 👇 核心修改：在这里把缺少的两个数据库映射属性补上
+    private String semester;  // 开课学期，对应数据库里的 semester
+    private Double gpa;       // 绩点，对应数据库里的 gpa
 }

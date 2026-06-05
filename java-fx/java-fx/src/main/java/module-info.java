@@ -5,12 +5,12 @@ module com.teach.javafx {
     requires java.logging;
     requires com.google.gson;
     requires java.net.http;
+    requires javafx.web;
     requires org.json;
+
 
     opens com.teach.javafx to javafx.fxml;
     opens com.teach.javafx.request to com.google.gson, javafx.fxml;
-    opens com.teach.javafx.controller.base to com.google.gson, javafx.fxml;
-    opens com.teach.javafx.controller to com.google.gson, javafx.fxml;
     opens com.teach.javafx.models to javafx.base,com.google.gson;
     opens com.teach.javafx.util to com.google.gson, javafx.fxml;
 
@@ -19,5 +19,7 @@ module com.teach.javafx {
     exports com.teach.javafx.controller.base;
     exports com.teach.javafx.request;
     exports com.teach.javafx.util;
+    opens com.teach.javafx.controller.base to com.google.gson, javafx.base, javafx.fxml;
+    opens com.teach.javafx.controller to com.google.gson, javafx.base, javafx.fxml;
 
 }

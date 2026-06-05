@@ -3,16 +3,33 @@ package cn.edu.sdu.java.server.services;
 import cn.edu.sdu.java.server.models.Course;
 import cn.edu.sdu.java.server.payload.request.DataRequest;
 import cn.edu.sdu.java.server.payload.response.DataResponse;
+import cn.edu.sdu.java.server.payload.response.OptionItem;
+import cn.edu.sdu.java.server.payload.response.OptionItemList;
 import cn.edu.sdu.java.server.repositorys.CourseRepository;
+import cn.edu.sdu.java.server.repositorys.TeacherRepository;
 import cn.edu.sdu.java.server.util.CommonMethod;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
+@AllArgsConstructor
 @Service
 public class CourseService {
     private final CourseRepository courseRepository;
-    public CourseService(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
+    private final TeacherRepository teacherRepository;
+
+    public OptionItemList getPreCourseItemOptionList(DataRequest dataRequest) {
+        List<Course> cList = courseRepository.findAll();
+        List<OptionItem> itemList = new ArrayList<>();
+        itemList.add(new OptionItem(0, "0", "无"));
+        for (Course c : cList) {
+            itemList.add(new OptionItem(
+                    c.getCourseId(),
+                    c.getCourseId() + "",
+                    c.getNum() + "-" + c.getName()
+            ));
+        }
+        return new OptionItemList(0, itemList);
     }
 
     public DataResponse getCourseList(DataRequest dataRequest) {
@@ -35,6 +52,14 @@ public class CourseService {
                 m.put("preCourse",pc.getName());
                 m.put("preCourseId",pc.getCourseId());
             }
+            if (c.getTeacher() != null) {
+                m.put("teacherId", c.getTeacher().getPersonId());
+                m.put("teacherName", c.getTeacher().getPerson().getNum() + "-"
+                        + c.getTeacher().getPerson().getName());
+            } else {
+                m.put("teacherId", "");
+                m.put("teacherName", "");
+            }
             dataList.add(m);
         }
         return CommonMethod.getReturnData(dataList);
@@ -46,6 +71,7 @@ public class CourseService {
         String name = dataRequest.getString("name");
         String coursePath = dataRequest.getString("coursePath");
         Integer credit = dataRequest.getInteger("credit");
+        Integer teacherId = dataRequest.getInteger("teacherId");
         Integer preCourseId = dataRequest.getInteger("preCourseId");
         Optional<Course> op;
         Course c= null;
@@ -68,6 +94,10 @@ public class CourseService {
         c.setCredit(credit);
         c.setCoursePath(coursePath);
         c.setPreCourse(pc);
+        if (teacherId != null && teacherId > 0) {
+            teacherRepository.findById(teacherId).ifPresent(c::setTeacher);
+        }
+
         courseRepository.save(c);
         return CommonMethod.getReturnMessageOK();
     }
