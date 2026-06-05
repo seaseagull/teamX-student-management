@@ -28,6 +28,8 @@ public class StudentLeave {
 
     @Size(max=50)
     private String leaveDate;
+    @Size(max=50)
+    private String returnDate;
     @Size(max=100)
     private String reason;
     private Integer state;
@@ -35,7 +37,11 @@ public class StudentLeave {
     @Size(max=100)
     private String teacherComment;
     private Date teacherTime;
+    private Boolean teacherChecked = false;  // 教师是否已审核
+    private Boolean teacherPass = false;      // 教师是否通过
     @Size(max=100)
     private String adminComment;
     private Date adminTime;
+    private Boolean adminChecked = false;     // 管理员是否已审核
+    private Boolean adminPass = false;       // 管理员是否通过
 }
