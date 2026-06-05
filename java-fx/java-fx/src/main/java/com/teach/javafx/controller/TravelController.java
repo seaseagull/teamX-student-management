@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
+import javafx.scene.layout.StackPane;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -15,11 +15,15 @@ public class TravelController {
     @FXML private Label driveLabel;    // 驾车出行
     @FXML private Label tourLabel;     // 运动建议
     @FXML private Label trafficLabel;  // 穿衣+路况
+    @FXML private StackPane rootStackPane; // 绑定页面最外层面板
 
-    // ⚠️ 这里必须替换为WeatherAPI.com的密钥，你的和风密钥无效
-    private static final String API_KEY = "4911d70ced444cffb61141300260206"; // 无效密钥
-    private static final String CITY = "Jinan";  // 济南，无需改动
+    private static final String API_KEY = "4911d70ced444cffb61141300260206";
+    private static final String CITY = "Jinan";
     private static final String SCHOOL_NAME = "山东大学软件园校区";
+
+    // 两套渐变背景：雨天蓝、晴天暖黄
+    private final String RAIN_BG = "-fx-background-color: linear-gradient(to bottom right, #e0f7fa, #b2ebf2, #81d4fa);-fx-padding:35;";
+    private final String SUN_BG = "-fx-background-color: linear-gradient(to bottom right, #fff9e0, #ffe8b9, #ffd38c);-fx-padding:35;";
 
     @FXML
     public void initialize() {
@@ -52,7 +56,6 @@ public class TravelController {
 
         try {
             JsonObject root = JsonParser.parseString(result).getAsJsonObject();
-            // 密钥错误会显示具体错误信息
             if (root.has("error")) {
                 String errMsg = root.getAsJsonObject("error").get("message").getAsString();
                 Platform.runLater(() -> {
@@ -87,10 +90,22 @@ public class TravelController {
             else dressTip = "厚防寒外套";
             String roadTip = willRain ==1 ? "雨天减速慢行" : "路况良好正常通行";
 
+            // 动态切换背景：下雨蓝色、晴天暖黄色
+            String finalDriveTip = driveTip;
+            String finalSportTip = sportTip;
+            String finalDressTip = dressTip;
+            String finalRoadTip = roadTip;
+            int finalWillRain = willRain;
             Platform.runLater(() -> {
-                driveLabel.setText("🚙 驾车出行：" + driveTip);
-                tourLabel.setText("🏃 运动建议：" + sportTip);
-                trafficLabel.setText("👕 穿衣建议：平均气温"+avgTemp+"℃，推荐"+dressTip+" | 🚦 "+roadTip);
+                driveLabel.setText("🚙 驾车出行：" + finalDriveTip);
+                tourLabel.setText("🏃 运动建议：" + finalSportTip);
+                trafficLabel.setText("👕 穿衣建议：平均气温"+avgTemp+"℃，推荐"+finalDressTip+" | 🚦 "+finalRoadTip);
+                // 修改面板背景
+                if(finalWillRain ==1){
+                    rootStackPane.setStyle(RAIN_BG);
+                }else{
+                    rootStackPane.setStyle(SUN_BG);
+                }
             });
 
         } catch (Exception e) {
