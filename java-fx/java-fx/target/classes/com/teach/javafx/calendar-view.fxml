@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+
+<!-- 只修改这一行：把原来的 -fx-background-color:#2b2b2b; 改成 #d5e9e0; -->
+<BorderPane prefWidth="1000" prefHeight="700" style="-fx-background-color: #d5e9e0;" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teach.javafx.controller.CalendarController">
+    <center>
+        <!-- ScrollPane背景保持透明，这样才能显示外层的淡绿色 -->
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+            <!-- 原来的VBox完全不变，保留原有padding和spacing -->
+            <VBox fx:id="calendarContainer" spacing="30" style="-fx-padding:20;"/>
+        </ScrollPane>
+    </center>
+</BorderPane>

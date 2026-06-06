@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<!-- 无CSS文件 + 内联样式 + 适配WeatherAPI + 无任何报错 -->
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.teach.javafx.controller.TravelController"
+           style="-fx-background-color: linear-gradient(to bottom right, #e0f7fa, #b2ebf2, #81d4fa); -fx-padding: 30;">
+
+    <VBox spacing="25"
+          style="-fx-background-color: rgba(255, 255, 255, 0.92);
+                -fx-background-radius: 20;
+                -fx-padding: 40 50;
+                -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 20, 0, 0, 5);
+                -fx-min-width: 500px;
+                -fx-alignment: top-center;">
+
+        <Label text="山东大学软件园校区-出行建议"
+               style="-fx-font-size: 26px;
+                     -fx-font-weight: bold;
+                     -fx-text-fill: #2c3e50;
+                     -fx-padding: 0 0 10 0;"/>
+
+        <Label fx:id="driveLabel" text="🚙 驾车出行：--"
+               style="-fx-font-size: 19px; -fx-text-fill: #34495e; -fx-min-width: 400px; -fx-wrap-text: true;"/>
+
+        <Label fx:id="tourLabel" text="🏃 运动建议：--"
+               style="-fx-font-size: 19px; -fx-text-fill: #34495e; -fx-min-width: 400px; -fx-wrap-text: true;"/>
+
+        <Label fx:id="trafficLabel" text="🚦 路况提示：--"
+               style="-fx-font-size: 19px; -fx-text-fill: #34495e; -fx-min-width: 400px; -fx-wrap-text: true;"/>
+    </VBox>
+
+</StackPane>
