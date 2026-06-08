@@ -32,6 +32,7 @@ public class StudentLeave {
     private String returnDate;
     @Size(max=100)
     private String reason;
+    @Column(name = "state")
     private Integer state;
     private Date applyTime;
     @Size(max=100)
@@ -44,4 +45,8 @@ public class StudentLeave {
     private Date adminTime;
     private Boolean adminChecked = false;     // 管理员是否已审核
     private Boolean adminPass = false;       // 管理员是否通过
+    @Size(max=255)
+    private String attachmentName;
+    @Lob
+    private String attachmentBase64;
 }

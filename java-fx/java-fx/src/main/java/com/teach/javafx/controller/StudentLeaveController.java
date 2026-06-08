@@ -17,6 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -86,6 +88,12 @@ public class StudentLeaveController extends ToolController {
     /** 表单：请假理由 */
     @FXML
     private TextArea reasonField;
+    /** 表单：PDF附件文件名展示 */
+    @FXML
+    private Label attachmentNameLabel;
+    /** 表单：选择PDF附件 */
+    @FXML
+    private Button attachmentButton;
     /** 理由字数提示 */
     @FXML
     private Label reasonLengthLabel;
@@ -159,10 +167,12 @@ public class StudentLeaveController extends ToolController {
 
     /** 当前编辑的请假记录主键，新建时为 {@code null} */
     private Integer studentLeaveId = null;
+    /** 当前选择的PDF附件文件 */
+    private File selectedAttachmentFile = null;
     /** 指导老师下拉选项列表 */
     private List<OptionItem> teacherList;
     /** 当前查询得到的请假记录列表 */
-    private ArrayList<Map> studentLeaveList = new ArrayList<>();
+    private ArrayList<Map<String, Object>> studentLeaveList = new ArrayList<>();
     /** 审核状态下拉选项（字典 SHZTM） */
     private List<OptionItem> stateList;
     /** 绑定到 {@link #dataTableView} 的可观察行集合 */
@@ -180,8 +190,8 @@ public class StudentLeaveController extends ToolController {
      */
     private void setTableViewData() {
         observableList.clear();
-        for (Map map : studentLeaveList) {
-            observableList.addAll(FXCollections.observableArrayList(map));
+        for (Map<String, Object> map : studentLeaveList) {
+            observableList.add(map);
         }
         dataTableView.setItems(observableList);
     }
@@ -238,7 +248,7 @@ public class StudentLeaveController extends ToolController {
                 adminCommentField.setDisable(true);
                 teacherCommentField.setDisable(true);
                 applyTeacherFieldMode(true);
-                configureStudentDetailFieldsForStudentRole();
+                configureStudentDetailFieldsForStudentRole(true);
                 configureStudentIdentityFieldsForStudentRole();
                 applyStudentIdentityFromJwt();
             }
@@ -565,14 +575,37 @@ public class StudentLeaveController extends ToolController {
     }
 
     /**
-     * 学生端：详情区时间与意见只读展示；新建时尚未产生时间与意见。
+     * 学生端：新增申请时只显示学生需要填写的字段；选中已存在记录时再展示审核时间与意见。
      */
-    private void configureStudentDetailFieldsForStudentRole() {
-        applyTimeValueLabel.setText("—");
-        teacherTimeValueLabel.setText("—");
-        adminTimeValueLabel.setText("—");
-        teacherCommentField.setText("");
-        adminCommentField.setText("");
+    private void configureStudentDetailFieldsForStudentRole(boolean isNewForm) {
+        boolean showReviewInfo = !isNewForm;
+        applyTimeLabel.setVisible(showReviewInfo);
+        applyTimeLabel.setManaged(showReviewInfo);
+        applyTimeValueLabel.setVisible(showReviewInfo);
+        applyTimeValueLabel.setManaged(showReviewInfo);
+        teacherTimeLabel.setVisible(showReviewInfo);
+        teacherTimeLabel.setManaged(showReviewInfo);
+        teacherTimeValueLabel.setVisible(showReviewInfo);
+        teacherTimeValueLabel.setManaged(showReviewInfo);
+        adminTimeLabel.setVisible(showReviewInfo);
+        adminTimeLabel.setManaged(showReviewInfo);
+        adminTimeValueLabel.setVisible(showReviewInfo);
+        adminTimeValueLabel.setManaged(showReviewInfo);
+        teacherCommentLabel.setVisible(showReviewInfo);
+        teacherCommentLabel.setManaged(showReviewInfo);
+        teacherCommentField.setVisible(showReviewInfo);
+        teacherCommentField.setManaged(showReviewInfo);
+        adminCommentLabel.setVisible(showReviewInfo);
+        adminCommentLabel.setManaged(showReviewInfo);
+        adminCommentField.setVisible(showReviewInfo);
+        adminCommentField.setManaged(showReviewInfo);
+        if (isNewForm) {
+            applyTimeValueLabel.setText("—");
+            teacherTimeValueLabel.setText("—");
+            adminTimeValueLabel.setText("—");
+            teacherCommentField.setText("");
+            adminCommentField.setText("");
+        }
         teacherCommentField.setEditable(false);
         adminCommentField.setEditable(false);
         teacherCommentField.setDisable(false);
@@ -585,6 +618,7 @@ public class StudentLeaveController extends ToolController {
             teacherTimeValueLabel.setText("—");
             adminTimeValueLabel.setText("—");
             if ("ROLE_STUDENT".equals(roleName)) {
+                configureStudentDetailFieldsForStudentRole(true);
                 teacherCommentField.setText("");
                 adminCommentField.setText("");
             }
@@ -646,7 +680,7 @@ public class StudentLeaveController extends ToolController {
         fillDetailFieldsFromForm(null);
         if ("ROLE_STUDENT".equals(roleName)) {
             applyStudentIdentityFromJwt();
-            configureStudentDetailFieldsForStudentRole();
+            configureStudentDetailFieldsForStudentRole(true);
         }
         applyTeacherFieldForCurrentRole(null);
         updateActionButtonVisibility(null);
@@ -670,6 +704,10 @@ public class StudentLeaveController extends ToolController {
         reasonField.setText(CommonMethod.getString(form, "reason"));
         updateReasonLengthLabel(reasonField.getText());
         fillDetailFieldsFromForm(form);
+        if ("ROLE_STUDENT".equals(roleName)) {
+            boolean draft = Integer.valueOf(0).equals(CommonMethod.getInteger(form, "submitState"));
+            configureStudentDetailFieldsForStudentRole(draft);
+        }
     }
 
     /**
@@ -702,12 +740,14 @@ public class StudentLeaveController extends ToolController {
         DataRequest req = new DataRequest();
         OptionItem op = stateComboBox.getSelectionModel().getSelectedItem();
         if (op != null) {
-            req.add("state", Integer.parseInt(op.getValue()));
+            req.add("auditState", Integer.parseInt(op.getValue()));
         }
         req.add("search", search);
         DataResponse res = HttpRequestUtil.request("/api/studentLeave/getStudentLeaveList", req);
         if (res != null && res.getCode() == 0) {
-            studentLeaveList = (ArrayList<Map>) res.getData();
+            @SuppressWarnings("unchecked")
+            ArrayList<Map<String, Object>> list = (ArrayList<Map<String, Object>>) res.getData();
+            studentLeaveList = list != null ? list : new ArrayList<>();
             setTableViewData();
             if (!restoreTableSelection(pendingReselectLeaveId)) {
                 dataTableView.getSelectionModel().clearSelection();
@@ -726,7 +766,7 @@ public class StudentLeaveController extends ToolController {
             return false;
         }
         for (int i = 0; i < studentLeaveList.size(); i++) {
-            Map row = studentLeaveList.get(i);
+            Map<String, Object> row = studentLeaveList.get(i);
             if (leaveId.equals(CommonMethod.getInteger(row, "studentLeaveId"))) {
                 dataTableView.getSelectionModel().select(i);
                 rightVBox.setVisible(true);
@@ -789,6 +829,11 @@ public class StudentLeaveController extends ToolController {
         }
     }
 
+    @FXML
+    protected void onAttachmentButtonClick() {
+        MessageDialog.showDialog("当前版本未启用附件上传功能。");
+    }
+
     @Override
     public void doDelete() {
         onDeleteButtonClick();
@@ -823,9 +868,9 @@ public class StudentLeaveController extends ToolController {
     /**
      * 调用后端 {@code /api/studentLeave/studentLeaveSave} 保存或提交请假。
      *
-     * @param state 业务状态：0 草稿，1 已提交（与后端约定一致）
+     * @param submitState 业务状态：0 草稿，1 已提交（与后端约定一致）
      */
-    protected void doSave(Integer state) {
+    protected void doSave(Integer submitState) {
         if (studentLeaveId != null) {
             Map<String, Object> form = dataTableView.getSelectionModel().getSelectedItem();
             if (form != null) {
@@ -839,7 +884,7 @@ public class StudentLeaveController extends ToolController {
         }
         DataRequest req = new DataRequest();
         OptionItem op = teacherComboBox.getSelectionModel().getSelectedItem();
-        boolean isSubmit = state != null && state == 1;
+        boolean isSubmit = submitState != null && submitState == 1;
         if ("ROLE_STUDENT".equals(roleName) && isSubmit && op == null) {
             MessageDialog.showDialog("请选择指导老师！");
             return;
@@ -874,7 +919,7 @@ public class StudentLeaveController extends ToolController {
         req.add("leaveDate", leaveDate != null ? leaveDate.format(LEAVE_DATE_FORMAT) : "");
         req.add("returnDate", returnDate != null ? returnDate.format(LEAVE_DATE_FORMAT) : "");
         req.add("reason", reason);
-        req.add("state", state);
+        req.add("submitState", submitState);
         DataResponse res = HttpRequestUtil.request("/api/studentLeave/studentLeaveSave", req);
         if (res != null && res.getCode() == 0) {
             MessageDialog.showDialog("保存提交成功！");
@@ -887,9 +932,9 @@ public class StudentLeaveController extends ToolController {
     /**
      * 调用后端 {@code /api/studentLeave/studentLeaveCheck} 提交审核结果及意见。
      *
-     * @param state 审核结果状态码（与 {@code StudentLeaveService#studentLeaveCheck} 约定一致）
+     * @param auditState 审核结果状态码（与 {@code StudentLeaveService#studentLeaveCheck} 约定一致）
      */
-    protected void doCheck(Integer state) {
+    protected void doCheck(Integer auditState) {
         if (studentLeaveId == null) {
             MessageDialog.showDialog("请选择要审核的请假记录！");
             return;
@@ -898,7 +943,7 @@ public class StudentLeaveController extends ToolController {
         req.add("studentLeaveId", studentLeaveId);
         req.add("teacherComment", teacherCommentField.getText());
         req.add("adminComment", adminCommentField.getText());
-        req.add("state", state);
+        req.add("auditState", auditState);
         DataResponse res = HttpRequestUtil.request("/api/studentLeave/studentLeaveCheck", req);
         if (res != null && res.getCode() == 0) {
             MessageDialog.showDialog("审核成功！");

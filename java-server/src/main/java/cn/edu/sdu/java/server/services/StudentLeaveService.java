@@ -46,7 +46,7 @@ public class StudentLeaveService {
     public DataResponse getStudentLeaveList(DataRequest dataRequest) {
         String roleName = CommonMethod.getRoleName();
         String userName = CommonMethod.getUsername();
-        Integer filterState = dataRequest.getInteger("state");
+        Integer filterState = dataRequest.getInteger("auditState");
         if(filterState == null)
             filterState = -1;
         String search = dataRequest.getString("search");
@@ -67,7 +67,7 @@ public class StudentLeaveService {
         Teacher t;
         if (slList != null && !slList.isEmpty()) {
             for (StudentLeave sl : slList) {
-                int submitState = sl.getState() != null ? sl.getState() : 0;
+                int submitState = sl.getSubmitState() != null ? sl.getSubmitState() : 0;
                 if (!studentRole && submitState == 0) {
                     continue;
                 }
@@ -86,7 +86,7 @@ public class StudentLeaveService {
                 map.put("studentId", s.getPersonId());
                 map.put("teacherName", formatTeacherDisplayName(t));
                 map.put("submitState", submitState);
-                map.put("state", auditView.auditState());
+                map.put("auditState", auditView.auditState());
                 map.put("reason", sl.getReason());
                 map.put("leaveDate", sl.getLeaveDate());
                 map.put("returnDate", sl.getReturnDate());
@@ -115,12 +115,22 @@ public class StudentLeaveService {
     }
 
     public DataResponse studentLeaveSave(DataRequest dataRequest) {
-        Integer state = dataRequest.getInteger("state");
+        Integer submitState = dataRequest.getInteger("submitState");
         Integer studentLeaveId = dataRequest.getInteger("studentLeaveId");
         Integer teacherId = dataRequest.getInteger("teacherId");
         String leaveDate = dataRequest.getString("leaveDate");
         String returnDate = dataRequest.getString("returnDate");
         String reason = dataRequest.getString("reason");
+        String attachmentName = dataRequest.getString("attachmentName");
+        String attachmentBase64 = dataRequest.getString("attachmentBase64");
+
+        if (attachmentName != null && !attachmentName.isBlank() && !attachmentName.toLowerCase().endsWith(".pdf")) {
+            return CommonMethod.getReturnMessageError("附件仅支持PDF格式！");
+        }
+
+        if (attachmentBase64 != null && !attachmentBase64.isBlank() && !attachmentBase64.startsWith("data:application/pdf")) {
+            return CommonMethod.getReturnMessageError("附件仅支持PDF格式！");
+        }
 
         if (leaveDate == null || leaveDate.trim().isEmpty()) {
             return CommonMethod.getReturnMessageError("离校日期不能为空！");
@@ -146,7 +156,7 @@ public class StudentLeaveService {
             return CommonMethod.getReturnMessageError("请假理由不能超过100字！");
         }
 
-        boolean isSubmit = state != null && state == 1;
+        boolean isSubmit = submitState != null && submitState == 1;
         if (isSubmit) {
             if (teacherId == null || teacherId <= 0) {
                 return CommonMethod.getReturnMessageError("请选择指导老师！");
@@ -169,7 +179,7 @@ public class StudentLeaveService {
             if(Boolean.TRUE.equals(sl.getTeacherChecked()) || Boolean.TRUE.equals(sl.getAdminChecked())) {
                 return CommonMethod.getReturnMessageError("该请假申请已审核，无法修改！");
             }
-            if(sl.getState() != null && sl.getState() == 1 && state != null && state == 0) {
+            if(sl.getSubmitState() != null && sl.getSubmitState() == 1 && submitState != null && submitState == 0) {
                 return CommonMethod.getReturnMessageError("已提交的申请不能改回草稿！");
             }
         }
@@ -179,7 +189,7 @@ public class StudentLeaveService {
                 return CommonMethod.getReturnMessageError("当前账号未关联学生档案，无法提交请假！");
             }
             sl = new StudentLeave();
-            sl.setState(0);
+            sl.setSubmitState(0);
             sl.setApplyTime(new Date());
             sl.setTeacherComment("");
             sl.setAdminComment("");
@@ -189,6 +199,8 @@ public class StudentLeaveService {
             sl.setAdminChecked(false);
             sl.setAdminPass(false);
         }
+        sl.setAttachmentName(attachmentName != null ? attachmentName.trim() : null);
+        sl.setAttachmentBase64(attachmentBase64);
         if(teacherId != null && teacherId > 0) {
             Optional<Teacher> op = teacherRepository.findById(teacherId);
             if(op.isPresent()) {
@@ -200,7 +212,7 @@ public class StudentLeaveService {
         sl.setLeaveDate(leaveDate);
         sl.setReturnDate(returnDate);
         sl.setReason(reason);
-        sl.setState(state);
+        sl.setSubmitState(submitState);
         sl.setApplyTime(new Date());
         studentLeaveRepository.save(sl);
         return CommonMethod.getReturnMessageOK();
@@ -229,7 +241,7 @@ public class StudentLeaveService {
     public DataResponse studentLeaveCheck(DataRequest dataRequest) {
         String roleName = CommonMethod.getRoleName();
         String userName = CommonMethod.getUsername();
-        Integer state = dataRequest.getInteger("state");
+        Integer auditState = dataRequest.getInteger("auditState");
         Integer studentLeaveId = dataRequest.getInteger("studentLeaveId");
         String teacherComment = dataRequest.getString("teacherComment");
         String adminComment = dataRequest.getString("adminComment");
@@ -260,7 +272,7 @@ public class StudentLeaveService {
             sl.setAdminComment(adminComment);
             sl.setAdminTime(new Date());
             sl.setAdminChecked(true);
-            sl.setAdminPass(state != null && state == 0);
+            sl.setAdminPass(auditState != null && auditState == 0);
         } else if("ROLE_TEACHER".equals(roleName)) {
             if(!isAssignedTeacher(sl, userName)) {
                 return CommonMethod.getReturnMessageError("无权审核该请假单！");
@@ -271,7 +283,7 @@ public class StudentLeaveService {
             sl.setTeacherComment(teacherComment);
             sl.setTeacherTime(new Date());
             sl.setTeacherChecked(true);
-            sl.setTeacherPass(state != null && state == 0);
+            sl.setTeacherPass(auditState != null && auditState == 0);
         } else {
             return CommonMethod.getReturnMessageError("无权审核该请假单！");
         }
@@ -303,7 +315,7 @@ public class StudentLeaveService {
     }
 
     private boolean isSubmitted(StudentLeave sl) {
-        return sl.getState() != null && sl.getState() == 1;
+        return sl.getSubmitState() != null && sl.getSubmitState() == 1;
     }
 
     private boolean isAuditRejected(StudentLeave sl) {
@@ -316,7 +328,7 @@ public class StudentLeaveService {
     private record LeaveAuditView(int auditState, String stateName) {}
 
     private LeaveAuditView computeLeaveAuditView(StudentLeave sl) {
-        int submitState = sl.getState() != null ? sl.getState() : 0;
+        int submitState = sl.getSubmitState() != null ? sl.getSubmitState() : 0;
         boolean teacherChecked = Boolean.TRUE.equals(sl.getTeacherChecked());
         boolean adminChecked = Boolean.TRUE.equals(sl.getAdminChecked());
         boolean teacherPass = Boolean.TRUE.equals(sl.getTeacherPass());
