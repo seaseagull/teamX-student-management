@@ -18,7 +18,9 @@ import java.util.*;
 @Service
 public class StudentLeaveService {
     private static final int REASON_MAX_LENGTH = 100;
-    /** 列表筛选：草稿（仅学生端使用，教师/管理员不可见草稿记录） */
+    /**
+     * 列表筛选项：草稿（仅学生端可见，教师/管理员不可见）。
+     */
     public static final int FILTER_STATE_DRAFT = 4;
 
     private final StudentRepository studentRepository;
@@ -46,63 +48,64 @@ public class StudentLeaveService {
     public DataResponse getStudentLeaveList(DataRequest dataRequest) {
         String roleName = CommonMethod.getRoleName();
         String userName = CommonMethod.getUsername();
-        Integer filterState = dataRequest.getInteger("auditState");
-        if(filterState == null)
-            filterState = -1;
+        Integer auditStateFilter = dataRequest.getInteger("auditState");
+        if (auditStateFilter == null) {
+            auditStateFilter = -1;
+        }
         String search = dataRequest.getString("search");
         if (search == null) {
             search = "";
         }
         assert roleName != null;
         boolean studentRole = "ROLE_STUDENT".equals(roleName);
-        List<StudentLeave> slList = switch (roleName) {
+        List<StudentLeave> leaveList = switch (roleName) {
             case "ROLE_STUDENT" -> studentLeaveRepository.getStudentLeaveList(search, userName, "");
             case "ROLE_TEACHER" -> studentLeaveRepository.getStudentLeaveList(search, "", userName);
             case "ROLE_ADMIN" -> studentLeaveRepository.getStudentLeaveList(search, "", "");
             default -> null;
         };
         List<Map<String, Object>> dataList = new ArrayList<>();
-        Map<String, Object> map;
-        Student s;
-        Teacher t;
-        if (slList != null && !slList.isEmpty()) {
-            for (StudentLeave sl : slList) {
-                int submitState = sl.getSubmitState() != null ? sl.getSubmitState() : 0;
+        Map<String, Object> row;
+        Student student;
+        Teacher teacher;
+        if (leaveList != null && !leaveList.isEmpty()) {
+            for (StudentLeave leave : leaveList) {
+                int submitState = leave.getSubmitState() != null ? leave.getSubmitState() : 0;
                 if (!studentRole && submitState == 0) {
                     continue;
                 }
-                LeaveAuditView auditView = computeLeaveAuditView(sl);
+                LeaveAuditView auditView = computeLeaveAuditView(leave);
 
-                if (filterState != -1 && !matchesAuditFilter(filterState, submitState, auditView, studentRole)) {
+                if (auditStateFilter != -1 && !matchesAuditFilter(auditStateFilter, submitState, auditView, studentRole)) {
                     continue;
                 }
 
-                map = new HashMap<>();
-                s = sl.getStudent();
-                t = sl.getTeacher();
-                map.put("studentLeaveId", sl.getStudentLeaveId());
-                map.put("studentNum", s.getPerson().getNum());
-                map.put("studentName", s.getPerson().getName());
-                map.put("studentId", s.getPersonId());
-                map.put("teacherName", formatTeacherDisplayName(t));
-                map.put("submitState", submitState);
-                map.put("auditState", auditView.auditState());
-                map.put("reason", sl.getReason());
-                map.put("leaveDate", sl.getLeaveDate());
-                map.put("returnDate", sl.getReturnDate());
-                map.put("applyTime", formatDateTime(sl.getApplyTime()));
-                map.put("teacherTime", formatDateTime(sl.getTeacherTime()));
-                map.put("adminTime", formatDateTime(sl.getAdminTime()));
-                map.put("lastActivityTime", computeLastActivityMillis(sl));
-                map.put("adminComment", sl.getAdminComment());
-                map.put("adminChecked", sl.getAdminChecked());
-                map.put("adminPass", sl.getAdminPass());
-                map.put("teacherId", t != null ? t.getPersonId() : null);
-                map.put("teacherComment", sl.getTeacherComment());
-                map.put("teacherChecked", sl.getTeacherChecked());
-                map.put("teacherPass", sl.getTeacherPass());
-                map.put("stateName", auditView.stateName());
-                dataList.add(map);
+                row = new HashMap<>();
+                student = leave.getStudent();
+                teacher = leave.getTeacher();
+                row.put("studentLeaveId", leave.getStudentLeaveId());
+                row.put("studentNum", student.getPerson().getNum());
+                row.put("studentName", student.getPerson().getName());
+                row.put("studentId", student.getPersonId());
+                row.put("teacherName", formatTeacherDisplayName(teacher));
+                row.put("submitState", submitState);
+                row.put("auditState", auditView.auditState());
+                row.put("reason", leave.getReason());
+                row.put("leaveDate", leave.getLeaveDate());
+                row.put("returnDate", leave.getReturnDate());
+                row.put("applyTime", formatDateTime(leave.getApplyTime()));
+                row.put("teacherTime", formatDateTime(leave.getTeacherTime()));
+                row.put("adminTime", formatDateTime(leave.getAdminTime()));
+                row.put("lastActivityTime", computeLastActivityMillis(leave));
+                row.put("adminComment", leave.getAdminComment());
+                row.put("adminChecked", leave.getAdminChecked());
+                row.put("adminPass", leave.getAdminPass());
+                row.put("teacherId", teacher != null ? teacher.getPersonId() : null);
+                row.put("teacherComment", leave.getTeacherComment());
+                row.put("teacherChecked", leave.getTeacherChecked());
+                row.put("teacherPass", leave.getTeacherPass());
+                row.put("stateName", auditView.stateName());
+                dataList.add(row);
             }
         }
         dataList.sort((a, b) -> Long.compare(
@@ -123,6 +126,7 @@ public class StudentLeaveService {
         String reason = dataRequest.getString("reason");
         String attachmentName = dataRequest.getString("attachmentName");
         String attachmentBase64 = dataRequest.getString("attachmentBase64");
+        boolean isSubmitAction = submitState != null && submitState == 1;
 
         if (attachmentName != null && !attachmentName.isBlank() && !attachmentName.toLowerCase().endsWith(".pdf")) {
             return CommonMethod.getReturnMessageError("附件仅支持PDF格式！");
@@ -156,8 +160,7 @@ public class StudentLeaveService {
             return CommonMethod.getReturnMessageError("请假理由不能超过100字！");
         }
 
-        boolean isSubmit = submitState != null && submitState == 1;
-        if (isSubmit) {
+        if (isSubmitAction) {
             if (teacherId == null || teacherId <= 0) {
                 return CommonMethod.getReturnMessageError("请选择指导老师！");
             }
@@ -178,6 +181,9 @@ public class StudentLeaveService {
             }
             if(Boolean.TRUE.equals(sl.getTeacherChecked()) || Boolean.TRUE.equals(sl.getAdminChecked())) {
                 return CommonMethod.getReturnMessageError("该请假申请已审核，无法修改！");
+            }
+            if (isSubmitAction && (teacherId == null || teacherId <= 0)) {
+                return CommonMethod.getReturnMessageError("请选择指导老师！");
             }
             if(sl.getSubmitState() != null && sl.getSubmitState() == 1 && submitState != null && submitState == 0) {
                 return CommonMethod.getReturnMessageError("已提交的申请不能改回草稿！");
@@ -205,7 +211,7 @@ public class StudentLeaveService {
             Optional<Teacher> op = teacherRepository.findById(teacherId);
             if(op.isPresent()) {
                 sl.setTeacher(op.get());
-            } else if (isSubmit) {
+            } else if (isSubmitAction) {
                 return CommonMethod.getReturnMessageError("所选指导老师不存在！");
             }
         }

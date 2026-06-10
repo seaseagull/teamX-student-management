@@ -32,8 +32,11 @@ public class StudentLeave {
     private String returnDate;
     @Size(max=100)
     private String reason;
+    /**
+     * 提交状态：0=草稿，1=已提交。数据库沿用 state 字段，代码统一使用 submitState 语义。
+     */
     @Column(name = "state")
-    private Integer state;
+    private Integer submitState = 0;
     private Date applyTime;
     @Size(max=100)
     private String teacherComment;
