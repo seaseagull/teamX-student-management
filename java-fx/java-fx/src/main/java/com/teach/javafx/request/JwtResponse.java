@@ -15,6 +15,15 @@ public class JwtResponse {
     private String perName;
     private String token;
     private String role;
+    private String perName;
+
+    public String getPerName() {
+        return perName;
+    }
+
+    public void setPerName(String perName) {
+        this.perName = perName;
+    }
 
     public String getTokenType() {
         return tokenType;

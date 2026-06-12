@@ -4,11 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8343b2d-6729-42ab-bd7c-34556a91b871" name="Changes" comment="删除多余log" />
+    <list default="true" id="a8343b2d-6729-42ab-bd7c-34556a91b871" name="Changes" comment="删除多余log">
+      <change afterPath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java-fx/java-fx/src/main/java/com/teach/javafx/controller/NoticeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java-fx/java-fx/src/main/resources/com/teach/javafx/notice-panel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/src/main/java/com/teach/javafx/controller/LeaveRequestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/src/main/java/com/teach/javafx/request/JwtResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-fx/java-fx/src/main/java/com/teach/javafx/request/JwtResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/src/main/resources/com/teach/javafx/leave-request-panel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/target/classes/com/teach/javafx/controller/LeaveRequestController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/target/classes/com/teach/javafx/controller/StudentLeaveController.class" beforeDir="false" afterPath="$PROJECT_DIR$/java-fx/java-fx/target/classes/com/teach/javafx/controller/StudentLeaveController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/target/classes/com/teach/javafx/controller/TravelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/java-fx/java-fx/target/classes/com/teach/javafx/controller/TravelController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/target/classes/com/teach/javafx/leave-request-panel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/target/classes/com/teach/javafx/request/JwtResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/java-fx/java-fx/target/classes/com/teach/javafx/request/JwtResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/target/classes/com/teach/javafx/travel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/java-fx/java-fx/target/classes/com/teach/javafx/travel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/java-fx/java-fx/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-server/src/main/java/cn/edu/sdu/java/server/controllers/LeaveRequestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-server/src/main/java/cn/edu/sdu/java/server/models/LeaveRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-server/src/main/java/cn/edu/sdu/java/server/repositorys/LeaveRequestRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-server/src/main/java/cn/edu/sdu/java/server/services/LeaveRequestService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/java-server.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/java-server.log" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,11 +71,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.MainApplication.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Hu",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.JavaServerApplication.executor": "Run",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -49,6 +92,36 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RunManager" selected="Application.MainApplication">
+    <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.teach.javafx.MainApplication" />
+      <module name="java-fx" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.teach.javafx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JavaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="java-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.edu.sdu.java.server.JavaServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -65,6 +138,16 @@
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
       <updated>1780619940846</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a8343b2d-6729-42ab-bd7c-34556a91b871" name="Changes" comment="删除多余log" />
+      <created>1780927293373</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1780927293373</updated>
+      <workItem from="1780927298899" duration="2326000" />
+      <workItem from="1781000518265" duration="1514000" />
+      <workItem from="1781273312966" duration="804000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
