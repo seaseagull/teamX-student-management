@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teach.javafx.controller.NoticeController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+            <Button fx:id="addButton" text="发布通知" onAction="#onAddClick" style="-fx-background-color: #409eff; -fx-text-fill: white;" />
+            <Button fx:id="editButton" text="编辑" onAction="#onEditClick" disable="true" />
+            <Button fx:id="deleteButton" text="删除" onAction="#onDeleteClick" disable="true" style="-fx-background-color: #f56c6c; -fx-text-fill: white;" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="刷新" onAction="#onRefreshClick" />
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.4">
+            <items>
+                <!-- 左侧：通知列表 -->
+                <VBox spacing="10.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <Label text="📢 通知列表" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                    <ListView fx:id="noticeListView" prefHeight="400.0" />
+                </VBox>
+
+                <!-- 右侧：通知详情/编辑区域 -->
+                <VBox spacing="10.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <Label text="📝 通知详情" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                    <TextField fx:id="titleField" promptText="请输入公告标题" />
+                    <TextArea fx:id="contentArea" prefHeight="300.0" wrapText="true" promptText="请输入公告内容" />
+                    <Label fx:id="timeLabel" style="-fx-text-fill: #909399;" />
+                    <HBox spacing="10.0" alignment="CENTER_RIGHT">
+                        <Button fx:id="submitButton" text="发布/保存" onAction="#onSubmitClick" style="-fx-background-color: #67c23a; -fx-text-fill: white;" />
+                        <Button text="取消" onAction="#onCancelClick" />
+                    </HBox>
+                </VBox>
+            </items>
+        </SplitPane>
+    </center>
+</BorderPane>
