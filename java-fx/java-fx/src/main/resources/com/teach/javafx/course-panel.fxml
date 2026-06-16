@@ -1,22 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-
-<!-- 学生个人简历界面 FXML配置文件 对应页面交互控制类 com.teach.javafx.controller.StudentIntroduceController -->
-<?import javafx.scene.control.TableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
-<BorderPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            style= "-fx-background-image: url('shanda1.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: cover;" fx:controller="com.teach.javafx.controller.CourseController">
-   <center>
-      <TableView fx:id="dataTableView"  >
-         <columns>
-            <TableColumn fx:id="numColumn" prefWidth="120.0" text="课程号" />
-            <TableColumn fx:id="nameColumn" prefWidth="90.0" text="课程名" />
-            <TableColumn fx:id="creditColumn" prefWidth="60.0" text="学分" />
-            <TableColumn fx:id="teacherColumn" prefWidth="100.0" text="任课教师" />
-            <TableColumn fx:id="preCourseColumn" prefWidth="120.0" text="前序课" />
-            <TableColumn fx:id="operateColumn" prefWidth="120.0" text="操作" />
-         </columns>
-      </TableView>
-   </center>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefWidth="900.0"
+            prefHeight="600.0"
+            styleClass="page-root"
+            stylesheets="@css/page-modern.css"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.teach.javafx.controller.CourseController">
+    <top>
+        <VBox spacing="4.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="课程查看" styleClass="page-title" />
+                <Label text="查看课程号、课程名称、学分、任课教师与前序课程信息" styleClass="page-subtitle" />
+            </children>
+            <padding>
+                <Insets bottom="14" />
+            </padding>
+        </VBox>
+    </top>
+    <center>
+        <VBox styleClass="table-card" VBox.vgrow="ALWAYS">
+            <children>
+                <TableView fx:id="dataTableView" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="numColumn" prefWidth="140.0" text="课程号" />
+                        <TableColumn fx:id="nameColumn" prefWidth="180.0" text="课程名" />
+                        <TableColumn fx:id="creditColumn" prefWidth="100.0" text="学分" />
+                        <TableColumn fx:id="teacherColumn" prefWidth="140.0" text="任课教师" />
+                        <TableColumn fx:id="preCourseColumn" prefWidth="220.0" text="前序课" />
+                        <TableColumn fx:id="operateColumn" prefWidth="120.0" text="操作" />
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
 </BorderPane>

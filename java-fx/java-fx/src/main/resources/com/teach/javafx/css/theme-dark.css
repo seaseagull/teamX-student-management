@@ -1,0 +1,115 @@
+.root-shell {
+    -fx-font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
+    -fx-background-color:
+            linear-gradient(to bottom, rgba(20, 20, 20, 0.34) 0%, rgba(20, 20, 20, 0.18) 28%, rgba(20, 20, 20, 0.06) 62%, rgba(20, 20, 20, 0.00) 100%),
+            url("../picture/login-bg.png");
+    -fx-background-size: cover, cover;
+    -fx-background-position: center center, center bottom;
+    -fx-background-repeat: no-repeat, no-repeat;
+}
+
+.top-bar,
+.status-bar {
+    -fx-background-color: rgba(31, 31, 31, 0.56);
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+    -fx-border-width: 0 0 1 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.22), 10, 0.10, 0, 2);
+}
+
+.status-bar {
+    -fx-border-width: 1 0 0 0;
+}
+
+.sidebar-scroll,
+.sidebar-scroll > .viewport,
+.content-scroll,
+.content-scroll > .viewport {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.sidebar {
+    -fx-background-color:
+            linear-gradient(to bottom, rgba(15, 23, 42, 0.70) 0%, rgba(15, 23, 42, 0.58) 55%, rgba(15, 23, 42, 0.48) 100%),
+            url("../picture/login-bg.png");
+    -fx-background-size: cover, cover;
+    -fx-background-position: center center, center bottom;
+    -fx-background-repeat: no-repeat, no-repeat;
+}
+
+.content-area {
+    -fx-background-color:
+            linear-gradient(to bottom, rgba(20, 20, 20, 0.22) 0%, rgba(20, 20, 20, 0.08) 52%, rgba(20, 20, 20, 0.00) 100%),
+            url("../picture/login-bg.png");
+    -fx-background-size: cover, cover;
+    -fx-background-position: center center, center bottom;
+    -fx-background-repeat: no-repeat, no-repeat;
+    -fx-padding: 20;
+}
+
+.app-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #f8fafc;
+}
+
+.app-subtitle, .status-text, .status-text-muted, .sidebar-hint {
+    -fx-text-fill: #94a3b8;
+}
+
+.sidebar-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+    -fx-text-fill: white;
+}
+
+.user-badge {
+    -fx-background-color: rgba(64, 150, 255, 0.16);
+    -fx-border-color: rgba(64, 150, 255, 0.35);
+    -fx-border-width: 1;
+    -fx-border-radius: 999;
+}
+
+.user-name {
+    -fx-text-fill: #f8fafc;
+    -fx-font-weight: 700;
+}
+
+.search-box {
+    -fx-background-color: rgba(42, 42, 42, 0.78);
+    -fx-border-color: rgba(64, 150, 255, 0.24);
+    -fx-border-radius: 10;
+    -fx-text-fill: #f8fafc;
+    -fx-prompt-text-fill: #94a3b8;
+}
+
+.secondary-btn {
+    -fx-background-color: rgba(64, 150, 255, 0.16);
+    -fx-text-fill: #e0f2fe;
+}
+
+.empty-state {
+    -fx-background-color: rgba(31, 31, 31, 0.48);
+    -fx-background-radius: 16;
+    -fx-padding: 40;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 16, 0.18, 0, 4);
+}
+
+.card,
+.table-card,
+.detail-card,
+.filter-card,
+.dashboard-chart,
+.page-toolbar {
+    -fx-background-color: rgba(31, 31, 31, 0.58);
+    -fx-border-color: rgba(255,255,255,0.10);
+}
+
+.table-view,
+.list-view {
+    -fx-background-color: rgba(31, 31, 31, 0.20);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: rgba(31, 31, 31, 0.36);
+}

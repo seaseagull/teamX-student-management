@@ -12,6 +12,8 @@ import java.io.IOException;
  * 应用的主程序 MainApplication 按照编程规范，需继承Application 重写start 方法 主方法调用Application的launch() 启动程序
  */
 public class MainApplication extends Application {
+    private static final double LOGIN_STAGE_WIDTH = 960;
+    private static final double LOGIN_STAGE_HEIGHT = 620;
     /**
      * 加载登录对话框，设置登录Scene到Stage,显示该场景
      */
@@ -24,10 +26,13 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("base/login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), LOGIN_STAGE_WIDTH, LOGIN_STAGE_HEIGHT);
 //        scene.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
         stage.setTitle("登录");
+        stage.setMinWidth(860);
+        stage.setMinHeight(560);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
         stage.setOnCloseRequest(event -> {
             if(canClose) {
@@ -63,12 +68,15 @@ public class MainApplication extends Application {
         stageHeight = mainStage.getHeight();
         mainStage.setTitle(name);
         mainStage.setScene(scene);
-        double x = (stageWidth-320)/2;
-        double y = (stageHeight-240)/2;
+        double x = (stageWidth-LOGIN_STAGE_WIDTH)/2;
+        double y = (stageHeight-LOGIN_STAGE_HEIGHT)/2;
         mainStage.setX(x);
         mainStage.setY(y);
-        mainStage.setWidth(320);
-        mainStage.setHeight(240);
+        mainStage.setWidth(LOGIN_STAGE_WIDTH);
+        mainStage.setHeight(LOGIN_STAGE_HEIGHT);
+        mainStage.setMinWidth(860);
+        mainStage.setMinHeight(560);
+        mainStage.centerOnScreen();
         mainStage.show();
     }
 

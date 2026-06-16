@@ -42,9 +42,9 @@
 
                 <HBox spacing="10" alignment="CENTER_RIGHT">
                     <children>
-                        <Button fx:id="themeToggleButton" text="深色模式" onAction="#onToggleTheme" styleClass="secondary-btn nav-btn" />
-                        <Button fx:id="refreshButton" text="刷新" onAction="#onRefreshCurrentPage" styleClass="secondary-btn nav-btn" />
-                        <Button fx:id="logoutButton" text="退出登录" onAction="#onLogoutAction" styleClass="danger-btn nav-btn" />
+                        <Button fx:id="themeToggleButton" text="深色模式" onAction="#onToggleTheme" styleClass="secondary-btn nav-btn pill-button" />
+                        <Button fx:id="refreshButton" text="刷新" onAction="#onRefreshCurrentPage" styleClass="secondary-btn nav-btn pill-button" />
+                        <Button fx:id="logoutButton" text="退出登录" onAction="#onLogoutAction" styleClass="danger-btn nav-btn pill-button" />
                         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="user-badge">
                             <children>
                                 <Circle radius="14" styleClass="avatar-dot" />

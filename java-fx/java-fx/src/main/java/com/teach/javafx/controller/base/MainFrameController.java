@@ -16,6 +16,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -38,6 +43,7 @@ public class MainFrameController {
     private static final String DARK_THEME = "/com/teach/javafx/css/theme-dark.css";
     private static final String COMPONENT_THEME = "/com/teach/javafx/css/component.css";
     private static final String LAYOUT_THEME = "/com/teach/javafx/css/layout.css";
+    private static final String HOME_BG_IMAGE = "/com/teach/javafx/picture/login-bg.png";
 
     @FXML private Label systemPrompt;
     @FXML private Label pagePrompt;
@@ -54,6 +60,7 @@ public class MainFrameController {
     private final Map<String, ToolController> toolControllerCache = new java.util.HashMap<>();
     private final Map<String, Button> menuButtonMap = new java.util.HashMap<>();
     private String currentPageName;
+    private String currentRole = "GUEST";
     private String currentTheme = LIGHT_THEME;
     private List<MenuEntry> currentMenuEntries = List.of();
 
@@ -61,6 +68,7 @@ public class MainFrameController {
     public void initialize() {
         JwtResponse jwt = AppStore.getJwt();
         String role = jwt == null || jwt.getRole() == null ? "GUEST" : jwt.getRole().replace("ROLE_", "");
+        currentRole = role;
         String userName = jwt == null ? "访客" : firstNonBlank(jwt.getPerName(), jwt.getUsername(), "访客");
 
         roleLabel.setText("角色：" + role);
@@ -73,6 +81,7 @@ public class MainFrameController {
         searchField.setPromptText("搜索功能、菜单或页面");
 
         applyThemeToScene(currentTheme);
+        installHomeBackground();
         currentMenuEntries = buildFallbackMenus(role);
         renderMenu(currentMenuEntries);
         MenuEntry firstPage = findFirstPage(currentMenuEntries);
@@ -100,20 +109,35 @@ public class MainFrameController {
     }
 
     private void loadMenusAsync(String role) {
-        Task<List<Map>> task = new Task<>() {
+        Task<List<MenuEntry>> task = new Task<>() {
             @Override
-            protected List<Map> call() {
+            protected List<MenuEntry> call() {
                 DataResponse response = HttpRequestUtil.request("/api/base/getMenuList", new DataRequest());
                 Object data = response == null ? null : response.getData();
-                if (data instanceof List) {
-                    return (List<Map>) data;
+                if (data instanceof List<?> list) {
+                    List<MenuEntry> result = new ArrayList<>();
+                    for (Object item : list) {
+                        if (item instanceof Map<?, ?> map) {
+                            Map<String, Object> normalized = new LinkedHashMap<>();
+                            for (Map.Entry<?, ?> entry : map.entrySet()) {
+                                if (entry.getKey() != null) {
+                                    normalized.put(String.valueOf(entry.getKey()), entry.getValue());
+                                }
+                            }
+                            MenuEntry menuEntry = toMenuEntry(normalized);
+                            if (menuEntry != null) {
+                                result.add(menuEntry);
+                            }
+                        }
+                    }
+                    return result;
                 }
                 return new ArrayList<>();
             }
         };
         task.setOnSucceeded(event -> {
-            List<MenuEntry> entries = buildMenuEntries(role, task.getValue());
-            if (!entries.isEmpty()) {
+            List<MenuEntry> entries = task.getValue();
+            if (entries != null && !entries.isEmpty()) {
                 currentMenuEntries = entries;
                 renderMenu(entries);
                 highlightCurrentMenu();
@@ -134,12 +158,12 @@ public class MainFrameController {
     private void renderMenu(List<MenuEntry> entries) {
         menuContainer.getChildren().clear();
         menuButtonMap.clear();
-        for (MenuEntry entry : orderAccountMenusLast(entries)) {
+        for (MenuEntry entry : sortMenusForRole(entries)) {
             if (entry.hasChildren()) {
                 Label groupLabel = new Label(entry.title());
                 groupLabel.getStyleClass().add("nav-group-title");
                 menuContainer.getChildren().add(groupLabel);
-                for (MenuEntry child : orderAccountMenusLast(entry.children())) {
+                for (MenuEntry child : sortMenusForRole(entry.children())) {
                     addMenuButton(child, true);
                 }
             } else {
@@ -243,6 +267,25 @@ public class MainFrameController {
         addStylesheetIfMissing(root.getStylesheets(), currentTheme);
     }
 
+    private void installHomeBackground() {
+        if (rootPane == null) {
+            return;
+        }
+        URL bgUrl = MainApplication.class.getResource(HOME_BG_IMAGE);
+        if (bgUrl == null) {
+            systemPrompt.setText("系统已就绪，但首页背景图未找到：" + HOME_BG_IMAGE);
+            return;
+        }
+        BackgroundImage backgroundImage = new BackgroundImage(
+                new javafx.scene.image.Image(bgUrl.toExternalForm(), true),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
+        );
+        rootPane.setBackground(new Background(backgroundImage));
+    }
+
     private void applyThemeToScene(String theme) {
         applyThemeToRoot(rootPane, theme);
         for (Parent cachedPage : contentCache.values()) {
@@ -258,6 +301,7 @@ public class MainFrameController {
         }
 
         if (rootPane != null) {
+            installHomeBackground();
             rootPane.applyCss();
             rootPane.layout();
         }
@@ -361,6 +405,15 @@ public class MainFrameController {
         String safeTitle = title == null ? "" : title.trim();
         String normalizedTitle = safeTitle.toLowerCase(Locale.ROOT);
 
+        if (safeName.endsWith(".fxml")) {
+            safeName = safeName.substring(0, safeName.length() - 5);
+        }
+
+        // 后端菜单的 name 通常就是 FXML 页面名。优先尊重真实页面名，避免标题关键字误判导致页面串联。
+        if (!safeName.isBlank() && resolvesToExistingFxml(safeName)) {
+            return safeName;
+        }
+
         if (normalizedTitle.contains("成绩管理") || normalizedTitle.contains("成绩查询") || "score".equals(safeName)) {
             return "score-panel";
         }
@@ -382,8 +435,11 @@ public class MainFrameController {
         if (normalizedTitle.contains("请假") || normalizedTitle.contains("审批")) {
             return normalizedTitle.contains("申请") ? "student-leave-panel" : "leave-request-panel";
         }
-        if (normalizedTitle.contains("志愿")) {
-            return normalizedTitle.contains("学生") || normalizedTitle.contains("我的") ? "student-volunteer-panel" : "volunteer-activity-panel";
+        if (normalizedTitle.contains("志愿查询") || normalizedTitle.contains("我的志愿")) {
+            return "student-volunteer-panel";
+        }
+        if (normalizedTitle.contains("志愿活动") || normalizedTitle.contains("志愿")) {
+            return "volunteer-activity-panel";
         }
         if (normalizedTitle.contains("作业")) {
             return "homework-panel";
@@ -403,29 +459,18 @@ public class MainFrameController {
         if (normalizedTitle.contains("便签") || normalizedTitle.contains("倒计时")) {
             return "quote-countdown-panel";
         }
-        if (safeName.endsWith(".fxml")) {
-            return safeName.substring(0, safeName.length() - 5);
-        }
         return safeName;
     }
 
-    private List<MenuEntry> buildMenuEntries(String role, List<Map> menuList) {
-        List<MenuEntry> entries = new ArrayList<>();
-        if (menuList != null) {
-            for (Map item : menuList) {
-                MenuEntry entry = toMenuEntry(item);
-                if (entry != null) {
-                    entries.add(entry);
-                }
-            }
+    private boolean resolvesToExistingFxml(String name) {
+        try {
+            return resolveFxmlUrl(name) != null;
+        } catch (MalformedURLException e) {
+            return false;
         }
-        if (entries.isEmpty()) {
-            entries = buildFallbackMenus(role);
-        }
-        return entries;
     }
 
-    private MenuEntry toMenuEntry(Map item) {
+    private MenuEntry toMenuEntry(Map<String, Object> item) {
         Object name = item.get("name");
         Object title = item.get("title");
         if (name == null && title == null) {
@@ -436,8 +481,14 @@ public class MainFrameController {
         Object childMenus = item.get("sList");
         if (childMenus instanceof List<?> childList) {
             for (Object child : childList) {
-                if (child instanceof Map childMap) {
-                    MenuEntry childEntry = toMenuEntry(childMap);
+                if (child instanceof Map<?, ?> childMap) {
+                    Map<String, Object> normalizedChild = new LinkedHashMap<>();
+                    for (Map.Entry<?, ?> entry : childMap.entrySet()) {
+                        if (entry.getKey() != null) {
+                            normalizedChild.put(String.valueOf(entry.getKey()), entry.getValue());
+                        }
+                    }
+                    MenuEntry childEntry = toMenuEntry(normalizedChild);
                     if (childEntry != null) {
                         children.add(childEntry);
                     }
@@ -452,18 +503,131 @@ public class MainFrameController {
         );
     }
 
-    private List<MenuEntry> orderAccountMenusLast(List<MenuEntry> entries) {
-        List<MenuEntry> normalMenus = new ArrayList<>();
-        List<MenuEntry> accountMenus = new ArrayList<>();
-        for (MenuEntry entry : entries) {
-            if (isAccountMenu(entry)) {
-                accountMenus.add(entry);
-            } else {
-                normalMenus.add(entry);
+    private List<MenuEntry> sortMenusForRole(List<MenuEntry> entries) {
+        List<MenuEntry> sorted = new ArrayList<>(entries);
+        sorted.sort((left, right) -> {
+            int weightCompare = Integer.compare(menuWeight(left), menuWeight(right));
+            if (weightCompare != 0) {
+                return weightCompare;
+            }
+            return Integer.compare(menuOriginalIndex(entries, left), menuOriginalIndex(entries, right));
+        });
+        return sorted;
+    }
+
+    private int menuOriginalIndex(List<MenuEntry> entries, MenuEntry target) {
+        int index = entries.indexOf(target);
+        return index < 0 ? Integer.MAX_VALUE : index;
+    }
+
+    private int menuWeight(MenuEntry entry) {
+        String text = menuText(entry);
+        if (isAccountMenu(entry)) {
+            return 900;
+        }
+        return switch (currentRole) {
+            case "STUDENT" -> studentMenuWeight(text);
+            case "TEACHER" -> teacherMenuWeight(text);
+            case "ADMIN" -> adminMenuWeight(text);
+            default -> commonMenuWeight(text);
+        };
+    }
+
+    private int studentMenuWeight(String text) {
+        if (containsAny(text, "学习管理", "学习中心", "课程", "选课", "作业", "考试", "校历")) {
+            return 100;
+        }
+        if (containsAny(text, "成绩", "我的成绩")) {
+            return 200;
+        }
+        if (containsAny(text, "生活服务", "生活事务", "请假", "校园地图", "地图", "天气", "学期便签", "出行", "校车", "班车", "志愿", "网站", "校园服务")) {
+            return 300;
+        }
+        if (containsAny(text, "工作台", "首页", "系统简介", "介绍")) {
+            return 400;
+        }
+        if (containsAny(text, "个人信息", "我的信息", "个人资料", "信息维护")) {
+            return 800;
+        }
+        return 500;
+    }
+
+    private int teacherMenuWeight(String text) {
+        if (containsAny(text, "教学管理", "我的课程", "课程", "作业", "成绩录入", "成绩", "考试")) {
+            return 100;
+        }
+        if (containsAny(text, "审批", "请假")) {
+            return 200;
+        }
+        if (containsAny(text, "学生", "学生管理")) {
+            return 300;
+        }
+        if (containsAny(text, "生活服务", "生活事务", "校园地图", "地图", "天气", "校车", "班车", "网站", "校园服务")) {
+            return 400;
+        }
+        if (containsAny(text, "工作台", "首页", "系统简介", "介绍")) {
+            return 500;
+        }
+        if (containsAny(text, "个人信息", "我的信息", "个人资料", "信息维护")) {
+            return 800;
+        }
+        return 600;
+    }
+
+    private int adminMenuWeight(String text) {
+        if (containsAny(text, "工作台", "首页", "系统简介", "介绍")) {
+            return 100;
+        }
+        if (containsAny(text, "学生", "教师", "课程", "考试", "成绩", "教学")) {
+            return 200;
+        }
+        if (containsAny(text, "请假", "审批", "志愿", "事务")) {
+            return 300;
+        }
+        if (containsAny(text, "生活服务", "校园地图", "地图", "天气", "校车", "班车", "网站", "校园服务")) {
+            return 400;
+        }
+        if (containsAny(text, "系统设置", "系统管理", "字典", "菜单")) {
+            return 700;
+        }
+        if (containsAny(text, "个人信息", "我的信息", "个人资料", "信息维护")) {
+            return 800;
+        }
+        return 500;
+    }
+
+    private int commonMenuWeight(String text) {
+        if (containsAny(text, "工作台", "首页")) {
+            return 100;
+        }
+        if (containsAny(text, "个人信息", "我的信息")) {
+            return 800;
+        }
+        return 500;
+    }
+
+    private String menuText(MenuEntry entry) {
+        StringBuilder builder = new StringBuilder();
+        appendMenuText(builder, entry);
+        return builder.toString().toLowerCase(Locale.ROOT);
+    }
+
+    private void appendMenuText(StringBuilder builder, MenuEntry entry) {
+        builder.append(' ').append(entry.name()).append(' ').append(entry.title());
+        if (entry.hasChildren()) {
+            for (MenuEntry child : entry.children()) {
+                appendMenuText(builder, child);
             }
         }
-        normalMenus.addAll(accountMenus);
-        return normalMenus;
+    }
+
+    private boolean containsAny(String text, String... keywords) {
+        for (String keyword : keywords) {
+            if (text.contains(keyword.toLowerCase(Locale.ROOT))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isAccountMenu(MenuEntry entry) {
@@ -478,7 +642,11 @@ public class MainFrameController {
     }
 
     private MenuEntry findFirstPage(List<MenuEntry> entries) {
-        for (MenuEntry entry : orderAccountMenusLast(entries)) {
+        MenuEntry dashboard = findDashboardPage(entries);
+        if (dashboard != null) {
+            return dashboard;
+        }
+        for (MenuEntry entry : sortMenusForRole(entries)) {
             if (entry.hasChildren()) {
                 MenuEntry childPage = findFirstPage(entry.children());
                 if (childPage != null) {
@@ -489,6 +657,26 @@ public class MainFrameController {
             }
         }
         return entries.isEmpty() ? null : entries.get(0);
+    }
+
+    private MenuEntry findDashboardPage(List<MenuEntry> entries) {
+        for (MenuEntry entry : entries) {
+            if (entry.hasChildren()) {
+                MenuEntry child = findDashboardPage(entry.children());
+                if (child != null) {
+                    return child;
+                }
+                continue;
+            }
+            String pageName = normalizePageName(entry.name(), entry.title());
+            String text = menuText(entry);
+            if ("system_summary_panel".equals(pageName)
+                    || text.contains("工作台")
+                    || text.contains("首页")) {
+                return entry;
+            }
+        }
+        return null;
     }
 
     private List<MenuEntry> buildFallbackMenus(String role) {
