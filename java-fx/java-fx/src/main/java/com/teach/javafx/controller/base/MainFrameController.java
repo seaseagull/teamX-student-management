@@ -16,11 +16,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -43,7 +38,6 @@ public class MainFrameController {
     private static final String DARK_THEME = "/com/teach/javafx/css/theme-dark.css";
     private static final String COMPONENT_THEME = "/com/teach/javafx/css/component.css";
     private static final String LAYOUT_THEME = "/com/teach/javafx/css/layout.css";
-    private static final String HOME_BG_IMAGE = "/com/teach/javafx/picture/login-bg.png";
 
     @FXML private Label systemPrompt;
     @FXML private Label pagePrompt;
@@ -81,7 +75,6 @@ public class MainFrameController {
         searchField.setPromptText("搜索功能、菜单或页面");
 
         applyThemeToScene(currentTheme);
-        installHomeBackground();
         currentMenuEntries = buildFallbackMenus(role);
         renderMenu(currentMenuEntries);
         MenuEntry firstPage = findFirstPage(currentMenuEntries);
@@ -267,25 +260,6 @@ public class MainFrameController {
         addStylesheetIfMissing(root.getStylesheets(), currentTheme);
     }
 
-    private void installHomeBackground() {
-        if (rootPane == null) {
-            return;
-        }
-        URL bgUrl = MainApplication.class.getResource(HOME_BG_IMAGE);
-        if (bgUrl == null) {
-            systemPrompt.setText("系统已就绪，但首页背景图未找到：" + HOME_BG_IMAGE);
-            return;
-        }
-        BackgroundImage backgroundImage = new BackgroundImage(
-                new javafx.scene.image.Image(bgUrl.toExternalForm(), true),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
-        );
-        rootPane.setBackground(new Background(backgroundImage));
-    }
-
     private void applyThemeToScene(String theme) {
         applyThemeToRoot(rootPane, theme);
         for (Parent cachedPage : contentCache.values()) {
@@ -301,7 +275,6 @@ public class MainFrameController {
         }
 
         if (rootPane != null) {
-            installHomeBackground();
             rootPane.applyCss();
             rootPane.layout();
         }

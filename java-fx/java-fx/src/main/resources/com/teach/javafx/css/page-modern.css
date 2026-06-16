@@ -1,10 +1,5 @@
 .page-root {
-    -fx-background-color:
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.00) 100%),
-            url("../picture/login-bg.png");
-    -fx-background-size: cover, cover;
-    -fx-background-position: center center, center bottom;
-    -fx-background-repeat: no-repeat, no-repeat;
+    -fx-background-color: transparent;
     -fx-padding: 18;
     -fx-font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
 }
@@ -24,18 +19,18 @@
 .table-card,
 .detail-card,
 .filter-card {
-    -fx-background-color: rgba(255, 255, 255, 0.74);
+    -fx-background-color: rgba(255, 255, 255, 0.92);
     -fx-background-radius: 16;
-    -fx-border-color: rgba(255, 255, 255, 0.42);
+    -fx-border-color: rgba(255, 255, 255, 0.62);
     -fx-border-radius: 16;
     -fx-padding: 16;
     -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.08), 18, 0.12, 0, 5);
 }
 
 .page-toolbar {
-    -fx-background-color: rgba(255, 255, 255, 0.72);
+    -fx-background-color: rgba(255, 255, 255, 0.56);
     -fx-background-radius: 16;
-    -fx-border-color: rgba(255, 255, 255, 0.44);
+    -fx-border-color: rgba(255, 255, 255, 0.40);
     -fx-border-radius: 16;
     -fx-padding: 12 14;
     -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.06), 12, 0.10, 0, 3);
@@ -90,8 +85,8 @@
 
 .table-view,
 .list-view {
-    -fx-background-color: rgba(255, 255, 255, 0.38);
-    -fx-border-color: rgba(234, 236, 240, 0.62);
+    -fx-background-color: rgba(255, 255, 255, 0.82);
+    -fx-border-color: rgba(234, 236, 240, 0.86);
     -fx-border-radius: 12;
     -fx-background-radius: 12;
 }
@@ -162,9 +157,9 @@
 }
 
 .dashboard-chart {
-    -fx-background-color: rgba(255, 255, 255, 0.82);
+    -fx-background-color: rgba(255, 255, 255, 0.92);
     -fx-background-radius: 16;
-    -fx-border-color: rgba(255, 255, 255, 0.48);
+    -fx-border-color: rgba(255, 255, 255, 0.62);
     -fx-border-radius: 16;
     -fx-padding: 10;
 }
