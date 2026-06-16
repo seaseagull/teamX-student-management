@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" prefWidth="800.0" fx:controller="com.teach.javafx.controller.base.DormElectricFeeController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="5.0">
+            <padding>
+                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
+            </padding>
+            <FlowPane>
+                <Button mnemonicParsing="false" onAction="#onQueryButtonClick" text="查询刷新"/>
+                <Button mnemonicParsing="false" onAction="#onPaySaveClick" text="确认缴费"/>
+            </FlowPane>
+        </HBox>
+    </top>
+    <center>
+        <TableView fx:id="dataTableView">
+            <columns>
+                <TableColumn fx:id="buildingNoColumn" prefWidth="120.0" text="楼栋号"/>
+                <TableColumn fx:id="roomNoColumn" prefWidth="110.0" text="房间号"/>
+                <TableColumn fx:id="moneyColumn" prefWidth="110.0" text="电费金额"/>
+                <TableColumn fx:id="dayColumn" prefWidth="150.0" text="缴费日期"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>
