@@ -1,7 +1,11 @@
 .page-root {
-    -fx-background-color: transparent;
+    -fx-background-color: linear-gradient(to bottom right, rgba(255,255,255,0.98), rgba(244,247,251,0.94));
     -fx-padding: 18;
     -fx-font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
+}
+
+.page-header {
+    -fx-padding: 0 2 2 2;
 }
 
 .page-title {
@@ -18,20 +22,21 @@
 .card,
 .table-card,
 .detail-card,
-.filter-card {
-    -fx-background-color: rgba(255, 255, 255, 0.92);
-    -fx-background-radius: 16;
-    -fx-border-color: rgba(255, 255, 255, 0.62);
-    -fx-border-radius: 16;
+.filter-card,
+.content-card {
+    -fx-background-color: rgba(255, 255, 255, 0.90);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(226, 232, 240, 0.90);
+    -fx-border-radius: 20;
     -fx-padding: 16;
     -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.08), 18, 0.12, 0, 5);
 }
 
 .page-toolbar {
-    -fx-background-color: rgba(255, 255, 255, 0.56);
-    -fx-background-radius: 16;
-    -fx-border-color: rgba(255, 255, 255, 0.40);
-    -fx-border-radius: 16;
+    -fx-background-color: rgba(255, 255, 255, 0.86);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(226, 232, 240, 0.88);
+    -fx-border-radius: 20;
     -fx-padding: 12 14;
     -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.06), 12, 0.10, 0, 3);
 }
@@ -85,15 +90,33 @@
 
 .table-view,
 .list-view {
-    -fx-background-color: rgba(255, 255, 255, 0.82);
-    -fx-border-color: rgba(234, 236, 240, 0.86);
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(234, 236, 240, 0.90);
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+}
+
+.table-view .viewport,
+.list-view .viewport {
+    -fx-background-color: rgba(255, 255, 255, 0.72);
 }
 
 .table-view .column-header-background {
-    -fx-background-color: rgba(248, 250, 252, 0.58);
-    -fx-background-radius: 12 12 0 0;
+    -fx-background-color: rgba(248, 250, 252, 0.92);
+    -fx-background-radius: 14 14 0 0;
+}
+
+.table-card .table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table-card .table-view .viewport {
+    -fx-background-color: transparent;
+}
+
+.table-card .table-view .column-header-background {
+    -fx-background-color: rgba(248, 250, 252, 0.92);
 }
 
 .table-view .column-header,
@@ -104,6 +127,14 @@
 .table-view .column-header .label {
     -fx-text-fill: #344054;
     -fx-font-weight: 700;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell:filled:hover {
+    -fx-background-color: rgba(22, 119, 255, 0.06);
 }
 
 .split-pane {
@@ -216,4 +247,13 @@
 .modern-page-dark .dashboard-chart {
     -fx-background-color: rgba(31, 31, 31, 0.82);
     -fx-border-color: rgba(255,255,255,0.10);
+}
+
+.content-card {
+    -fx-background-color: rgba(255, 255, 255, 0.96);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(226, 232, 240, 0.92);
+    -fx-border-radius: 14;
+    -fx-padding: 14;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.06), 12, 0.10, 0, 3);
 }

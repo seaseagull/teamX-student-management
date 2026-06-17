@@ -8,11 +8,12 @@
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             prefWidth="950.0" prefHeight="650.0"
             fx:controller="com.teach.javafx.controller.ScoreController"
-            style="-fx-background-color: #f4f6f9;">
+            styleClass="page-root"
+            stylesheets="@/com/teach/javafx/css/page-modern.css">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="15.0"
-              style="-fx-background-color: white; -fx-padding: 12 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.04), 10, 0, 0, 2); -fx-border-color: #e9ecef; -fx-border-width: 0 0 1 0;">
+              styleClass="page-toolbar">
             <children>
                 <HBox spacing="10.0" alignment="CENTER_LEFT">
                     <children>
@@ -41,7 +42,7 @@
     <center>
         <SplitPane dividerPositions="0.68" style="-fx-background-color: transparent; -fx-padding: 15; -fx-box-border: transparent;">
             <items>
-                <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #e9ecef; -fx-padding: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.02), 8, 0, 0, 4);">
+                <VBox styleClass="table-card">
                     <children>
                         <TableView fx:id="dataTableView" VBox.vgrow="ALWAYS"
                                    style="-fx-background-color: transparent; -fx-base: white; -fx-control-inner-background: white; -fx-table-cell-border-color: #f1f3f5;">
@@ -62,7 +63,7 @@
                 </VBox>
 
                 <VBox alignment="TOP_CENTER" spacing="20.0"
-                      style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #e9ecef; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 10, 0, 0, 4);">
+                      styleClass="detail-card">
                     <padding>
                         <Insets bottom="25.0" left="22.0" right="22.0" top="25.0" />
                     </padding>
