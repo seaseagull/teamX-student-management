@@ -19,10 +19,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.MapValueFactory;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -37,6 +41,11 @@ import java.util.regex.Pattern;
  * <p>首页承担系统概览、数据摘要和快捷导航职责。</p>
  */
 public class SystemSummaryController {
+    private void debugLog(String hypothesisId, String location, String message, Map<String, Object> data) {
+        try (FileWriter fw = new FileWriter("debug-d90a1c.log", true)) {
+            fw.write("{\"sessionId\":\"d90a1c\",\"id\":\"sys_" + System.nanoTime() + "\",\"timestamp\":" + Instant.now().toEpochMilli() + ",\"runId\":\"run1\",\"hypothesisId\":\"" + hypothesisId + "\",\"location\":\"" + location + "\",\"message\":\"" + message.replace("\"", "'") + "\",\"data\":\"" + String.valueOf(data).replace("\"", "'") + "\"}\n");
+        } catch (IOException ignored) {}
+    }
     @FXML private Label titleLabel;
     @FXML private Label subtitleLabel;
     @FXML private Label currentDateLabel;
@@ -75,26 +84,47 @@ public class SystemSummaryController {
         roleName = jwt == null || jwt.getRole() == null ? "GUEST" : jwt.getRole();
         String userName = jwt == null ? "访客" : firstNonBlank(jwt.getPerName(), jwt.getUsername(), "访客");
 
-        if (userLabel != null) {
-            userLabel.setText(userName);
+        debugLog("H1", "SystemSummaryController.initialize:entry", "initialize entered", Map.of(
+                "roleName", roleName,
+                "userName", userName,
+                "jwtNull", jwt == null,
+                "titleLabelNull", titleLabel == null,
+                "subtitleLabelNull", subtitleLabel == null,
+                "featurePieChartNull", featurePieChart == null,
+                "usageBarChartNull", usageBarChart == null));
+        try {
+            if (userLabel != null) {
+                userLabel.setText(userName);
+            }
+            if (roleLabel != null) {
+                roleLabel.setText(displayRole(roleName));
+            }
+            if (statusLabel != null) {
+                statusLabel.setText("系统运行正常");
+            }
+            configureHeader();
+            configureSemesterSummary();
+            configureQuote();
+            configureTables();
+            configureCharts();
+            loadNotices();
+            loadLeaves();
+            loadTodos();
+            debugLog("H1", "SystemSummaryController.initialize:success", "initialize completed", Map.of(
+                    "noticeCount", noticeTableView == null ? -1 : noticeTableView.getItems().size(),
+                    "leaveCount", leaveTableView == null ? -1 : leaveTableView.getItems().size(),
+                    "todoCount", todoTableView == null ? -1 : todoTableView.getItems().size()));
+        } catch (Exception ex) {
+            debugLog("H1", "SystemSummaryController.initialize:error", "initialize failed", Map.of(
+                    "errorType", ex.getClass().getName(),
+                    "message", ex.getMessage()));
+            System.out.println("SystemSummaryController initialize failed: " + ex.getClass().getName() + " - " + ex.getMessage());
+            throw ex;
         }
-        if (roleLabel != null) {
-            roleLabel.setText(displayRole(roleName));
-        }
-        if (statusLabel != null) {
-            statusLabel.setText("系统运行正常");
-        }
-        configureHeader();
-        configureSemesterSummary();
-        configureQuote();
-        configureTables();
-        configureCharts();
-        loadNotices();
-        loadLeaves();
-        loadTodos();
     }
 
     private void configureHeader() {
+        debugLog("H1", "SystemSummaryController.configureHeader", "configuring header", Map.of("roleName", roleName));
         if ("ROLE_STUDENT".equals(roleName)) {
             titleLabel.setText("学生首页");
             subtitleLabel.setText("查看学习进度、生活服务和常用功能入口");
@@ -121,6 +151,10 @@ public class SystemSummaryController {
         progressPercentLabel.setText(String.format("%.1f%%", progress * 100));
         long daysLeft = ChronoUnit.DAYS.between(today, TERM_END);
         daysLeftLabel.setText(String.valueOf(Math.max(0, daysLeft)));
+        debugLog("H1", "SystemSummaryController.configureSemesterSummary", "semester summary configured", Map.of(
+                "today", today.toString(),
+                "progress", progress,
+                "daysLeft", Math.max(0, daysLeft)));
     }
 
     private void configureQuote() {
@@ -145,6 +179,10 @@ public class SystemSummaryController {
     }
 
     private void configureTables() {
+        debugLog("H1", "SystemSummaryController.configureTables:entry", "configuring tables", Map.of(
+                "noticeTableViewNull", noticeTableView == null,
+                "leaveTableViewNull", leaveTableView == null,
+                "todoTableViewNull", todoTableView == null));
         noticeTitleColumn.setCellValueFactory(new MapValueFactory<>("title"));
         noticeTimeColumn.setCellValueFactory(new MapValueFactory<>("createTime"));
         leaveNameColumn.setCellValueFactory(new MapValueFactory<>("studentName"));
@@ -162,9 +200,13 @@ public class SystemSummaryController {
         if (leaveTableView != null) {
             leaveTableView.setFixedCellSize(28);
         }
+        debugLog("H1", "SystemSummaryController.configureTables:success", "tables configured", Map.of("ok", true));
     }
 
     private void configureCharts() {
+        debugLog("H1", "SystemSummaryController.configureCharts:entry", "configuring charts", Map.of(
+                "featurePieChartNull", featurePieChart == null,
+                "usageBarChartNull", usageBarChart == null));
         featurePieChart.setLegendVisible(true);
         featurePieChart.setLabelsVisible(true);
         usageBarChart.setLegendVisible(false);
@@ -314,7 +356,7 @@ public class SystemSummaryController {
     }
 
     private String httpGet(String urlStr) throws Exception {
-        URL url = new URL(urlStr);
+        URL url = URI.create(urlStr).toURL();
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setConnectTimeout(4000);

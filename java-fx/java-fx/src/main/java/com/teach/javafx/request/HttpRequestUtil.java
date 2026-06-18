@@ -2,6 +2,10 @@ package com.teach.javafx.request;
 
 import com.teach.javafx.AppStore;
 import com.google.gson.Gson;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.nio.charset.StandardCharsets;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
@@ -37,14 +41,24 @@ public class HttpRequestUtil {
      */
 
     public static String login(LoginRequest request){
+            try {
+                Files.writeString(Path.of("debug-d90a1c.log"), "{\"sessionId\":\"d90a1c\",\"id\":\"login_enter\",\"timestamp\":" + System.currentTimeMillis() + ",\"location\":\"HttpRequestUtil.java:login\",\"message\":\"login called\",\"data\":{\"requestClass\":\"" + request.getClass().getSimpleName() + "\"}}\n", StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            } catch (IOException ignored) {}
+            String payload = gson.toJson(request);
+            try {
+                Files.writeString(Path.of("debug-d90a1c.log"), "{\"sessionId\":\"d90a1c\",\"id\":\"login_serialized\",\"timestamp\":" + System.currentTimeMillis() + ",\"location\":\"HttpRequestUtil.java:login\",\"message\":\"request serialized\",\"data\":{\"payloadLength\":" + payload.length() + "}}\n", StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            } catch (IOException ignored) {}
             HttpRequest httpRequest = HttpRequest.newBuilder()
                     .uri(URI.create(serverUrl + "/auth/login"))
-                    .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(request)))
+                    .POST(HttpRequest.BodyPublishers.ofString(payload))
                     .headers("Content-Type", "application/json")
                     .build();
             try {
                 HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
                 System.out.println("response.statusCode===="+response.statusCode());
+                try {
+                    Files.writeString(Path.of("debug-d90a1c.log"), "{\"sessionId\":\"d90a1c\",\"id\":\"login_response\",\"timestamp\":" + System.currentTimeMillis() + ",\"location\":\"HttpRequestUtil.java:login\",\"message\":\"response received\",\"data\":{\"statusCode\":" + response.statusCode() + "}}\n", StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                } catch (IOException ignored) {}
                 if (response.statusCode() == 200) {
                     JwtResponse jwt = gson.fromJson(response.body(), JwtResponse.class);
                     AppStore.setJwt(jwt);
@@ -54,6 +68,9 @@ public class HttpRequestUtil {
                 }
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
+                try {
+                    Files.writeString(Path.of("debug-d90a1c.log"), "{\"sessionId\":\"d90a1c\",\"id\":\"login_err\",\"timestamp\":" + System.currentTimeMillis() + ",\"location\":\"HttpRequestUtil.java:login\",\"message\":\"login failed\",\"data\":{\"error\":\"" + e.getClass().getSimpleName() + "\"}}\n", StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                } catch (IOException ignored) {}
             }
         return "登录失败";
     }

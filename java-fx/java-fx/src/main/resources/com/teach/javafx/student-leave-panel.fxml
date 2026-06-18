@@ -136,7 +136,7 @@
                             <Label fx:id="applyTimeLabel" text="申请时间" styleClass="form-label" GridPane.rowIndex="7" />
                             <Label fx:id="applyTimeValueLabel" text="—" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                             <Label fx:id="teacherTimeLabel" text="教师审核时间" styleClass="form-label" GridPane.rowIndex="8" />
-                            <Label fx:id="teacherTimeValueLabel" text="—" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                            <Label fx:id="teacherTimeValueLabel" text="教师尚未审核" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                             <Label fx:id="adminTimeLabel" text="管理员审核时间" styleClass="form-label" GridPane.rowIndex="9" />
                             <Label fx:id="adminTimeValueLabel" text="—" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                             <Label fx:id="teacherCommentLabel" text="老师意见" styleClass="form-label" GridPane.rowIndex="10" />
