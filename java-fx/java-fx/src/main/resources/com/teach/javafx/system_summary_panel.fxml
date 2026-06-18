@@ -85,7 +85,7 @@
                                     </children>
                                 </VBox>
 
-                                <VBox spacing="8.0" styleClass="table-card dashboard-side-card" minHeight="220.0" maxWidth="Infinity">
+                                <VBox spacing="8.0" styleClass="table-card" minHeight="220.0" maxWidth="Infinity">
                                     <children>
                                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity">
                                             <children>
