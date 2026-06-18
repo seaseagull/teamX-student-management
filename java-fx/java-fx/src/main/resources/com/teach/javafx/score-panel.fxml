@@ -7,15 +7,15 @@
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             prefWidth="1100.0" prefHeight="720.0"
             fx:controller="com.teach.javafx.controller.ScoreController"
-            styleClass="page-root modern-page-dark"
+            styleClass="page-root"
             stylesheets="@css/page-modern.css">
 
     <top>
         <VBox spacing="14.0" styleClass="page-header">
             <children>
-                <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="page-toolbar">
+                <HBox alignment="CENTER_LEFT" spacing="14.0">
                     <padding>
-                        <Insets top="14" right="18" bottom="14" left="18" />
+                        <Insets bottom="14" />
                     </padding>
                     <children>
                         <VBox spacing="2" alignment="CENTER_LEFT">

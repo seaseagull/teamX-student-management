@@ -53,12 +53,12 @@
                             <Label text="日期类型" styleClass="form-label" GridPane.rowIndex="1" />
                             <HBox spacing="24.0" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3">
                                 <children>
-                                    <RadioButton fx:id="weekdayRadio" text="工作日" selected="true">
+                                    <RadioButton fx:id="weekdayRadio" text="工作日" selected="true" style="-fx-text-fill: #333">
                                         <toggleGroup>
                                             <ToggleGroup fx:id="scheduleTypeGroup" />
                                         </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="weekendRadio" text="非工作日" toggleGroup="$scheduleTypeGroup" />
+                                    <RadioButton fx:id="weekendRadio" text="非工作日" toggleGroup="$scheduleTypeGroup" style="-fx-text-fill: #333"/>
                                 </children>
                             </HBox>
                         </GridPane>
