@@ -124,7 +124,7 @@
                                         </TableView>
                                     </children>
                                 </VBox>
-                                <VBox spacing="8.0" styleClass="table-card dashboard-feature-card" maxWidth="Infinity" HBox.vgrow="ALWAYS">
+                                <VBox spacing="8.0" styleClass="table-card dashboard-feature-card" maxWidth="Infinity" HBox.hgrow="ALWAYS">
                                     <children>
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
