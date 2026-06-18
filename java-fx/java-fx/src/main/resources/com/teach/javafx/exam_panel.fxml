@@ -6,22 +6,19 @@
 
 <BorderPane prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.teach.javafx.controller.ExamManagementController"
-            styleClass="page-root modern-page-dark"
-            stylesheets="@/com/teach/javafx/css/page-modern.css">
+            styleClass="page-root"
+            stylesheets="@css/page-modern.css">
     <top>
         <VBox spacing="12.0">
             <children>
-                <HBox spacing="10" alignment="CENTER_LEFT" styleClass="page-toolbar">
-                    <padding>
-                        <Insets top="10" right="14" bottom="10" left="14" />
-                    </padding>
+                <VBox spacing="2" alignment="CENTER_LEFT">
                     <children>
-                        <VBox spacing="2" alignment="CENTER_LEFT">
-                            <children>
-                                <Label text="考试管理" styleClass="page-title" />
-                                <Label text="管理考试安排、时间与地点信息" styleClass="page-subtitle" />
-                            </children>
-                        </VBox>
+                        <Label text="考试管理" styleClass="page-title" />
+                        <Label text="管理考试安排、时间与地点信息" styleClass="page-subtitle" />
+                    </children>
+                </VBox>
+                <HBox spacing="10" alignment="CENTER_LEFT" styleClass="page-toolbar">
+                    <children>
                         <Pane HBox.hgrow="ALWAYS" />
                         <Button text="新增考试" onAction="#addExam" styleClass="primary-button"/>
                         <Button text="编辑考试" onAction="#editExam" styleClass="secondary-button"/>
@@ -31,6 +28,9 @@
                     </children>
                 </HBox>
             </children>
+            <padding>
+                <Insets bottom="14" />
+            </padding>
         </VBox>
     </top>
     <center>
