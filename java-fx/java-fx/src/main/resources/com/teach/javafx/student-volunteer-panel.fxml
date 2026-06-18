@@ -12,8 +12,11 @@
             stylesheets="@css/page-modern.css">
 
     <top>
-        <VBox spacing="15.0" styleClass="page-toolbar">
-            <Label text="我的志愿" styleClass="page-title" />
+        <VBox spacing="15.0">
+            <VBox spacing="4.0">
+                <Label text="我的志愿" styleClass="page-title" />
+                <Label text="已报名和已完成的志愿活动清单" styleClass="page-subtitle" />
+            </VBox>
             <HBox spacing="20.0">
                 <VBox spacing="5.0" prefWidth="220" styleClass="card">
                     <Label fx:id="totalHoursLabel" text="0"
@@ -28,7 +31,9 @@
                            styleClass="page-subtitle" />
                 </VBox>
             </HBox>
-            <Separator />
+            <padding>
+                <Insets bottom="14" />
+            </padding>
         </VBox>
     </top>
 

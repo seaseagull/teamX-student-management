@@ -6,6 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.teach.javafx.controller.VolunteerActivityController"
@@ -13,13 +14,17 @@
             styleClass="page-root"
             stylesheets="@css/page-modern.css">
     <top>
-        <VBox spacing="10.0" styleClass="page-toolbar">
-            <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT">
+            <BorderPane.margin>
+                <Insets bottom="10.0" />
+            </BorderPane.margin>
+            <VBox spacing="4.0">
                 <Label text="志愿活动" styleClass="page-title"/>
-                <Pane HBox.hgrow="ALWAYS"/>
-                <Button fx:id="addButton" text="添加活动" onAction="#onAddButtonClick" visible="false" managed="false" styleClass="primary-button" />
-            </HBox>
-        </VBox>
+                <Label text="查看、报名校园志愿活动" styleClass="page-subtitle"/>
+            </VBox>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button fx:id="addButton" text="添加活动" onAction="#onAddButtonClick" visible="false" managed="false" styleClass="primary-button" />
+        </HBox>
     </top>
 
     <center>
@@ -37,7 +42,6 @@
             </VBox>
             <VBox fx:id="studentActivityBox" visible="false" managed="false" spacing="10.0" styleClass="detail-card">
                 <Label text="我的志愿活动" styleClass="page-title" />
-                <Separator />
                 <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
                     <VBox fx:id="studentActivityListBox" spacing="8.0" />
                 </ScrollPane>
