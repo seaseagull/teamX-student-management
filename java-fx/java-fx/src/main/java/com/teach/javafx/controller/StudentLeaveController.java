@@ -269,10 +269,14 @@ public class StudentLeaveController extends ToolController {
                 studentNameField.setDisable(true);
                 studentNumField.setEditable(true);
                 studentNameField.setEditable(true);
-                stateLabel.setVisible(false);
-                searchLabel.setVisible(false);
-                stateComboBox.setVisible(false);
-                searchTextField.setVisible(false);
+                stateLabel.setVisible(true);
+                stateLabel.setManaged(true);
+                searchLabel.setVisible(true);
+                searchLabel.setManaged(true);
+                stateComboBox.setVisible(true);
+                stateComboBox.setManaged(true);
+                searchTextField.setVisible(true);
+                searchTextField.setManaged(true);
                 addButton.setVisible(false);
                 deleteButton.setVisible(false);
                 saveButton.setVisible(false);
@@ -296,9 +300,13 @@ public class StudentLeaveController extends ToolController {
                 studentNumField.setEditable(true);
                 studentNameField.setEditable(true);
                 stateLabel.setVisible(true);
+                stateLabel.setManaged(true);
                 searchLabel.setVisible(true);
+                searchLabel.setManaged(true);
                 stateComboBox.setVisible(true);
+                stateComboBox.setManaged(true);
                 searchTextField.setVisible(true);
+                searchTextField.setManaged(true);
                 addButton.setVisible(false);
                 deleteButton.setVisible(false);
                 saveButton.setVisible(false);
@@ -354,7 +362,7 @@ public class StudentLeaveController extends ToolController {
             filterItems.add(new OptionItem(-1, "-1", "全部"));
             filterItems.addAll(stateList);
         } else if ("ROLE_ADMIN".equals(roleName) || "ROLE_TEACHER".equals(roleName)) {
-            filterItems.add(new OptionItem(-1, "0", "未审核"));
+            filterItems.add(new OptionItem(-1, "-1", "请选择..."));
             for (OptionItem item : stateList) {
                 if (!DRAFT_FILTER_VALUE.equals(item.getValue())) {
                     filterItems.add(item);
@@ -366,6 +374,24 @@ public class StudentLeaveController extends ToolController {
         }
         stateComboBox.getItems().addAll(filterItems);
         if (!filterItems.isEmpty()) {
+            if ("ROLE_ADMIN".equals(roleName)) {
+                for (int i = 0; i < filterItems.size(); i++) {
+                    OptionItem item = filterItems.get(i);
+                    if ("1".equals(item.getValue())) {
+                        stateComboBox.getSelectionModel().select(i);
+                        return;
+                    }
+                }
+            }
+            if ("ROLE_TEACHER".equals(roleName)) {
+                for (int i = 0; i < filterItems.size(); i++) {
+                    OptionItem item = filterItems.get(i);
+                    if ("0".equals(item.getValue())) {
+                        stateComboBox.getSelectionModel().select(i);
+                        return;
+                    }
+                }
+            }
             stateComboBox.getSelectionModel().select(0);
         }
     }
