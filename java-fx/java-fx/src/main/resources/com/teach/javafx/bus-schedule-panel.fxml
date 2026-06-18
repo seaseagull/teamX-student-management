@@ -51,14 +51,18 @@
                             <Label text="到达校区" styleClass="form-label" GridPane.columnIndex="2" />
                             <ComboBox fx:id="toCampusComboBox" prefWidth="190.0" GridPane.columnIndex="3" />
                             <Label text="日期类型" styleClass="form-label" GridPane.rowIndex="1" />
-                            <HBox spacing="24.0" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3">
+                            <HBox spacing="12.0" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3">
                                 <children>
-                                    <RadioButton fx:id="weekdayRadio" text="工作日" selected="true">
-                                        <toggleGroup>
-                                            <ToggleGroup fx:id="scheduleTypeGroup" />
-                                        </toggleGroup>
-                                    </RadioButton>
-                                    <RadioButton fx:id="weekendRadio" text="非工作日" toggleGroup="$scheduleTypeGroup" />
+                                    <HBox spacing="8.0" alignment="CENTER_LEFT" styleClass="segmented-toggle-group">
+                                        <children>
+                                            <RadioButton fx:id="weekdayRadio" text="工作日" selected="true" styleClass="segmented-radio">
+                                                <toggleGroup>
+                                                    <ToggleGroup fx:id="scheduleTypeGroup" />
+                                                </toggleGroup>
+                                            </RadioButton>
+                                            <RadioButton fx:id="weekendRadio" text="非工作日" toggleGroup="$scheduleTypeGroup" styleClass="segmented-radio" />
+                                        </children>
+                                    </HBox>
                                 </children>
                             </HBox>
                         </GridPane>
