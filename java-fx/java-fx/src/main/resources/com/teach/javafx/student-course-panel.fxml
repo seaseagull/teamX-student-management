@@ -17,9 +17,9 @@
             stylesheets="@css/page-modern.css">
 
     <top>
-        <VBox spacing="10.0" styleClass="page-toolbar">
+        <VBox spacing="12.0">
             <padding>
-                <Insets top="14" right="18" bottom="14" left="18" />
+                <Insets bottom="14"/>
             </padding>
             <children>
                 <HBox alignment="CENTER_LEFT" spacing="12">
