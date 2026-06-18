@@ -407,3 +407,46 @@
     -fx-padding: 14;
     -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.2), 12, 0.10, 0, 3);
 }
+
+.segmented-toggle-group {
+    -fx-background-color: rgba(22, 119, 255, 0.08);
+    -fx-background-radius: 999;
+    -fx-padding: 4;
+    -fx-border-color: rgba(22, 119, 255, 0.12);
+    -fx-border-radius: 999;
+}
+
+.segmented-toggle-group .radio-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-padding: 10 18 10 18;
+    -fx-text-fill: #475467;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+}
+
+.segmented-toggle-group .radio-button:hover {
+    -fx-background-color: rgba(22, 119, 255, 0.08);
+}
+
+.segmented-toggle-group .radio-button:selected {
+    -fx-background-color: #1677ff;
+}
+
+.segmented-toggle-group .radio-button:selected .text {
+    -fx-fill: white;
+}
+
+.segmented-toggle-group .radio-button .radio,
+.segmented-toggle-group .radio-button .dot {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.segmented-toggle-group .radio-button .text {
+    -fx-fill: #475467;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+}
