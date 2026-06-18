@@ -1,12 +1,11 @@
 .page-root {
-    -fx-background-color:
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.00) 100%),
-            url("../picture/login-bg.png");
-    -fx-background-size: cover, cover;
-    -fx-background-position: center center, center bottom;
-    -fx-background-repeat: no-repeat, no-repeat;
+    -fx-background-color: linear-gradient(to bottom right, rgba(250,252,255,0.98), rgba(236,242,250,0.94));
     -fx-padding: 18;
     -fx-font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
+}
+
+.page-header {
+    -fx-padding: 0 2 2 2;
 }
 
 .page-title {
@@ -23,22 +22,49 @@
 .card,
 .table-card,
 .detail-card,
-.filter-card {
-    -fx-background-color: rgba(255, 255, 255, 0.74);
-    -fx-background-radius: 16;
-    -fx-border-color: rgba(255, 255, 255, 0.42);
-    -fx-border-radius: 16;
+.filter-card,
+.content-card,
+.dashboard-chart,
+.dashboard-hero,
+.dashboard-feature-card {
+    -fx-background-color: rgba(255, 255, 255, 0.94);
+    -fx-background-radius: 22;
+    -fx-border-color: rgba(226, 232, 240, 0.94);
+    -fx-border-radius: 22;
     -fx-padding: 16;
-    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.08), 18, 0.12, 0, 5);
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.14), 20, 0.16, 0, 6);
+}
+
+.dashboard-feature-card .table-view,
+.dashboard-feature-card .table-view .viewport,
+.dashboard-feature-card .table-view .corner,
+.dashboard-feature-card .table-view .filler,
+.dashboard-feature-card .table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.dashboard-feature-card .table-view {
+    -fx-border-color: rgba(226, 232, 240, 0.92);
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-background-color: rgba(255, 255, 255, 0.98);
+}
+
+.dashboard-feature-card .table-view .table-row-cell {
+    -fx-cell-size: 42;
+}
+
+.dashboard-feature-card .table-view .table-cell {
+    -fx-text-fill: #1f2937;
 }
 
 .page-toolbar {
-    -fx-background-color: rgba(255, 255, 255, 0.72);
-    -fx-background-radius: 16;
-    -fx-border-color: rgba(255, 255, 255, 0.44);
-    -fx-border-radius: 16;
+    -fx-background-color: rgba(255, 255, 255, 0.82);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(226, 232, 240, 0.88);
+    -fx-border-radius: 20;
     -fx-padding: 12 14;
-    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.06), 12, 0.10, 0, 3);
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.10), 12, 0.10, 0, 3);
 }
 
 .form-label {
@@ -55,7 +81,7 @@
 }
 
 .secondary-button {
-    -fx-background-color: rgba(22, 119, 255, 0.08);
+    -fx-background-color: rgba(22, 119, 255, 0.10);
     -fx-text-fill: #1677ff;
     -fx-background-radius: 10;
     -fx-padding: 8 16;
@@ -90,15 +116,37 @@
 
 .table-view,
 .list-view {
-    -fx-background-color: rgba(255, 255, 255, 0.38);
-    -fx-border-color: rgba(234, 236, 240, 0.62);
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(234, 236, 240, 0.90);
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-padding: 0;
+}
+
+.table-view .viewport,
+.list-view .viewport {
+    -fx-background-color: rgba(255, 255, 255, 0.78);
 }
 
 .table-view .column-header-background {
-    -fx-background-color: rgba(248, 250, 252, 0.58);
-    -fx-background-radius: 12 12 0 0;
+    -fx-background-color: linear-gradient(to bottom, rgba(248, 250, 252, 0.88), rgba(241, 245, 249, 0.88));
+    -fx-background-radius: 16 16 0 0;
+}
+
+.table-card .table-view,
+.content-card .table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table-card .table-view .viewport,
+.content-card .table-view .viewport {
+    -fx-background-color: transparent;
+}
+
+.table-card .table-view .column-header-background,
+.content-card .table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, rgba(248, 250, 252, 0.9), rgba(241, 245, 249, 0.9));
 }
 
 .table-view .column-header,
@@ -109,6 +157,33 @@
 .table-view .column-header .label {
     -fx-text-fill: #344054;
     -fx-font-weight: 700;
+    -fx-padding: 10 12;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-cell-size: 40;
+}
+
+.table-view .table-row-cell:filled:hover {
+    -fx-background-color: rgba(22, 119, 255, 0.08);
+}
+
+.table-view .table-row-cell:filled:selected,
+.table-view .table-row-cell:filled:selected:hover {
+    -fx-background-color: rgba(22, 119, 255, 0.12);
+}
+
+.table-view .table-row-cell:selected .table-cell,
+.table-view .table-row-cell:selected:hover .table-cell,
+.table-view .table-cell:selected {
+    -fx-text-fill: #1f2937;
+}
+
+.table-view .table-cell {
+    -fx-border-color: transparent rgba(226, 232, 240, 0.55) transparent transparent;
+    -fx-padding: 10 12;
+    -fx-text-fill: #1f2937;
 }
 
 .split-pane {
@@ -155,18 +230,33 @@
 
 .dashboard-hero {
     -fx-min-width: 780px;
+    -fx-background-color: linear-gradient(to bottom right, rgba(255,255,255,0.78), rgba(248,250,255,0.72));
+    -fx-border-color: rgba(22, 119, 255, 0.10);
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.10), 22, 0.14, 0, 7);
 }
 
 .dashboard-side-card {
     -fx-min-width: 360px;
+    -fx-background-color: rgba(255, 255, 255, 0.78);
+    -fx-border-color: rgba(22, 119, 255, 0.10);
+}
+
+.dashboard-feature-card {
+    -fx-background-color: linear-gradient(to bottom right, rgba(255,255,255,0.78), rgba(247,250,255,0.72));
+    -fx-background-radius: 22;
+    -fx-border-color: rgba(226, 232, 240, 0.95);
+    -fx-border-radius: 22;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.10), 20, 0.14, 0, 6);
 }
 
 .dashboard-chart {
     -fx-background-color: rgba(255, 255, 255, 0.82);
-    -fx-background-radius: 16;
-    -fx-border-color: rgba(255, 255, 255, 0.48);
-    -fx-border-radius: 16;
-    -fx-padding: 10;
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(226, 232, 240, 0.92);
+    -fx-border-radius: 18;
+    -fx-padding: 12;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.10), 16, 0.12, 0, 5);
 }
 
 .dashboard-number {
@@ -176,9 +266,9 @@
 }
 
 .quote-card {
-    -fx-background-color: linear-gradient(to right, rgba(22,119,255,0.12), rgba(82,196,26,0.12));
+    -fx-background-color: linear-gradient(to right, rgba(22,119,255,0.10), rgba(82,196,26,0.10));
     -fx-background-radius: 14;
-    -fx-border-color: rgba(22,119,255,0.16);
+    -fx-border-color: rgba(22,119,255,0.14);
     -fx-border-radius: 14;
     -fx-padding: 14;
 }
@@ -200,17 +290,17 @@
 }
 
 .progress-bar > .track {
-    -fx-background-color: rgba(22, 119, 255, 0.12);
+    -fx-background-color: rgba(22, 119, 255, 0.10);
     -fx-background-radius: 999;
 }
 
 .modern-page-dark .page-title {
-    -fx-text-fill: #f8fafc;
+    -fx-text-fill: #102a43;
 }
 
 .modern-page-dark .page-subtitle,
 .modern-page-dark .form-label {
-    -fx-text-fill: #94a3b8;
+    -fx-text-fill: #667085;
 }
 
 .modern-page-dark .card,
@@ -218,7 +308,93 @@
 .modern-page-dark .detail-card,
 .modern-page-dark .filter-card,
 .modern-page-dark .page-toolbar,
-.modern-page-dark .dashboard-chart {
-    -fx-background-color: rgba(31, 31, 31, 0.82);
-    -fx-border-color: rgba(255,255,255,0.10);
+.modern-page-dark .dashboard-chart,
+.modern-page-dark .dashboard-hero,
+.modern-page-dark .dashboard-feature-card {
+    -fx-background-color: rgba(255,255,255,0.78);
+    -fx-border-color: rgba(226,232,240,0.84);
+}
+
+.detail-card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2937;
+    -fx-padding: 0 0 10 0;
+    -fx-border-color: #f1f3f5;
+    -fx-border-width: 0 0 1 0;
+}
+
+.dashboard-chart .label,
+.dashboard-feature-card .label,
+.table-card .label,
+.card .label {
+    -fx-text-fill: #1f2937;
+}
+
+.detail-card .label,
+.detail-card .text,
+.detail-card .text-field,
+.detail-card .text-area,
+.detail-card .combo-box,
+.detail-card .date-picker,
+.table-card .text,
+.card .text,
+.dashboard-feature-card .text,
+.dashboard-chart .text {
+    -fx-text-fill: #1f2937;
+}
+
+.detail-card .combo-box,
+.page-toolbar .combo-box {
+    -fx-background-color: rgba(255, 255, 255, 0.96);
+    -fx-border-color: rgba(148, 163, 184, 0.95);
+}
+
+.detail-card .combo-box .arrow,
+.page-toolbar .combo-box .arrow {
+    -fx-background-color: #475467;
+}
+
+.detail-card .combo-box .list-cell,
+.page-toolbar .combo-box .list-cell {
+    -fx-text-fill: #111827;
+    -fx-background-color: transparent;
+}
+
+.detail-card .combo-box .prompt-text,
+.page-toolbar .combo-box .prompt-text {
+    -fx-text-fill: #64748b;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: white;
+    -fx-border-color: rgba(148, 163, 184, 0.95);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.combo-box-popup .list-cell {
+    -fx-text-fill: #111827;
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-cell:hover,
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: rgba(22, 119, 255, 0.12);
+    -fx-text-fill: #102a43;
+}
+
+.detail-card .text-field:disabled,
+.detail-card .text-area:disabled {
+    -fx-opacity: 1;
+    -fx-text-fill: #111827;
+}
+
+.content-card {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(226, 232, 240, 0.9);
+    -fx-border-radius: 14;
+    -fx-padding: 14;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.2), 12, 0.10, 0, 3);
 }

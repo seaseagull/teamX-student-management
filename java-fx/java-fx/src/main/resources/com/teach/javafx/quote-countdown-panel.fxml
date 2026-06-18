@@ -20,7 +20,7 @@
 
     <HBox spacing="20" VBox.vgrow="ALWAYS">
         <VBox spacing="20" HBox.hgrow="ALWAYS" prefWidth="450">
-            <VBox spacing="15" style="-fx-background-color: #ffffff; -fx-background-radius: 16; -fx-border-color: #e2e8f0; -fx-border-radius: 16; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 10, 0, 0, 4);">
+            <VBox spacing="15" style="-fx-background-color: rgba(255, 255, 255, 0.84); -fx-background-radius: 16; -fx-border-color: rgba(226, 232, 240, 0.88); -fx-border-radius: 16; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 10, 0, 0, 4);">
                 <Label text="📅 期末倒计时" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #0284c7;"/>
                 <HBox alignment="BASELINE_CENTER" spacing="8">
                     <Label text="距离本学期结束还有" style="-fx-font-size: 16px; -fx-text-fill: #334155;"/>
@@ -67,14 +67,14 @@
 
             <HBox spacing="8" alignment="CENTER_LEFT">
                 <TextField fx:id="todoInputField" promptText="添加个新待办事项吧..." HBox.hgrow="ALWAYS"
-                           style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #cbd5e1; -fx-padding: 6;"/>
+                           style="-fx-background-color: rgba(255,255,255,0.82); -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #cbd5e1; -fx-padding: 6;"/>
                 <DatePicker fx:id="todoDatePicker" promptText="到期日期" prefWidth="130"
-                            style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-padding: 3;"/>
+                            style="-fx-background-color: rgba(255,255,255,0.82); -fx-background-radius: 8; -fx-border-radius: 8; -fx-padding: 3;"/>
                 <Button text="➕ 增加" onAction="#onAddTodoClick"
                         style="-fx-background-color: #7c3aed; -fx-text-fill: #ffffff; -fx-background-radius: 8; -fx-padding: 6 12; -fx-cursor: hand; -fx-font-weight: bold;"/>
             </HBox>
 
-            <TableView fx:id="todoTableView" VBox.vgrow="ALWAYS" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;">
+            <TableView fx:id="todoTableView" VBox.vgrow="ALWAYS" style="-fx-background-color: rgba(255,255,255,0.74); -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;">
                 <columns>
                     <TableColumn fx:id="todoContentColumn" text="事项内容" prefWidth="240"/>
                     <TableColumn fx:id="todoTimeColumn" text="截止时间" prefWidth="140"/>

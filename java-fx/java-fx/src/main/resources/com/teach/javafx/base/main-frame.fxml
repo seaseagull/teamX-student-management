@@ -15,7 +15,7 @@
 <BorderPane fx:id="rootPane"
             prefWidth="1366.0"
             prefHeight="768.0"
-            stylesheets="@../css/theme-light.css, @../css/component.css, @../css/layout.css"
+            stylesheets="@../css/theme-light.css, @../css/component.css"
             styleClass="root-shell"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"

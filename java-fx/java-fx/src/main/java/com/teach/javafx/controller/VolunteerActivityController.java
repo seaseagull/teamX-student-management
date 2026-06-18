@@ -146,7 +146,7 @@ public class VolunteerActivityController extends ToolController {
         String status = (String) activity.get("status");
 
         VBox card = new VBox(8);
-        card.setPadding(new Insets(5));
+        card.setPadding(new Insets(12, 15, 12, 15));
         card.setFocusTraversable(false);
         card.setStyle("-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #F0F0F0; -fx-border-radius: 8; -fx-cursor: hand;");
         card.setOnMouseEntered(e -> card.setStyle("-fx-background-color: #FAFAFA; -fx-background-radius: 8; -fx-border-color: #1677FF; -fx-border-radius: 8; -fx-cursor: hand;"));
@@ -279,7 +279,7 @@ public class VolunteerActivityController extends ToolController {
         HBox signupStartTimePicker = createTimePicker("00", "00");
         HBox signupStartBox = new HBox(5, new Label("开始:"), signupStartDate, signupStartTimePicker);
 
-// 报名截止时间
+        // 报名截止时间
         DatePicker signupEndDate = new DatePicker();
         signupEndDate.setPrefWidth(150);
         HBox signupEndTimePicker = createTimePicker("23", "59");

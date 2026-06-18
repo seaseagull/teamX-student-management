@@ -81,7 +81,18 @@ public class NoticeController {
 
     // 点击通知时显示详情
     private void onNoticeSelected(Map notice) {
-        currentEditId = (Integer) notice.get("id");
+        Object idObj = notice.get("id");
+        if (idObj instanceof Integer) {
+            currentEditId = (Integer) idObj;
+        } else if (idObj instanceof Double) {
+            currentEditId = ((Double) idObj).intValue();
+        } else if (idObj instanceof Long) {
+            currentEditId = ((Long) idObj).intValue();
+        } else if (idObj instanceof Number) {
+            currentEditId = ((Number) idObj).intValue();
+        } else {
+            currentEditId = null;
+        }
         titleField.setText((String) notice.get("title"));
         contentArea.setText((String) notice.get("content"));
         String time = (String) notice.get("createTime");

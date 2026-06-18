@@ -282,7 +282,11 @@ public class StudentLeaveController extends ToolController {
                 teacherComboBox.setDisable(true);
                 adminCommentField.setDisable(true);
                 teacherCommentField.setDisable(false);
+                reasonField.setEditable(false);
+                attachmentButton.setDisable(false);
+                attachmentButton.setText("查看PDF");
                 applyTeacherFieldMode(false);
+                applyReviewFieldVisibilityForTeacher();
             }
             case "ROLE_ADMIN" -> {
                 studentNumLabel.setText("学号");
@@ -304,7 +308,11 @@ public class StudentLeaveController extends ToolController {
                 teacherComboBox.setDisable(true);
                 adminCommentField.setDisable(false);
                 teacherCommentField.setDisable(true);
+                reasonField.setEditable(false);
+                attachmentButton.setDisable(false);
+                attachmentButton.setText("查看PDF");
                 applyTeacherFieldMode(false);
+                applyReviewFieldVisibilityForAdmin();
             }
             default -> {
                 studentNumField.setDisable(true);
@@ -346,7 +354,7 @@ public class StudentLeaveController extends ToolController {
             filterItems.add(new OptionItem(-1, "-1", "全部"));
             filterItems.addAll(stateList);
         } else if ("ROLE_ADMIN".equals(roleName) || "ROLE_TEACHER".equals(roleName)) {
-            filterItems.add(new OptionItem(-1, "-1", "请选择..."));
+            filterItems.add(new OptionItem(-1, "0", "未审核"));
             for (OptionItem item : stateList) {
                 if (!DRAFT_FILTER_VALUE.equals(item.getValue())) {
                     filterItems.add(item);
@@ -592,6 +600,60 @@ public class StudentLeaveController extends ToolController {
         adminCommentColumn.setVisible(!student);
     }
 
+    private void applyReviewFieldVisibilityForTeacher() {
+        applyTimeLabel.setVisible(true);
+        applyTimeLabel.setManaged(true);
+        applyTimeValueLabel.setVisible(true);
+        applyTimeValueLabel.setManaged(true);
+        teacherTimeLabel.setVisible(false);
+        teacherTimeLabel.setManaged(false);
+        teacherTimeValueLabel.setVisible(false);
+        teacherTimeValueLabel.setManaged(false);
+        adminTimeLabel.setVisible(false);
+        adminTimeLabel.setManaged(false);
+        adminTimeValueLabel.setVisible(false);
+        adminTimeValueLabel.setManaged(false);
+        adminCommentLabel.setVisible(false);
+        adminCommentLabel.setManaged(false);
+        adminCommentField.setVisible(false);
+        adminCommentField.setManaged(false);
+        teacherCommentLabel.setVisible(true);
+        teacherCommentLabel.setManaged(true);
+        teacherCommentField.setVisible(true);
+        teacherCommentField.setManaged(true);
+        if (attachmentButton != null) {
+            attachmentButton.setDisable(false);
+            attachmentButton.setText("查看PDF");
+        }
+    }
+
+    private void applyReviewFieldVisibilityForAdmin() {
+        applyTimeLabel.setVisible(true);
+        applyTimeLabel.setManaged(true);
+        applyTimeValueLabel.setVisible(true);
+        applyTimeValueLabel.setManaged(true);
+        teacherTimeLabel.setVisible(true);
+        teacherTimeLabel.setManaged(true);
+        teacherTimeValueLabel.setVisible(true);
+        teacherTimeValueLabel.setManaged(true);
+        adminTimeLabel.setVisible(false);
+        adminTimeLabel.setManaged(false);
+        adminTimeValueLabel.setVisible(false);
+        adminTimeValueLabel.setManaged(false);
+        teacherCommentLabel.setVisible(true);
+        teacherCommentLabel.setManaged(true);
+        teacherCommentField.setVisible(true);
+        teacherCommentField.setManaged(true);
+        adminCommentLabel.setVisible(true);
+        adminCommentLabel.setManaged(true);
+        adminCommentField.setVisible(true);
+        adminCommentField.setManaged(true);
+        if (attachmentButton != null) {
+            attachmentButton.setDisable(false);
+            attachmentButton.setText("查看PDF");
+        }
+    }
+
     /**
      * 学生端学号、姓名为「只读展示」：不禁用控件（避免部分主题下灰显难以辨认），禁止编辑。
      */
@@ -645,7 +707,7 @@ public class StudentLeaveController extends ToolController {
     private void fillDetailFieldsFromForm(Map<String, Object> form) {
         if (form == null) {
             applyTimeValueLabel.setText("—");
-            teacherTimeValueLabel.setText("—");
+            teacherTimeValueLabel.setText("教师尚未审核");
             adminTimeValueLabel.setText("—");
             if ("ROLE_STUDENT".equals(roleName)) {
                 configureStudentDetailFieldsForStudentRole(true);
@@ -655,11 +717,19 @@ public class StudentLeaveController extends ToolController {
             return;
         }
         applyTimeValueLabel.setText(displayOrDash(CommonMethod.getString(form, "applyTime")));
-        teacherTimeValueLabel.setText(displayOrDash(CommonMethod.getString(form, "teacherTime")));
+        String teacherTime = CommonMethod.getString(form, "teacherTime");
+        if (teacherTime == null || teacherTime.isBlank()) {
+            teacherTimeValueLabel.setText("教师尚未审核");
+        } else {
+            teacherTimeValueLabel.setText(teacherTime);
+        }
         adminTimeValueLabel.setText(displayOrDash(CommonMethod.getString(form, "adminTime")));
         if ("ROLE_STUDENT".equals(roleName)) {
             teacherCommentField.setText(displayOrDash(CommonMethod.getString(form, "teacherComment")));
             adminCommentField.setText(displayOrDash(CommonMethod.getString(form, "adminComment")));
+        } else if ("ROLE_TEACHER".equals(roleName)) {
+            teacherCommentField.setText(CommonMethod.getString(form, "teacherComment"));
+            adminCommentField.setText("");
         } else {
             teacherCommentField.setText(CommonMethod.getString(form, "teacherComment"));
             adminCommentField.setText(CommonMethod.getString(form, "adminComment"));
@@ -736,7 +806,11 @@ public class StudentLeaveController extends ToolController {
         String attachmentName = CommonMethod.getString(form, "attachmentName");
         selectedAttachmentFile = null;
         if (attachmentNameLabel != null) {
-            attachmentNameLabel.setText(attachmentName != null && !attachmentName.isBlank() ? attachmentName : "未选择附件");
+            if ("ROLE_STUDENT".equals(roleName) && CommonMethod.getInteger(form, "submitState") != null && CommonMethod.getInteger(form, "submitState") == 1) {
+                attachmentNameLabel.setText(attachmentName != null && !attachmentName.isBlank() ? attachmentName : "未上传附件");
+            } else {
+                attachmentNameLabel.setText(attachmentName != null && !attachmentName.isBlank() ? attachmentName : "未选择附件");
+            }
         }
         updateReasonLengthLabel(reasonField.getText());
         fillDetailFieldsFromForm(form);
@@ -893,26 +967,63 @@ public class StudentLeaveController extends ToolController {
 
     @FXML
     protected void onAttachmentButtonClick() {
-        if (!"ROLE_STUDENT".equals(roleName)) {
+        if ("ROLE_STUDENT".equals(roleName)) {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("选择请假附件PDF");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF文件", "*.pdf"));
+            if (selectedAttachmentFile != null && selectedAttachmentFile.getParentFile() != null) {
+                fileChooser.setInitialDirectory(selectedAttachmentFile.getParentFile());
+            }
+            File file = fileChooser.showOpenDialog(attachmentButton != null ? attachmentButton.getScene().getWindow() : null);
+            if (file == null) {
+                return;
+            }
+            if (!file.getName().toLowerCase().endsWith(".pdf")) {
+                MessageDialog.showDialog("附件仅支持PDF格式！");
+                return;
+            }
+            selectedAttachmentFile = file;
+            if (attachmentNameLabel != null) {
+                attachmentNameLabel.setText(file.getName());
+            }
             return;
         }
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("选择请假附件PDF");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF文件", "*.pdf"));
-        if (selectedAttachmentFile != null && selectedAttachmentFile.getParentFile() != null) {
-            fileChooser.setInitialDirectory(selectedAttachmentFile.getParentFile());
-        }
-        File file = fileChooser.showOpenDialog(attachmentButton != null ? attachmentButton.getScene().getWindow() : null);
-        if (file == null) {
+        openAttachmentPdf();
+    }
+
+    private void openAttachmentPdf() {
+        Map<String, Object> form = dataTableView.getSelectionModel().getSelectedItem();
+        if (form == null) {
+            MessageDialog.showDialog("请选择要查看附件的请假记录！");
             return;
         }
-        if (!file.getName().toLowerCase().endsWith(".pdf")) {
-            MessageDialog.showDialog("附件仅支持PDF格式！");
+        Integer leaveId = CommonMethod.getInteger(form, "studentLeaveId");
+        if (leaveId == null) {
+            MessageDialog.showDialog("请先选择有效的请假记录！");
             return;
         }
-        selectedAttachmentFile = file;
-        if (attachmentNameLabel != null) {
-            attachmentNameLabel.setText(file.getName());
+        String attachmentName = CommonMethod.getString(form, "attachmentName");
+        String attachmentBase64 = CommonMethod.getString(form, "attachmentBase64");
+        if (attachmentBase64 == null || attachmentBase64.isBlank()) {
+            MessageDialog.showDialog("当前记录没有可查看的PDF附件！");
+            return;
+        }
+        try {
+            String base64 = attachmentBase64.trim();
+            if (base64.startsWith("data:application/pdf;base64,")) {
+                base64 = base64.substring("data:application/pdf;base64,".length());
+            }
+            byte[] pdfBytes = java.util.Base64.getDecoder().decode(base64);
+            java.nio.file.Path tempDir = java.nio.file.Files.createTempDirectory("leave-attachment-");
+            String fileName = (attachmentName != null && !attachmentName.isBlank()) ? attachmentName : "attachment.pdf";
+            java.nio.file.Path pdfPath = tempDir.resolve(fileName);
+            java.nio.file.Files.write(pdfPath, pdfBytes);
+            pdfPath.toFile().deleteOnExit();
+            tempDir.toFile().deleteOnExit();
+            java.awt.Desktop.getDesktop().open(pdfPath.toFile());
+        } catch (Exception e) {
+            e.printStackTrace();
+            MessageDialog.showDialog("打开PDF失败，请检查本机是否支持PDF查看器。");
         }
     }
 
@@ -982,6 +1093,9 @@ public class StudentLeaveController extends ToolController {
                     return;
                 }
             }
+        }
+        if (!"ROLE_STUDENT".equals(roleName)) {
+            reasonField.setEditable(false);
         }
         DataRequest req = new DataRequest();
         OptionItem op = teacherComboBox.getSelectionModel().getSelectedItem();
@@ -1059,8 +1173,13 @@ public class StudentLeaveController extends ToolController {
         }
         DataRequest req = new DataRequest();
         req.add("studentLeaveId", studentLeaveId);
-        req.add("teacherComment", teacherCommentField.getText());
-        req.add("adminComment", adminCommentField.getText());
+        if ("ROLE_TEACHER".equals(roleName)) {
+            req.add("teacherComment", teacherCommentField.getText());
+            req.add("adminComment", "");
+        } else {
+            req.add("teacherComment", teacherCommentField.getText());
+            req.add("adminComment", adminCommentField.getText());
+        }
         req.add("auditState", auditState);
         DataResponse res = HttpRequestUtil.request("/api/studentLeave/studentLeaveCheck", req);
         if (res != null && res.getCode() == 0) {

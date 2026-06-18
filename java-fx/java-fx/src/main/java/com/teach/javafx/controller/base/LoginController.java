@@ -48,10 +48,13 @@ public class LoginController {
     }
     @FXML
     protected void onTeacherLoginButtonClick() {
-        onLoginButtonClick("200799013517","123456");
+        onLoginButtonClick("T2022002","123456");  // 陈洪波
     }
     protected void onLoginButtonClick(String username, String password) {
         LoginRequest loginRequest = new LoginRequest(username,password);
+        try {
+            java.nio.file.Files.writeString(java.nio.file.Path.of("debug-d90a1c.log"), "{\"sessionId\":\"d90a1c\",\"id\":\"login_button\",\"timestamp\":" + System.currentTimeMillis() + ",\"location\":\"LoginController.java:onLoginButtonClick\",\"message\":\"login button clicked\",\"data\":{\"username\":\"" + username + "\"}}\n", java.nio.charset.StandardCharsets.UTF_8, java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
+        } catch (java.io.IOException ignored) {}
         String msg = HttpRequestUtil.login(loginRequest);
         if(msg != null) {
             MessageDialog.showDialog( msg);

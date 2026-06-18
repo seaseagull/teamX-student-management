@@ -21,6 +21,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.Instant;
 
 /**
  * CourseController 登录交互控制类 对应 course-panel.fxml
@@ -28,6 +31,8 @@ import java.util.Map;
  *  @FXML 方法 对应于fxml文件中的 on***Click的属性
  */
 public class CourseController {
+    private static final String DEBUG_LOG_PATH = "debug-d90a1c.log";
+
     @FXML
     private TableView<Map<String, Object>> dataTableView;
     @FXML
@@ -48,13 +53,20 @@ public class CourseController {
     private List<OptionItem> teacherList;
     private List<OptionItem> preCourseList;
 
+    private void debugLog(String hypothesisId, String location, String message, Map<String, Object> data) {
+        try (FileWriter fw = new FileWriter(DEBUG_LOG_PATH, true)) {
+            fw.write("{\"sessionId\":\"d90a1c\",\"id\":\"course_" + System.nanoTime() + "\",\"timestamp\":" + Instant.now().toEpochMilli() + ",\"runId\":\"run1\",\"hypothesisId\":\"" + hypothesisId + "\",\"location\":\"" + location + "\",\"message\":\"" + message.replace("\"", "'") + "\",\"data\":\"" + String.valueOf(data).replace("\"", "'") + "\"}\n");
+        } catch (IOException ignored) {}
+    }
 
     @FXML
     public void initialize() {
+        debugLog("H1", "CourseController.initialize:entry", "initialize invoked", Map.of("dataTableViewInjected", dataTableView != null, "numColumnInjected", numColumn != null, "nameColumnInjected", nameColumn != null, "teacherColumnInjected", teacherColumn != null));
         DataRequest req = new DataRequest();
         teacherList = HttpRequestUtil.requestOptionItemList("/api/studentCourse/getTeacherItemOptionList",req);
         preCourseList = HttpRequestUtil.requestOptionItemList(
                 "/api/course/getPreCourseItemOptionList", req);
+        debugLog("H2", "CourseController.initialize:options", "option lists loaded", Map.of("teacherListSize", teacherList == null ? -1 : teacherList.size(), "preCourseListSize", preCourseList == null ? -1 : preCourseList.size()));
 
 
         numColumn.setCellValueFactory(new MapValueFactory<>("num"));
@@ -110,6 +122,7 @@ public class CourseController {
         DataResponse res;
         DataRequest req =new DataRequest();
         res = HttpRequestUtil.request("/api/course/getCourseList",req); //从后台获取所有学生信息列表集合
+        debugLog("H3", "CourseController.onQueryButtonClick:response", "course list request finished", Map.of("responseNull", res == null, "responseCode", res == null ? -1 : res.getCode(), "responseDataClass", res != null && res.getData() != null ? res.getData().getClass().getName() : "null"));
         if(res != null && res.getCode()== 0) {
             courseList = (List<Map<String, Object>>) res.getData();
         }
@@ -118,6 +131,7 @@ public class CourseController {
 
     private void setTableViewData() {
        observableList.clear();
+       debugLog("H4", "CourseController.setTableViewData:entry", "building table items", Map.of("courseListSize", courseList == null ? -1 : courseList.size()));
        for (int j = 0; j < courseList.size(); j++) {
                 Map map = courseList.get(j);
                 FlowPane flowPane = new FlowPane();
@@ -132,6 +146,7 @@ public class CourseController {
            observableList.add(map);
             }
        dataTableView.setItems(observableList);
+       debugLog("H4", "CourseController.setTableViewData:exit", "table items assigned", Map.of("observableSize", observableList.size(), "tableItemsNull", dataTableView.getItems() == null));
     }
 
 

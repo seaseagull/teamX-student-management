@@ -1,52 +1,43 @@
 .root-shell {
     -fx-font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
-    -fx-background-color:
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.50) 0%, rgba(255, 255, 255, 0.34) 28%, rgba(255, 255, 255, 0.14) 62%, rgba(255, 255, 255, 0.00) 100%),
-            url("../picture/login-bg.png");
-    -fx-background-size: cover, cover;
-    -fx-background-position: center center, center bottom;
-    -fx-background-repeat: no-repeat, no-repeat;
+    -fx-background-image: url("../picture/login-bg.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgba(245, 247, 250, 0.10);
 }
 
 .top-bar {
-    -fx-background-color: rgba(255, 255, 255, 0.68);
-    -fx-border-color: rgba(0, 0, 0, 0.05);
+    -fx-background-color: rgba(255, 255, 255, 0.90);
+    -fx-border-color: rgba(255, 255, 255, 0.56);
     -fx-border-width: 0 0 1 0;
-    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.05), 10, 0.08, 0, 2);
-}
-
-.status-bar {
-    -fx-background-color: rgba(255, 255, 255, 0.66);
-    -fx-border-color: rgba(0, 0, 0, 0.05);
-    -fx-border-width: 1 0 0 0;
-    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.05), 10, 0.08, 0, 2);
 }
 
 .sidebar-scroll,
-.sidebar-scroll > .viewport,
+.sidebar-scroll > .viewport {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.sidebar {
+    -fx-background-color: rgba(0, 21, 41, 0.92);
+}
+
 .content-scroll,
 .content-scroll > .viewport {
     -fx-background-color: transparent;
     -fx-background: transparent;
 }
 
-.sidebar {
-    -fx-background-color:
-            linear-gradient(to bottom, rgba(0, 21, 41, 0.72) 0%, rgba(0, 21, 41, 0.58) 55%, rgba(0, 21, 41, 0.48) 100%),
-            url("../picture/login-bg.png");
-    -fx-background-size: cover, cover;
-    -fx-background-position: center center, center bottom;
-    -fx-background-repeat: no-repeat, no-repeat;
+.content-area {
+    -fx-background-color: transparent;
+    -fx-padding: 20;
 }
 
-.content-area {
-    -fx-background-color:
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 52%, rgba(255, 255, 255, 0.00) 100%),
-            url("../picture/login-bg.png");
-    -fx-background-size: cover, cover;
-    -fx-background-position: center center, center bottom;
-    -fx-background-repeat: no-repeat, no-repeat;
-    -fx-padding: 20;
+.status-bar {
+    -fx-background-color: rgba(255, 255, 255, 0.90);
+    -fx-border-color: rgba(255, 255, 255, 0.56);
+    -fx-border-width: 1 0 0 0;
 }
 
 .app-title {
@@ -66,7 +57,7 @@
 }
 
 .user-badge {
-    -fx-background-color: rgba(22, 119, 255, 0.10);
+    -fx-background-color: rgba(22, 119, 255, 0.08);
     -fx-border-color: rgba(22, 119, 255, 0.18);
     -fx-border-width: 1;
     -fx-border-radius: 999;
@@ -94,35 +85,8 @@
 }
 
 .empty-state {
-    -fx-background-color: rgba(255, 255, 255, 0.56);
+    -fx-background-color: rgba(255, 255, 255, 0.62);
     -fx-background-radius: 16;
     -fx-padding: 40;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 16, 0.12, 0, 4);
-}
-
-.card,
-.table-card,
-.detail-card,
-.filter-card,
-.dashboard-chart {
-    -fx-background-color: rgba(255, 255, 255, 0.58);
-}
-
-.table-view,
-.list-view {
-    -fx-background-color: rgba(255, 255, 255, 0.28);
-}
-
-.table-view .column-header-background {
-    -fx-background-color: rgba(248, 250, 252, 0.42);
-}
-
-.root-shell .split-pane,
-.root-shell .split-pane-divider {
-    -fx-background-color: transparent;
-}
-
-.pill-button,
-.nav-btn {
-    -fx-background-radius: 999;
 }

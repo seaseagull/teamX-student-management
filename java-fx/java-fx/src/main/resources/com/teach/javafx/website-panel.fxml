@@ -4,25 +4,33 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12"
+<BorderPane prefWidth="800.0"
+            styleClass="page-root"
+            stylesheets="@css/page-modern.css"
+            xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.teach.javafx.controller.WebsiteController">
 
     <top>
-        <VBox spacing="10.0" style="-fx-padding: 15;">
-            <HBox alignment="CENTER_LEFT">
-                <Label text="山东大学常用网站" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        <HBox spacing="12.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="10.0" />
+            </BorderPane.margin>
+            <children>
+                <VBox spacing="4.0">
+                    <Label text="常用网站" styleClass="page-title" />
+                    <Label text="快速定位至山东大学综合服务、学习相关、生活服务网站" styleClass="page-subtitle" />
+                </VBox>
                 <Pane HBox.hgrow="ALWAYS" />
                 <Button fx:id="addButton" text="添加网站" visible="false" managed="false"
-                        style="-fx-background-color: #1890ff; -fx-text-fill: white;" onAction="#onAddButtonClick"/>
-            </HBox>
-            <Separator />
-        </VBox>
+                            styleClass="primary-button" onAction="#onAddButtonClick"/>
+            </children>
+        </HBox>
     </top>
 
     <center>
-        <ScrollPane fitToWidth="true">
-            <VBox fx:id="contentVBox" spacing="20.0" style="-fx-padding: 15;" />
+        <ScrollPane fitToWidth="true" styleClass="content-scroll">
+            <VBox fx:id="contentVBox" spacing="20.0" style="-fx-padding: 15;" styleClass="table-card"/>
         </ScrollPane>
     </center>
 </BorderPane>

@@ -31,6 +31,8 @@ public class WeatherController {
     @FXML
     public void initialize() {
         errorLabel.setText("");
+        cityField.setText("济南");
+        Platform.runLater(this::onQueryButtonClick);
     }
 
     @FXML

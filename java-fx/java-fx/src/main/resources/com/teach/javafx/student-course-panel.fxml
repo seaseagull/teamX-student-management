@@ -1,27 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12"
+<BorderPane prefWidth="960.0" prefHeight="650.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.teach.javafx.controller.StudentCourseController">
+            fx:controller="com.teach.javafx.controller.StudentCourseController"
+            styleClass="page-root"
+            stylesheets="@css/page-modern.css">
 
     <top>
-        <VBox spacing="10.0" style="-fx-padding: 15;">
-            <HBox alignment="CENTER_LEFT">
-                <Label text="课程查询" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
-                <Pane HBox.hgrow="ALWAYS" />
-            </HBox>
-            <Separator />
+        <VBox spacing="10.0" styleClass="page-toolbar">
+            <padding>
+                <Insets top="14" right="18" bottom="14" left="18" />
+            </padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <children>
+                        <VBox spacing="2" alignment="CENTER_LEFT">
+                            <children>
+                                <Label text="课程查看" styleClass="page-title" />
+                                <Label text="以卡片形式浏览学生可查看的课程信息" styleClass="page-subtitle" />
+                            </children>
+                        </VBox>
+                        <Pane HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+            </children>
         </VBox>
     </top>
 
     <center>
-        <ScrollPane fitToWidth="true">
-            <FlowPane fx:id="cardFlowPane" hgap="15" vgap="15"
-                      style="-fx-padding: 15;" prefWrapLength="780" />
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll">
+            <content>
+                <VBox spacing="16" style="-fx-padding: 18;">
+                    <children>
+                        <HBox styleClass="filter-card" alignment="CENTER_LEFT" spacing="10">
+                            <children>
+                                <Label text="课程列表" styleClass="form-label" />
+                                <Pane HBox.hgrow="ALWAYS" />
+                                <Label text="可通过左侧菜单切换其他学习功能" styleClass="page-subtitle" />
+                            </children>
+                        </HBox>
+
+                        <FlowPane fx:id="cardFlowPane" hgap="16" vgap="16" prefWrapLength="860"
+                                  styleClass="dashboard-container" />
+                    </children>
+                </VBox>
+            </content>
         </ScrollPane>
     </center>
 </BorderPane>

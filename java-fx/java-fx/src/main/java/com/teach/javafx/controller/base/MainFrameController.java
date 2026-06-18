@@ -16,19 +16,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -43,7 +40,6 @@ public class MainFrameController {
     private static final String DARK_THEME = "/com/teach/javafx/css/theme-dark.css";
     private static final String COMPONENT_THEME = "/com/teach/javafx/css/component.css";
     private static final String LAYOUT_THEME = "/com/teach/javafx/css/layout.css";
-    private static final String HOME_BG_IMAGE = "/com/teach/javafx/picture/login-bg.png";
 
     @FXML private Label systemPrompt;
     @FXML private Label pagePrompt;
@@ -59,6 +55,12 @@ public class MainFrameController {
     private final Map<String, Parent> contentCache = new java.util.HashMap<>();
     private final Map<String, ToolController> toolControllerCache = new java.util.HashMap<>();
     private final Map<String, Button> menuButtonMap = new java.util.HashMap<>();
+
+    private void debugLog(String hypothesisId, String location, String message, Map<String, Object> data) {
+        try (FileWriter fw = new FileWriter("debug-d90a1c.log", true)) {
+            fw.write("{\"sessionId\":\"d90a1c\",\"id\":\"main_" + System.nanoTime() + "\",\"timestamp\":" + Instant.now().toEpochMilli() + ",\"runId\":\"post-fix\",\"hypothesisId\":\"" + hypothesisId + "\",\"location\":\"" + location + "\",\"message\":\"" + message.replace("\"", "'") + "\",\"data\":\"" + String.valueOf(data).replace("\"", "'") + "\"}\n");
+        } catch (IOException ignored) {}
+    }
     private String currentPageName;
     private String currentRole = "GUEST";
     private String currentTheme = LIGHT_THEME;
@@ -70,6 +72,12 @@ public class MainFrameController {
         String role = jwt == null || jwt.getRole() == null ? "GUEST" : jwt.getRole().replace("ROLE_", "");
         currentRole = role;
         String userName = jwt == null ? "访客" : firstNonBlank(jwt.getPerName(), jwt.getUsername(), "访客");
+        debugLog("H2", "MainFrameController.initialize:entry", "initialize entered", Map.of(
+                "role", role,
+                "userName", userName,
+                "rootPaneNull", rootPane == null,
+                "contentAreaNull", contentArea == null,
+                "menuContainerNull", menuContainer == null));
 
         roleLabel.setText("角色：" + role);
         userNameLabel.setText(userName);
@@ -81,10 +89,12 @@ public class MainFrameController {
         searchField.setPromptText("搜索功能、菜单或页面");
 
         applyThemeToScene(currentTheme);
-        installHomeBackground();
         currentMenuEntries = buildFallbackMenus(role);
         renderMenu(currentMenuEntries);
         MenuEntry firstPage = findFirstPage(currentMenuEntries);
+        debugLog("H2", "MainFrameController.initialize:firstPage", "first page selected", Map.of(
+                "firstPageName", firstPage == null ? "null" : firstPage.name(),
+                "firstPageTitle", firstPage == null ? "null" : firstPage.title()));
         if (firstPage != null) {
             openPage(firstPage);
         }
@@ -221,13 +231,17 @@ public class MainFrameController {
     private Parent loadPage(String name) {
         try {
             URL pageUrl = resolveFxmlUrl(name);
+            URL pageModernCss = MainApplication.class.getResource("/com/teach/javafx/css/page-modern.css");
+            debugLog("H5", "MainFrameController.loadPage:resolve", "resolved page url", Map.of("name", name, "url", pageUrl == null ? "null" : pageUrl.toExternalForm(), "pageModernCss", pageModernCss == null ? "null" : pageModernCss.toExternalForm()));
             if (pageUrl == null) {
                 new Alert(Alert.AlertType.ERROR, "打开页面失败：" + name + "\n未找到对应的 FXML 文件").show();
                 return null;
             }
             FXMLLoader loader = new FXMLLoader(pageUrl);
             Parent root = loader.load();
+            debugLog("H5", "MainFrameController.loadPage:loaded", "fxml loaded", Map.of("name", name, "stylesheets", root.getStylesheets().toString(), "rootClass", root.getClass().getName(), "pageModernCss", pageModernCss == null ? "null" : pageModernCss.toExternalForm()));
             applySceneStyles(root);
+            debugLog("H5", "MainFrameController.loadPage:styled", "scene styles applied", Map.of("name", name, "stylesheets", root.getStylesheets().toString()));
             Object controller = loader.getController();
             if (controller instanceof ToolController toolController) {
                 toolControllerCache.put(name, toolController);
@@ -235,6 +249,7 @@ public class MainFrameController {
             }
             return root;
         } catch (IOException ex) {
+            debugLog("H5", "MainFrameController.loadPage:error", "page load failed", Map.of("name", name, "error", ex.getMessage()));
             new Alert(Alert.AlertType.ERROR, "打开页面失败：" + name + "\n" + ex.getMessage()).show();
             return null;
         }
@@ -265,25 +280,8 @@ public class MainFrameController {
         addStylesheetIfMissing(root.getStylesheets(), COMPONENT_THEME);
         addStylesheetIfMissing(root.getStylesheets(), LAYOUT_THEME);
         addStylesheetIfMissing(root.getStylesheets(), currentTheme);
-    }
-
-    private void installHomeBackground() {
-        if (rootPane == null) {
-            return;
-        }
-        URL bgUrl = MainApplication.class.getResource(HOME_BG_IMAGE);
-        if (bgUrl == null) {
-            systemPrompt.setText("系统已就绪，但首页背景图未找到：" + HOME_BG_IMAGE);
-            return;
-        }
-        BackgroundImage backgroundImage = new BackgroundImage(
-                new javafx.scene.image.Image(bgUrl.toExternalForm(), true),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
-        );
-        rootPane.setBackground(new Background(backgroundImage));
+        addStylesheetIfMissing(root.getStylesheets(), "/com/teach/javafx/css/page-modern.css");
+        debugLog("H5", "MainFrameController.applySceneStyles", "stylesheets after apply", Map.of("count", root.getStylesheets().size(), "stylesheets", root.getStylesheets().toString()));
     }
 
     private void applyThemeToScene(String theme) {
@@ -301,7 +299,6 @@ public class MainFrameController {
         }
 
         if (rootPane != null) {
-            installHomeBackground();
             rootPane.applyCss();
             rootPane.layout();
         }
