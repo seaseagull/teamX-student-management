@@ -221,6 +221,7 @@ public class HomeworkController extends ToolController {
         // 作业名称
         TextField nameField = new TextField(data != null ? (String) data.get("homeworkName") : "");
         nameField.setPrefWidth(300);
+        nameField.getStyleClass().add("login-input");
 
         // 课程
         ComboBox<OptionItem> courseBox = new ComboBox<>();
@@ -253,6 +254,7 @@ public class HomeworkController extends ToolController {
         TextArea remarkField = new TextArea(data != null ? (String) data.get("remark") : "");
         remarkField.setPrefHeight(60);
         remarkField.setWrapText(true);
+        remarkField.getStyleClass().add("login-input");
 
         // 完成状态
         ComboBox<OptionItem> stateBox = new ComboBox<>();
@@ -271,20 +273,23 @@ public class HomeworkController extends ToolController {
         grid.addRow(4, new Label("完成状态:"), stateBox);
 
         Button saveBtn = new Button("保存");
-        saveBtn.setStyle("-fx-background-color: #1677FF; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;");
 
         Button deleteBtn = new Button("删除");
-        deleteBtn.setStyle("-fx-background-color: #FF4D4F; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-cursor: hand;");
         if (data == null) { deleteBtn.setVisible(false); deleteBtn.setManaged(false); }
 
         Button cancelBtn = new Button("取消");
-        cancelBtn.setStyle("-fx-background-color: white; -fx-text-fill: #333; -fx-font-size: 13px; -fx-padding: 6 16; -fx-background-radius: 4; -fx-border-color: #D9D9D9; -fx-border-radius: 4; -fx-cursor: hand;");
+
+        saveBtn.getStyleClass().add("primary-button");
+        deleteBtn.getStyleClass().add("danger-button");
+        cancelBtn.getStyleClass().add("secondary-button");
 
         HBox buttons = new HBox(10, deleteBtn, new Pane(), cancelBtn, saveBtn);
         HBox.setHgrow(buttons.getChildren().get(1), Priority.ALWAYS);
 
-        VBox root = new VBox(15, grid, new Separator(), buttons);
-        root.setPadding(new Insets(10));
+        VBox pane = new VBox(15, grid, buttons);
+        VBox root = new VBox(pane);
+        pane.getStyleClass().add("login-panel");
+        pane.setPadding(new Insets(20, 20, 30, 20));
 
         // 保存
         Integer homeworkId = null;
@@ -327,7 +332,12 @@ public class HomeworkController extends ToolController {
 
         cancelBtn.setOnAction(e -> stage.close());
 
-        stage.setScene(new Scene(root, 650, 400));
+        Scene scene = new Scene(root, 800, 420);
+        scene.getStylesheets().add(getClass().getResource("/com/teach/javafx/css/component.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/com/teach/javafx/css/login-modern.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/com/teach/javafx/css/page-modern.css").toExternalForm());
+        stage.setScene(scene);
+        root.setStyle("-fx-background-color: rgba(255,255,255,0.82); -fx-background-radius: 30; -fx-background-image: url('" + getClass().getResource("/com/teach/javafx/picture/login-bg.png").toExternalForm() + "'); -fx-background-size: cover;");
         stage.showAndWait();
     }
 }

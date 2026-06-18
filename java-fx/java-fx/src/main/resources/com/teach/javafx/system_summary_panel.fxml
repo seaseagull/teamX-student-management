@@ -19,7 +19,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.teach.javafx.controller.SystemSummaryController"
-            styleClass="page-root dashboard-root modern-page-dark"
+            styleClass="page-root dashboard-root"
             maxWidth="Infinity"
             maxHeight="Infinity"
             stylesheets="@css/page-modern.css">
@@ -41,14 +41,14 @@
                     <children>
                         <VBox spacing="14.0" fillWidth="true" maxWidth="Infinity">
                             <children>
-                                <VBox spacing="14.0" styleClass="dashboard-hero dashboard-feature-card" maxWidth="Infinity">
+                                <VBox spacing="14.0" styleClass="card dashboard-hero" maxWidth="Infinity">
                                     <children>
                                         <HBox spacing="16.0" alignment="CENTER_LEFT" maxWidth="Infinity">
                                             <children>
                                                 <VBox spacing="4.0" maxWidth="Infinity" HBox.hgrow="ALWAYS">
                                                     <children>
                                                         <Label text="学期便签" styleClass="page-subtitle" />
-                                                        <Label fx:id="currentDateLabel" text="今天是 -" styleClass="page-title" wrapText="true" />
+                                                        <Label fx:id="currentDateLabel" text="今天是 -" styleClass="page-title" />
                                                     </children>
                                                 </VBox>
                                                 <VBox spacing="4.0" alignment="CENTER_RIGHT" minWidth="180.0">
@@ -78,14 +78,14 @@
                                         <VBox spacing="6.0" styleClass="quote-card" maxWidth="Infinity">
                                             <children>
                                                 <Label text="每日一言" styleClass="page-subtitle" />
-                                                <Label fx:id="quoteTextLabel" text="今天也要元气满满哦！" wrapText="true" styleClass="quote-text" maxWidth="Infinity" />
+                                                <Label fx:id="quoteTextLabel" text="今天也要元气满满哦！" wrapText="true" styleClass="quote-text" />
                                                 <Label fx:id="quoteSourceLabel" text="—— 系统温馨提示" styleClass="page-subtitle" />
                                             </children>
                                         </VBox>
                                     </children>
                                 </VBox>
 
-                                <VBox spacing="8.0" styleClass="table-card dashboard-side-card dashboard-feature-card" minHeight="220.0" maxWidth="Infinity">
+                                <VBox spacing="8.0" styleClass="table-card dashboard-side-card" minHeight="220.0" maxWidth="Infinity">
                                     <children>
                                         <HBox alignment="CENTER_LEFT" maxWidth="Infinity">
                                             <children>
@@ -94,7 +94,7 @@
                                                 <Button text="刷新" onAction="#onRefreshTodoClick" styleClass="secondary-button pill-button" />
                                             </children>
                                         </HBox>
-                                        <TableView fx:id="todoTableView" prefHeight="240.0" minHeight="180.0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                                        <TableView fx:id="todoTableView" prefHeight="200.0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
                                             <columns>
                                                 <TableColumn fx:id="todoContentColumn" prefWidth="520.0" text="内容" />
                                                 <TableColumn fx:id="todoTimeColumn" prefWidth="180.0" text="时间" />
@@ -107,7 +107,7 @@
 
                         <HBox spacing="14.0" fillHeight="true" maxWidth="Infinity">
                             <children>
-                                <VBox spacing="8.0" styleClass="table-card dashboard-feature-card" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                                <VBox spacing="8.0" styleClass="table-card" maxWidth="Infinity" HBox.hgrow="ALWAYS">
                                     <children>
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
@@ -116,7 +116,7 @@
                                                 <Button text="更多" onAction="#onNoticeClick" styleClass="secondary-button pill-button" />
                                             </children>
                                         </HBox>
-                                        <TableView fx:id="noticeTableView" prefHeight="260.0" minHeight="200.0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                                        <TableView fx:id="noticeTableView" prefHeight="240.0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
                                             <columns>
                                                 <TableColumn fx:id="noticeTitleColumn" prefWidth="360.0" text="标题" />
                                                 <TableColumn fx:id="noticeTimeColumn" prefWidth="140.0" text="时间" />
@@ -124,7 +124,7 @@
                                         </TableView>
                                     </children>
                                 </VBox>
-                                <VBox spacing="8.0" styleClass="table-card dashboard-feature-card" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                                <VBox spacing="8.0" styleClass="table-card" maxWidth="Infinity" HBox.hgrow="ALWAYS">
                                     <children>
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
@@ -133,7 +133,7 @@
                                                 <Button text="请假管理" onAction="#onLeaveClick" styleClass="secondary-button pill-button" />
                                             </children>
                                         </HBox>
-                                        <TableView fx:id="leaveTableView" prefHeight="260.0" minHeight="200.0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                                        <TableView fx:id="leaveTableView" prefHeight="240.0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
                                             <columns>
                                                 <TableColumn fx:id="leaveNameColumn" prefWidth="140.0" text="学生" />
                                                 <TableColumn fx:id="leaveDateColumn" prefWidth="150.0" text="离校日期" />
@@ -147,16 +147,16 @@
 
                         <HBox spacing="14.0" fillHeight="true" maxWidth="Infinity">
                             <children>
-                                <VBox spacing="8.0" styleClass="dashboard-chart dashboard-feature-card" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                                <VBox spacing="8.0" styleClass="dashboard-chart" maxWidth="Infinity" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Label text="作业与事务概览" styleClass="page-subtitle" />
-                                        <PieChart fx:id="featurePieChart" prefHeight="280.0" minHeight="220.0" maxWidth="Infinity" />
+                                        <PieChart fx:id="featurePieChart" prefHeight="260.0" maxWidth="Infinity" />
                                     </children>
                                 </VBox>
-                                <VBox spacing="8.0" styleClass="dashboard-chart dashboard-feature-card" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                                <VBox spacing="8.0" styleClass="dashboard-chart" maxWidth="Infinity" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Label text="近期数据统计" styleClass="page-subtitle" />
-                                        <BarChart fx:id="usageBarChart" prefHeight="280.0" minHeight="220.0" maxWidth="Infinity">
+                                        <BarChart fx:id="usageBarChart" prefHeight="260.0" maxWidth="Infinity">
                                             <xAxis>
                                                 <CategoryAxis fx:id="xAxis" />
                                             </xAxis>
@@ -169,10 +169,10 @@
                             </children>
                         </HBox>
 
-                        <VBox spacing="10.0" styleClass="card dashboard-feature-card" maxWidth="Infinity">
+                        <VBox spacing="10.0" styleClass="card" maxWidth="Infinity">
                             <children>
                                 <Label text="常用入口" styleClass="page-subtitle" />
-                                <FlowPane hgap="10.0" vgap="10.0" prefWrapLength="1200.0" maxWidth="Infinity">
+                                <FlowPane hgap="10.0" vgap="10.0" prefWrapLength="1200.0">
                                     <children>
                                         <Button text="成绩查询" onAction="#onScoreClick" styleClass="secondary-button pill-button" />
                                         <Button text="请假申请 / 审批" onAction="#onLeaveClick" styleClass="secondary-button pill-button" />
