@@ -13,9 +13,9 @@
     <top>
         <VBox spacing="14.0" styleClass="page-header">
             <children>
-                <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="page-toolbar">
+                <HBox alignment="CENTER_LEFT" spacing="14.0">
                     <padding>
-                        <Insets top="14" right="18" bottom="14" left="18" />
+                        <Insets bottom="14" />
                     </padding>
                     <children>
                         <VBox spacing="2" alignment="CENTER_LEFT">
