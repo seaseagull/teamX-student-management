@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8343b2d-6729-42ab-bd7c-34556a91b871" name="Changes" comment="校园公告">
+      <change afterPath="$PROJECT_DIR$/java-server/src/main/java/cn/edu/sdu/java/server/controllers/NoticeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java-server/src/main/java/cn/edu/sdu/java/server/models/Notice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java-server/src/main/java/cn/edu/sdu/java/server/repositorys/NoticeRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java-fx/java-fx/src/main/java/com/teach/javafx/controller/NoticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-fx/java-fx/src/main/java/com/teach/javafx/controller/NoticeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/java-server.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/java-server.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +27,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -52,7 +53,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.MainApplication.executor": "Debug",
+    "Application.MainApplication.executor": "Run",
+    "Maven.java-fx [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
@@ -62,7 +64,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.JavaServerApplication.executor": "Run",
+    "Spring Boot.JavaServerApplication.executor": "Debug",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -129,7 +131,8 @@
       <workItem from="1780927298899" duration="2326000" />
       <workItem from="1781000518265" duration="1514000" />
       <workItem from="1781273312966" duration="1514000" />
-      <workItem from="1781749107420" duration="793000" />
+      <workItem from="1781749107420" duration="1528000" />
+      <workItem from="1781752003787" duration="1003000" />
     </task>
     <task id="LOCAL-00002" summary="校园公告">
       <option name="closed" value="true" />
@@ -147,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781274744520</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="校园公告">
+      <option name="closed" value="true" />
+      <created>1781750013891</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1781750013891</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
