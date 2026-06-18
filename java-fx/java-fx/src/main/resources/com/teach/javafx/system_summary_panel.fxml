@@ -1,11 +1,198 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.teach.javafx.controller.SystemSummaryController"
+            styleClass="page-root dashboard-root"
+            maxWidth="Infinity"
+            maxHeight="Infinity"
+            stylesheets="@css/page-modern.css">
+    <top>
+        <VBox spacing="6.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="14" />
+            </padding>
+            <children>
+                <Label fx:id="titleLabel" text="学生首页" styleClass="page-title" />
+                <Label fx:id="subtitleLabel" text="汇总学期进度、待办事项、通知公告与近期事务" styleClass="page-subtitle" />
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="content-scroll" BorderPane.alignment="CENTER">
+            <content>
+                <VBox spacing="16.0" styleClass="dashboard-container" fillWidth="true" maxWidth="Infinity" minWidth="820.0">
+                    <children>
+                        <VBox spacing="14.0" fillWidth="true" maxWidth="Infinity">
+                            <children>
+                                <VBox spacing="14.0" styleClass="card dashboard-hero" maxWidth="Infinity">
+                                    <children>
+                                        <HBox spacing="16.0" alignment="CENTER_LEFT" maxWidth="Infinity">
+                                            <children>
+                                                <VBox spacing="4.0" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="学期便签" styleClass="page-subtitle" />
+                                                        <Label fx:id="currentDateLabel" text="今天是 -" styleClass="page-title" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="4.0" alignment="CENTER_RIGHT" minWidth="180.0">
+                                                    <children>
+                                                        <Label text="距离学期结束" styleClass="page-subtitle" />
+                                                        <HBox spacing="6.0" alignment="BASELINE_RIGHT">
+                                                            <children>
+                                                                <Label fx:id="daysLeftLabel" text="-" styleClass="dashboard-number" />
+                                                                <Label text="天" styleClass="page-subtitle" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <VBox spacing="6.0" maxWidth="Infinity">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                                    <children>
+                                                        <Label text="学期进度" styleClass="form-label" />
+                                                        <Label fx:id="progressPercentLabel" text="0%" styleClass="page-subtitle" />
+                                                    </children>
+                                                </HBox>
+                                                <ProgressBar fx:id="semesterProgressBar" maxWidth="Infinity" prefWidth="Infinity" />
+                                            </children>
+                                        </VBox>
+                                        <VBox spacing="6.0" styleClass="quote-card" maxWidth="Infinity">
+                                            <children>
+                                                <Label text="每日一言" styleClass="page-subtitle" />
+                                                <Label fx:id="quoteTextLabel" text="今天也要元气满满哦！" wrapText="true" styleClass="quote-text" />
+                                                <Label fx:id="quoteSourceLabel" text="—— 系统温馨提示" styleClass="page-subtitle" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teach.javafx.controller.SystemSummaryController">
-   <center>
-      <Button mnemonicParsing="false" text="系统介绍测试" BorderPane.alignment="CENTER" />
-   </center>
+                                <VBox spacing="8.0" styleClass="table-card dashboard-side-card" minHeight="220.0" maxWidth="Infinity">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" maxWidth="Infinity">
+                                            <children>
+                                                <Label text="今日待办" styleClass="page-subtitle" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button text="刷新" onAction="#onRefreshTodoClick" styleClass="secondary-button pill-button" />
+                                            </children>
+                                        </HBox>
+                                        <TableView fx:id="todoTableView" prefHeight="200.0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                                            <columns>
+                                                <TableColumn fx:id="todoContentColumn" prefWidth="520.0" text="内容" />
+                                                <TableColumn fx:id="todoTimeColumn" prefWidth="180.0" text="时间" />
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+
+                        <HBox spacing="14.0" fillHeight="true" maxWidth="Infinity">
+                            <children>
+                                <VBox spacing="8.0" styleClass="table-card" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label text="近期通知" styleClass="page-subtitle" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button text="更多" onAction="#onNoticeClick" styleClass="secondary-button pill-button" />
+                                            </children>
+                                        </HBox>
+                                        <TableView fx:id="noticeTableView" prefHeight="240.0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                                            <columns>
+                                                <TableColumn fx:id="noticeTitleColumn" prefWidth="360.0" text="标题" />
+                                                <TableColumn fx:id="noticeTimeColumn" prefWidth="140.0" text="时间" />
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                </VBox>
+                                <VBox spacing="8.0" styleClass="table-card" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label text="近期请假" styleClass="page-subtitle" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button text="请假管理" onAction="#onLeaveClick" styleClass="secondary-button pill-button" />
+                                            </children>
+                                        </HBox>
+                                        <TableView fx:id="leaveTableView" prefHeight="240.0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                                            <columns>
+                                                <TableColumn fx:id="leaveNameColumn" prefWidth="140.0" text="学生" />
+                                                <TableColumn fx:id="leaveDateColumn" prefWidth="150.0" text="离校日期" />
+                                                <TableColumn fx:id="leaveStateColumn" prefWidth="100.0" text="状态" />
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <HBox spacing="14.0" fillHeight="true" maxWidth="Infinity">
+                            <children>
+                                <VBox spacing="8.0" styleClass="dashboard-chart" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Label text="作业与事务概览" styleClass="page-subtitle" />
+                                        <PieChart fx:id="featurePieChart" prefHeight="260.0" maxWidth="Infinity" />
+                                    </children>
+                                </VBox>
+                                <VBox spacing="8.0" styleClass="dashboard-chart" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Label text="近期数据统计" styleClass="page-subtitle" />
+                                        <BarChart fx:id="usageBarChart" prefHeight="260.0" maxWidth="Infinity">
+                                            <xAxis>
+                                                <CategoryAxis fx:id="xAxis" />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis fx:id="yAxis" label="数量" />
+                                            </yAxis>
+                                        </BarChart>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <VBox spacing="10.0" styleClass="card" maxWidth="Infinity">
+                            <children>
+                                <Label text="常用入口" styleClass="page-subtitle" />
+                                <FlowPane hgap="10.0" vgap="10.0" prefWrapLength="1200.0">
+                                    <children>
+                                        <Button text="成绩查询" onAction="#onScoreClick" styleClass="secondary-button pill-button" />
+                                        <Button text="请假申请 / 审批" onAction="#onLeaveClick" styleClass="secondary-button pill-button" />
+                                        <Button text="校历查询" onAction="#onCalendarClick" styleClass="secondary-button pill-button" />
+                                        <Button text="通知公告" onAction="#onNoticeClick" styleClass="secondary-button pill-button" />
+                                        <Button text="课程" onAction="#onCourseManageClick" styleClass="secondary-button pill-button" />
+                                        <Button text="作业" onAction="#onHomeworkClick" styleClass="secondary-button pill-button" />
+                                        <Button text="考试" onAction="#onExamClick" styleClass="secondary-button pill-button" />
+                                        <Button text="志愿活动" onAction="#onVolunteerClick" styleClass="secondary-button pill-button" />
+                                        <Button text="天气" onAction="#onWeatherClick" styleClass="secondary-button pill-button" />
+                                        <Button text="校车" onAction="#onBusClick" styleClass="secondary-button pill-button" />
+                                        <Button text="地图" onAction="#onMapClick" styleClass="secondary-button pill-button" />
+                                        <Button text="校园服务" onAction="#onWebsiteClick" styleClass="secondary-button pill-button" />
+                                    </children>
+                                </FlowPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
 </BorderPane>

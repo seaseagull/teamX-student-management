@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.ScrollPane?>
 
-<!-- 只修改这一行：把原来的 -fx-background-color:#2b2b2b; 改成 #d5e9e0; -->
-<BorderPane prefWidth="1000" prefHeight="700" style="-fx-background-color: #d5e9e0;" xmlns:fx="http://javafx.com/fxml" fx:controller="com.teach.javafx.controller.CalendarController">
+<BorderPane prefWidth="1000"
+            prefHeight="700"
+            styleClass="page-root"
+            stylesheets="@css/page-modern.css"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.teach.javafx.controller.CalendarController">
+    <top>
+        <VBox spacing="4.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="校历查询" styleClass="page-title" />
+                <Label text="查看学期安排、节假日与重要教学节点" styleClass="page-subtitle" />
+            </children>
+            <padding>
+                <Insets bottom="14" />
+            </padding>
+        </VBox>
+    </top>
     <center>
-        <!-- ScrollPane背景保持透明，这样才能显示外层的淡绿色 -->
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
-            <!-- 原来的VBox完全不变，保留原有padding和spacing -->
-            <VBox fx:id="calendarContainer" spacing="30" style="-fx-padding:20;"/>
+        <ScrollPane fx:id="scrollPane"
+                    fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    vbarPolicy="AS_NEEDED"
+                    styleClass="calendar-scroll">
+            <content>
+                <VBox fx:id="calendarContainer" spacing="22" styleClass="calendar-container" />
+            </content>
         </ScrollPane>
     </center>
 </BorderPane>

@@ -68,10 +68,10 @@ public class WebsiteController extends ToolController {
         VBox box = new VBox(10);
 
         Label title = new Label(category);
-        title.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-fill: #333");
+        title.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333");
 
-        FlowPane flowPane = new FlowPane(15, 15);
-        flowPane.setPadding(new Insets(10, 0, 10, 0));
+        FlowPane flowPane = new FlowPane(20, 15);
+        flowPane.setPadding(new Insets(10, 10, 10, 10));
         flowPane.setPrefWrapLength(780);
 
         for (Map w : websites) {
@@ -79,7 +79,7 @@ public class WebsiteController extends ToolController {
             flowPane.getChildren().add(card);
         }
 
-        box.getChildren().addAll(title, flowPane, new Separator());
+        box.getChildren().addAll(title, flowPane);
         return box;
     }
 

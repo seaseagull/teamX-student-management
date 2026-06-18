@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -88,7 +89,7 @@ public class StudentLeaveController extends ToolController {
     /** 表单：请假理由 */
     @FXML
     private TextArea reasonField;
-    /** 表单：PDF附件文件名展示 */
+    /** 表单：附件文件名展示 */
     @FXML
     private Label attachmentNameLabel;
     /** 表单：选择PDF附件 */
@@ -161,9 +162,17 @@ public class StudentLeaveController extends ToolController {
     @FXML
     private Button notPassButton;
 
-    /** 右侧表单区域容器，用于控制显示/隐藏 */
+    /** 列表区域容器 */
+    @FXML
+    private VBox listViewPane;
+    /** 表单区域容器，用于控制显示/隐藏 */
     @FXML
     private VBox rightVBox;
+
+    @FXML
+    private Label pageTitleLabel;
+    @FXML
+    private Label pageSubtitleLabel;
 
     /** 当前编辑的请假记录主键，新建时为 {@code null} */
     private Integer studentLeaveId = null;
@@ -227,6 +236,7 @@ public class StudentLeaveController extends ToolController {
         list.addListener(this::onTableRowSelect);
         setTableViewData();
         this.roleName = AppStore.getJwt().getRole();
+        configurePageHeaderForRole();
         initStateFilterComboBox();
         switch (this.roleName) {
             case "ROLE_STUDENT" -> {
@@ -303,10 +313,27 @@ public class StudentLeaveController extends ToolController {
         }
         applyReviewCommentColumnsVisibility();
         configureLeaveDatePickerForRole();
-        // 初始化时隐藏右侧表单区域
-        rightVBox.setVisible(false);
-        rightVBox.setManaged(false);
+        showListView();
         onQueryButtonClick();
+    }
+
+    private void configurePageHeaderForRole() {
+        if (pageTitleLabel == null || pageSubtitleLabel == null) {
+            return;
+        }
+        if ("ROLE_STUDENT".equals(roleName)) {
+            pageTitleLabel.setText("请假申请");
+            pageSubtitleLabel.setText("填写请假申请，查看本人请假记录及审核进度");
+        } else if ("ROLE_TEACHER".equals(roleName)) {
+            pageTitleLabel.setText("请假审批");
+            pageSubtitleLabel.setText("审核学生提交的请假申请并填写审批意见");
+        } else if ("ROLE_ADMIN".equals(roleName)) {
+            pageTitleLabel.setText("请假审批");
+            pageSubtitleLabel.setText("查看请假申请记录，完成管理员审批处理");
+        } else {
+            pageTitleLabel.setText("请假管理");
+            pageSubtitleLabel.setText("查看请假记录与处理进度");
+        }
     }
 
     private void initStateFilterComboBox() {
@@ -357,6 +384,9 @@ public class StudentLeaveController extends ToolController {
         returnDatePicker.setDisable(!editable);
         teacherComboBox.setDisable(!editable);
         reasonField.setEditable(editable);
+        if (attachmentButton != null) {
+            attachmentButton.setDisable(!editable);
+        }
     }
 
     /**
@@ -677,6 +707,7 @@ public class StudentLeaveController extends ToolController {
         reasonField.setText("");
         teacherCommentField.setText("");
         adminCommentField.setText("");
+        clearAttachmentSelection();
         fillDetailFieldsFromForm(null);
         if ("ROLE_STUDENT".equals(roleName)) {
             applyStudentIdentityFromJwt();
@@ -702,6 +733,11 @@ public class StudentLeaveController extends ToolController {
         leaveDatePicker.setValue(parseLeaveDateFromBackend(CommonMethod.getString(form, "leaveDate")));
         returnDatePicker.setValue(parseReturnDateFromBackend(CommonMethod.getString(form, "returnDate")));
         reasonField.setText(CommonMethod.getString(form, "reason"));
+        String attachmentName = CommonMethod.getString(form, "attachmentName");
+        selectedAttachmentFile = null;
+        if (attachmentNameLabel != null) {
+            attachmentNameLabel.setText(attachmentName != null && !attachmentName.isBlank() ? attachmentName : "未选择附件");
+        }
         updateReasonLengthLabel(reasonField.getText());
         fillDetailFieldsFromForm(form);
         if ("ROLE_STUDENT".equals(roleName)) {
@@ -719,8 +755,7 @@ public class StudentLeaveController extends ToolController {
         Map<String, Object> form = dataTableView.getSelectionModel().getSelectedItem();
         changeStudentInfo();
         if (studentLeaveId != null) {
-            rightVBox.setVisible(true);
-            rightVBox.setManaged(true);
+            showFormView();
         }
         updateActionButtonVisibility(form);
         applyTeacherFieldForCurrentRole(form);
@@ -751,8 +786,7 @@ public class StudentLeaveController extends ToolController {
             setTableViewData();
             if (!restoreTableSelection(pendingReselectLeaveId)) {
                 dataTableView.getSelectionModel().clearSelection();
-                rightVBox.setVisible(false);
-                rightVBox.setManaged(false);
+                showListView();
                 clearPanel();
             }
         } else if (pendingReselectLeaveId == null) {
@@ -769,21 +803,49 @@ public class StudentLeaveController extends ToolController {
             Map<String, Object> row = studentLeaveList.get(i);
             if (leaveId.equals(CommonMethod.getInteger(row, "studentLeaveId"))) {
                 dataTableView.getSelectionModel().select(i);
-                rightVBox.setVisible(true);
-                rightVBox.setManaged(true);
+                showFormView();
                 return true;
             }
         }
         return false;
     }
 
-    /** 学生：清空表单，准备新建请假。 */
+    /** 学生：清空表单，进入完整页面准备新建请假。 */
     @FXML
     protected void onAddButtonClick() {
         clearPanel();
-        rightVBox.setVisible(true);
-        rightVBox.setManaged(true);
+        showFormView();
         updateActionButtonVisibility(null);
+    }
+
+    /** 返回请假记录列表。 */
+    @FXML
+    protected void onBackToListClick() {
+        dataTableView.getSelectionModel().clearSelection();
+        clearPanel();
+        showListView();
+    }
+
+    private void showListView() {
+        if (listViewPane != null) {
+            listViewPane.setVisible(true);
+            listViewPane.setManaged(true);
+        }
+        if (rightVBox != null) {
+            rightVBox.setVisible(false);
+            rightVBox.setManaged(false);
+        }
+    }
+
+    private void showFormView() {
+        if (listViewPane != null) {
+            listViewPane.setVisible(false);
+            listViewPane.setManaged(false);
+        }
+        if (rightVBox != null) {
+            rightVBox.setVisible(true);
+            rightVBox.setManaged(true);
+        }
     }
 
     /** 学生：保存请假草稿。 */
@@ -831,7 +893,46 @@ public class StudentLeaveController extends ToolController {
 
     @FXML
     protected void onAttachmentButtonClick() {
-        MessageDialog.showDialog("当前版本未启用附件上传功能。");
+        if (!"ROLE_STUDENT".equals(roleName)) {
+            return;
+        }
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("选择请假附件PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF文件", "*.pdf"));
+        if (selectedAttachmentFile != null && selectedAttachmentFile.getParentFile() != null) {
+            fileChooser.setInitialDirectory(selectedAttachmentFile.getParentFile());
+        }
+        File file = fileChooser.showOpenDialog(attachmentButton != null ? attachmentButton.getScene().getWindow() : null);
+        if (file == null) {
+            return;
+        }
+        if (!file.getName().toLowerCase().endsWith(".pdf")) {
+            MessageDialog.showDialog("附件仅支持PDF格式！");
+            return;
+        }
+        selectedAttachmentFile = file;
+        if (attachmentNameLabel != null) {
+            attachmentNameLabel.setText(file.getName());
+        }
+    }
+
+    private void clearAttachmentSelection() {
+        selectedAttachmentFile = null;
+        if (attachmentNameLabel != null) {
+            attachmentNameLabel.setText("未选择附件");
+        }
+    }
+
+    private String encodeAttachmentToBase64(File file) {
+        if (file == null) {
+            return null;
+        }
+        try {
+            return "data:application/pdf;base64," + java.util.Base64.getEncoder().encodeToString(Files.readAllBytes(file.toPath()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -911,6 +1012,23 @@ public class StudentLeaveController extends ToolController {
         if (reason != null && reason.length() > REASON_MAX_LENGTH) {
             MessageDialog.showDialog("请假理由不能超过100字！");
             return;
+        }
+        if (selectedAttachmentFile != null) {
+            String name = selectedAttachmentFile.getName();
+            if (!name.toLowerCase().endsWith(".pdf")) {
+                MessageDialog.showDialog("附件仅支持PDF格式！");
+                return;
+            }
+            String attachmentBase64 = encodeAttachmentToBase64(selectedAttachmentFile);
+            if (attachmentBase64 == null) {
+                MessageDialog.showDialog("附件读取失败，请重新选择PDF文件！");
+                return;
+            }
+            req.add("attachmentName", name);
+            req.add("attachmentBase64", attachmentBase64);
+        } else {
+            req.add("attachmentName", "");
+            req.add("attachmentBase64", "");
         }
         if (op != null) {
             req.add("teacherId", Integer.parseInt(op.getValue()));

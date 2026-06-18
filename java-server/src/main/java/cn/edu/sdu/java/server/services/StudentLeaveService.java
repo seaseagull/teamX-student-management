@@ -104,6 +104,7 @@ public class StudentLeaveService {
                 row.put("teacherComment", leave.getTeacherComment());
                 row.put("teacherChecked", leave.getTeacherChecked());
                 row.put("teacherPass", leave.getTeacherPass());
+                row.put("attachmentName", leave.getAttachmentName());
                 row.put("stateName", auditView.stateName());
                 dataList.add(row);
             }

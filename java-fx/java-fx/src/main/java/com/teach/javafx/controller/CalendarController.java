@@ -101,25 +101,27 @@ public class CalendarController {
 
     private void drawSingleMonth(YearMonth currentMonth, List<Map<String, Object>> events) {
         // 1. 创建当前月的外层容器
-        VBox monthBox = new VBox(10);
-        monthBox.setStyle("-fx-alignment:center; -fx-padding:10 0;");
+        VBox monthBox = new VBox(14);
+        monthBox.setStyle("-fx-alignment:center; -fx-padding:22; -fx-background-color:white; -fx-background-radius:18; -fx-border-color:rgba(15,23,42,0.08); -fx-border-radius:18; -fx-effect:dropshadow(gaussian, rgba(15,23,42,0.08), 18, 0.12, 0, 5);");
 
-        // 2. 月份标题（文字颜色改为深灰色）
+        // 2. 月份标题
         Label monthTitle = new Label(currentMonth.getYear() + "年" + currentMonth.getMonthValue() + "月");
-        monthTitle.setStyle("-fx-font-size:18px; -fx-font-weight:bold; -fx-text-fill:#333333; -fx-padding:5;");
+        monthTitle.setStyle("-fx-font-size:20px; -fx-font-weight:800; -fx-text-fill:#102a43; -fx-padding:4 0 8 0;");
         monthBox.getChildren().add(monthTitle);
 
         // 3. 创建日历Grid
         GridPane calendarGrid = new GridPane();
-        calendarGrid.setHgap(2);
-        calendarGrid.setVgap(2);
+        calendarGrid.setHgap(8);
+        calendarGrid.setVgap(8);
         calendarGrid.setStyle("-fx-padding:10;");
 
         // 4. 绘制星期标题（文字颜色改为深灰色）
         String[] weekNames = {"周一", "周二", "周三", "周四", "周五", "周六", "周日"};
         for (int i = 0; i < 7; i++) {
             Label l = new Label(weekNames[i]);
-            l.setStyle("-fx-font-weight:bold; -fx-padding:5; -fx-text-fill:#333333;");
+            l.setMinWidth(92);
+            l.setAlignment(Pos.CENTER);
+            l.setStyle("-fx-font-weight:700; -fx-padding:8; -fx-text-fill:#475467;");
             calendarGrid.add(l, i, 0);
         }
 
@@ -132,9 +134,11 @@ public class CalendarController {
             int col = (startWeek + day - 2) % 7;
             if (col == 0 && day > 1) row++;
 
-            VBox box = new VBox(2);
-            box.setStyle("-fx-padding:4; -fx-border-color:#cccccc; -fx-min-width:80; -fx-min-height:60;");
+            VBox box = new VBox(4);
+            box.setMinWidth(92);
+            box.setMinHeight(74);
             box.setAlignment(Pos.TOP_CENTER);
+            box.setStyle("-fx-padding:8; -fx-border-color:rgba(15,23,42,0.08); -fx-border-radius:12; -fx-background-radius:12; -fx-background-color:#f8fafc;");
 
             LocalDate currentDate = currentMonth.atDay(day);
             String currentDateStr = currentDate.format(dateFormatter);
@@ -146,32 +150,34 @@ public class CalendarController {
                 if (sd.isCircle) {
                     // 圆形标记（和第一张校历完全一样）
                     StackPane circlePane = new StackPane();
-                    circlePane.setStyle("-fx-background-color:" + sd.color + "; -fx-background-radius:50%; -fx-min-width:30; -fx-min-height:30;");
+                    circlePane.setMinWidth(34);
+                    circlePane.setMinHeight(34);
+                    circlePane.setStyle("-fx-background-color:" + sd.color + "; -fx-background-radius:999;");
                     dayLabel = new Label(String.valueOf(day));
-                    dayLabel.setStyle("-fx-font-weight:bold; -fx-text-fill:white;");
+                    dayLabel.setStyle("-fx-font-weight:800; -fx-text-fill:white;");
                     circlePane.getChildren().add(dayLabel);
                     box.getChildren().add(circlePane);
 
                     // 添加事件名称
                     Label eventLabel = new Label(sd.title);
-                    eventLabel.setStyle("-fx-font-size:10px; -fx-text-fill:#333333;");
+                    eventLabel.setStyle("-fx-font-size:11px; -fx-text-fill:#475467;");
                     box.getChildren().add(eventLabel);
                 } else {
                     // 背景标记（体育大课堂）
-                    box.setStyle("-fx-padding:4; -fx-border-color:#cccccc; -fx-min-width:80; -fx-min-height:60; -fx-background-color:" + sd.color + ";");
+                    box.setStyle("-fx-padding:8; -fx-border-color:rgba(250,173,20,0.30); -fx-border-radius:12; -fx-background-radius:12; -fx-background-color:" + sd.color + ";");
                     dayLabel = new Label(String.valueOf(day));
-                    dayLabel.setStyle("-fx-font-weight:bold; -fx-text-fill:#856404;");
+                    dayLabel.setStyle("-fx-font-weight:800; -fx-text-fill:#856404;");
                     box.getChildren().add(dayLabel);
 
                     // 添加事件名称
                     Label eventLabel = new Label(sd.title);
-                    eventLabel.setStyle("-fx-font-size:10px; -fx-text-fill:#856404;");
+                    eventLabel.setStyle("-fx-font-size:11px; -fx-text-fill:#856404;");
                     box.getChildren().add(eventLabel);
                 }
             } else {
                 // 普通日期
                 dayLabel = new Label(String.valueOf(day));
-                dayLabel.setStyle("-fx-font-weight:bold; -fx-text-fill:#333333;");
+                dayLabel.setStyle("-fx-font-weight:800; -fx-text-fill:#344054;");
                 box.getChildren().add(dayLabel);
             }
 

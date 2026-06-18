@@ -14,45 +14,69 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teach.javafx.controller.BusScheduleController">
-    <center>
-        <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+<BorderPane styleClass="page-root"
+            stylesheets="@css/page-modern.css"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.teach.javafx.controller.BusScheduleController">
+    <top>
+        <VBox spacing="4.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="校车时刻查询" styleClass="page-title" />
+                <Label text="选择出发校区、到达校区和日期类型，快速查询班车信息" styleClass="page-subtitle" />
+            </children>
             <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                <Insets bottom="14" />
             </padding>
-            <GridPane hgap="10.0" vgap="10.0">
-                <columnConstraints>
-                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="80.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="200.0" />
-                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="80.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="200.0" />
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                </rowConstraints>
-                <Label text="出发校区：" />
-                <ComboBox fx:id="fromCampusComboBox" prefWidth="150.0" GridPane.columnIndex="1" />
-                <Label text="到达校区：" GridPane.columnIndex="2" />
-                <ComboBox fx:id="toCampusComboBox" prefWidth="150.0" GridPane.columnIndex="3" />
-
-                <Label text="日期类型：" GridPane.rowIndex="1" />
-                <HBox spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3">
-                    <RadioButton fx:id="weekdayRadio" text="工作日" selected="true">
-                        <toggleGroup>
-                            <ToggleGroup fx:id="scheduleTypeGroup" />
-                        </toggleGroup>
-                    </RadioButton>
-                    <RadioButton fx:id="weekendRadio" text="非工作日" toggleGroup="$scheduleTypeGroup" />
-                </HBox>
-            </GridPane>
-
-            <HBox spacing="20.0" alignment="CENTER">
-                <Button text="查询" onAction="#onQueryButtonClick" />
-                <Button text="重置" onAction="#onResetButtonClick" />
-            </HBox>
-
-            <ListView fx:id="resultListView" prefHeight="300.0" prefWidth="500.0" />
+        </VBox>
+    </top>
+    <center>
+        <VBox spacing="16.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox spacing="14.0" styleClass="filter-card">
+                    <children>
+                        <GridPane hgap="12.0" vgap="12.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" prefWidth="90.0" />
+                                <ColumnConstraints prefWidth="210.0" />
+                                <ColumnConstraints halignment="RIGHT" prefWidth="90.0" />
+                                <ColumnConstraints prefWidth="210.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints prefHeight="38.0" />
+                                <RowConstraints prefHeight="38.0" />
+                            </rowConstraints>
+                            <Label text="出发校区" styleClass="form-label" />
+                            <ComboBox fx:id="fromCampusComboBox" prefWidth="190.0" GridPane.columnIndex="1" />
+                            <Label text="到达校区" styleClass="form-label" GridPane.columnIndex="2" />
+                            <ComboBox fx:id="toCampusComboBox" prefWidth="190.0" GridPane.columnIndex="3" />
+                            <Label text="日期类型" styleClass="form-label" GridPane.rowIndex="1" />
+                            <HBox spacing="24.0" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3">
+                                <children>
+                                    <RadioButton fx:id="weekdayRadio" text="工作日" selected="true">
+                                        <toggleGroup>
+                                            <ToggleGroup fx:id="scheduleTypeGroup" />
+                                        </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="weekendRadio" text="非工作日" toggleGroup="$scheduleTypeGroup" />
+                                </children>
+                            </HBox>
+                        </GridPane>
+                        <HBox spacing="12.0" alignment="CENTER_RIGHT">
+                            <children>
+                                <Button text="重置" onAction="#onResetButtonClick" styleClass="secondary-button" />
+                                <Button text="查询" onAction="#onQueryButtonClick" styleClass="primary-button" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox spacing="10.0" styleClass="table-card" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Label text="查询结果" styleClass="page-subtitle" />
+                        <ListView fx:id="resultListView" prefHeight="360.0" VBox.vgrow="ALWAYS" />
+                    </children>
+                </VBox>
+            </children>
         </VBox>
     </center>
 </BorderPane>
