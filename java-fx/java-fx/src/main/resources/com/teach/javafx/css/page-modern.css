@@ -182,7 +182,7 @@
 
 .table-view .table-cell {
     -fx-border-color: transparent rgba(226, 232, 240, 0.55) transparent transparent;
-    -fx-padding: 10 12;
+    -fx-padding: 0;
     -fx-text-fill: #1f2937;
 }
 
