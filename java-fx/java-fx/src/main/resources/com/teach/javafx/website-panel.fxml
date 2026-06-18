@@ -12,10 +12,7 @@
             fx:controller="com.teach.javafx.controller.WebsiteController">
 
     <top>
-        <HBox spacing="12.0" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets bottom="10.0" />
-            </BorderPane.margin>
+        <HBox spacing="12.0" BorderPane.alignment="CENTER" styleClass="page-toolbar">
             <children>
                 <VBox spacing="4.0">
                     <Label text="常用网站" styleClass="page-title" />
@@ -23,14 +20,21 @@
                 </VBox>
                 <Pane HBox.hgrow="ALWAYS" />
                 <Button fx:id="addButton" text="添加网站" visible="false" managed="false"
-                            styleClass="primary-button" onAction="#onAddButtonClick"/>
+                        styleClass="primary-button" onAction="#onAddButtonClick" />
             </children>
+            <padding>
+                <Insets bottom="10.0" />
+            </padding>
         </HBox>
     </top>
 
     <center>
         <ScrollPane fitToWidth="true" styleClass="content-scroll">
-            <VBox fx:id="contentVBox" spacing="20.0" style="-fx-padding: 15;" styleClass="table-card"/>
+            <VBox fx:id="contentVBox" spacing="18.0" styleClass="table-card">
+                <padding>
+                    <Insets top="14" right="14" bottom="14" left="14" />
+                </padding>
+            </VBox>
         </ScrollPane>
     </center>
 </BorderPane>

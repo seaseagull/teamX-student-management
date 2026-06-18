@@ -65,14 +65,14 @@ public class WebsiteController extends ToolController {
     }
 
     private VBox createCategoryBox(String category, List<Map> websites) {
-        VBox box = new VBox(10);
+        VBox box = new VBox(12);
+        box.getStyleClass().add("content-card");
 
         Label title = new Label(category);
-        title.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333");
+        title.setStyle("-fx-font-size: 16px; -fx-font-weight: 700; -fx-text-fill: #102a43;");
 
-        FlowPane flowPane = new FlowPane(20, 15);
-        flowPane.setPadding(new Insets(10, 10, 10, 10));
-        flowPane.setPrefWrapLength(780);
+        FlowPane flowPane = new FlowPane(16, 16);
+        flowPane.setPrefWrapLength(760);
 
         for (Map w : websites) {
             VBox card = createCard(w);
@@ -90,21 +90,22 @@ public class WebsiteController extends ToolController {
 
         VBox card = new VBox(8);
         card.setFocusTraversable(false);
-        card.setPrefHeight(90);
+        card.setPrefHeight(96);
         card.setPrefWidth(230);
-        card.setPadding(new Insets(15));
-        card.setStyle("-fx-border-color: #e8e8e8; -fx-border-radius: 8; -fx-background-color: #fafafa; -fx-background-radius: 8; -fx-cursor: hand");
+        card.setPadding(new Insets(14));
+        card.getStyleClass().add("website-card");
+        card.setStyle("-fx-background-color: rgba(255,255,255,0.96); -fx-background-radius: 14; -fx-border-color: rgba(226,232,240,0.95); -fx-border-radius: 14; -fx-cursor: hand;");
 
-        card.setOnMouseEntered(e -> card.setStyle("-fx-border-color: #1890ff; -fx-border-radius: 8; -fx-background-color: #e6f7ff; -fx-background-radius: 8; -fx-cursor: hand;"));
-        card.setOnMouseExited(e -> card.setStyle("-fx-border-color: #e8e8e8; -fx-border-radius: 8; -fx-background-color: #fafafa; -fx-background-radius: 8; -fx-cursor: hand;"));
+        card.setOnMouseEntered(e -> card.setStyle("-fx-background-color: rgba(22,119,255,0.08); -fx-background-radius: 14; -fx-border-color: rgba(22,119,255,0.28); -fx-border-radius: 14; -fx-cursor: hand;"));
+        card.setOnMouseExited(e -> card.setStyle("-fx-background-color: rgba(255,255,255,0.96); -fx-background-radius: 14; -fx-border-color: rgba(226,232,240,0.95); -fx-border-radius: 14; -fx-cursor: hand;"));
 
         Label nameLabe = new Label(name);
-        nameLabe.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333");
+        nameLabe.setStyle("-fx-font-weight: 700; -fx-font-size: 14px; -fx-text-fill: #1f2937;");
 
         Label descLabel = new Label(desc);
         descLabel.setWrapText(true);
         descLabel.setMaxHeight(30);
-        descLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #999");
+        descLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #667085;");
 
         card.getChildren().addAll(nameLabe, descLabel);
         card.setOnMouseClicked(e -> {
@@ -138,20 +139,20 @@ public class WebsiteController extends ToolController {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setHgap(12);
+        gridPane.setVgap(12);
+        gridPane.setPadding(new Insets(22));
 
         TextField nameField = new TextField();
         nameField.setPromptText("网站名称");
-        nameField.setPrefWidth(290);
+        nameField.setPrefWidth(310);
         TextField urlField = new TextField();
         urlField.setPromptText("网址");
-        urlField.setPrefWidth(290);
+        urlField.setPrefWidth(310);
         TextArea descField = new TextArea();
         descField.setPromptText("描述");
-        descField.setPrefWidth(290);
-        descField.setPrefHeight(60);
+        descField.setPrefWidth(310);
+        descField.setPrefHeight(72);
         descField.setWrapText(true);
 
         ComboBox<String> categoryBox = new ComboBox<>();
@@ -159,18 +160,20 @@ public class WebsiteController extends ToolController {
         categoryBox.getSelectionModel().selectFirst();
 
         gridPane.addRow(0, new Label("名称:"), nameField);
-        gridPane.addRow(1, new Label("网址:"), urlField );
+        gridPane.addRow(1, new Label("网址:"), urlField);
         gridPane.addRow(2, new Label("描述:"), descField);
         gridPane.addRow(3, new Label("分类:"), categoryBox);
 
         Button saveButton = new Button("保存");
-        saveButton.setStyle("-fx-background-color: #1890ff; -fx-text-fill: white;");
+        saveButton.getStyleClass().add("primary-button");
         Button cancelButton = new Button("取消");
+        cancelButton.getStyleClass().add("secondary-button");
         HBox buttons = new HBox(10, saveButton, cancelButton);
         buttons.setAlignment(Pos.CENTER_RIGHT);
 
-        VBox root = new VBox(15, gridPane, new Separator(), buttons);
-        root.setPadding(new Insets(10));
+        VBox root = new VBox(16, gridPane, new Separator(), buttons);
+        root.getStyleClass().add("content-card");
+        root.setPadding(new Insets(14));
 
         saveButton.setOnAction(e -> {
             String name = nameField.getText().trim();
@@ -188,7 +191,7 @@ public class WebsiteController extends ToolController {
 
         cancelButton.setOnAction(e -> stage.close());
 
-        stage.setScene(new Scene(root, 400, 300));
+        stage.setScene(new Scene(root, 430, 330));
         stage.showAndWait();
 
         loadWebistes();
@@ -211,18 +214,18 @@ public class WebsiteController extends ToolController {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setHgap(12);
+        gridPane.setVgap(12);
+        gridPane.setPadding(new Insets(22));
 
         TextField nameField = new TextField((String) website.get("name"));
         TextField urlField = new TextField((String) website.get("url"));
         TextArea descField = new TextArea((String) website.get("description"));
 
-        nameField.setPrefWidth(290);
-        urlField.setPrefWidth(290);
-        descField.setPrefWidth(290);
-        descField.setPrefHeight(60);
+        nameField.setPrefWidth(310);
+        urlField.setPrefWidth(310);
+        descField.setPrefWidth(310);
+        descField.setPrefHeight(72);
         descField.setWrapText(true);
 
         ComboBox<String> categoryBox = new ComboBox<>();
@@ -230,20 +233,22 @@ public class WebsiteController extends ToolController {
         categoryBox.getSelectionModel().selectFirst();
 
         gridPane.addRow(0, new Label("名称:"), nameField);
-        gridPane.addRow(1, new Label("网址:"), urlField );
+        gridPane.addRow(1, new Label("网址:"), urlField);
         gridPane.addRow(2, new Label("描述:"), descField);
         gridPane.addRow(3, new Label("分类:"), categoryBox);
 
         Button saveButton = new Button("保存");
-        saveButton.setStyle("-fx-background-color: #1890ff; -fx-text-fill: white;");
+        saveButton.getStyleClass().add("primary-button");
         Button deleteButton = new Button("删除");
-        deleteButton.setStyle("-fx-background-color: #ff6b6b; -fx-text-fill: white;");
+        deleteButton.getStyleClass().add("danger-button");
         Button cancelButton = new Button("取消");
-        HBox buttons = new HBox(10, new Pane(),saveButton, cancelButton, deleteButton);
+        cancelButton.getStyleClass().add("secondary-button");
+        HBox buttons = new HBox(10, new Pane(), saveButton, cancelButton, deleteButton);
         buttons.setAlignment(Pos.CENTER_RIGHT);
 
-        VBox root = new VBox(15, gridPane, new Separator(), buttons);
-        root.setPadding(new Insets(10));
+        VBox root = new VBox(16, gridPane, new Separator(), buttons);
+        root.getStyleClass().add("content-card");
+        root.setPadding(new Insets(14));
 
         Object idObj = website.get("id");
         Integer id = idObj instanceof Double ? ((Double) idObj).intValue() : (Integer) idObj;
@@ -269,7 +274,7 @@ public class WebsiteController extends ToolController {
 
         cancelButton.setOnAction(e -> stage.close());
 
-        stage.setScene(new Scene(root, 400, 300));
+        stage.setScene(new Scene(root, 430, 330));
         stage.showAndWait();
 
         loadWebistes();

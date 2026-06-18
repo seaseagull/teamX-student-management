@@ -6,8 +6,7 @@
 
 <BorderPane prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.teach.javafx.controller.ExamManagementController"
-            styleClass="page-root modern-page-dark"
-            stylesheets="@/com/teach/javafx/css/page-modern.css">
+            styleClass="page-root modern-page-dark">
     <top>
         <VBox spacing="12.0">
             <children>

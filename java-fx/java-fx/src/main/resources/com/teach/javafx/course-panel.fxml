@@ -19,10 +19,15 @@
             <children>
                 <VBox spacing="4.0" styleClass="page-header">
                     <children>
-                        <Label text="课程查看" styleClass="page-title" />
-                        <Label text="查看课程号、课程名称、学分、任课教师与前序课程信息" styleClass="page-subtitle" />
+                        <Label text="课程管理" styleClass="page-title" />
+                        <Label text="维护课程号、课程名称、学分、任课教师与前序课程信息" styleClass="page-subtitle" />
                     </children>
                 </VBox>
+                <HBox alignment="CENTER_RIGHT">
+                    <children>
+                        <Button text="添加" onAction="#onAddButtonClick" styleClass="primary-button" />
+                    </children>
+                </HBox>
             </children>
             <padding>
                 <Insets bottom="14" />

@@ -232,7 +232,9 @@ public class MainFrameController {
         try {
             URL pageUrl = resolveFxmlUrl(name);
             URL pageModernCss = MainApplication.class.getResource("/com/teach/javafx/css/page-modern.css");
-            debugLog("H5", "MainFrameController.loadPage:resolve", "resolved page url", Map.of("name", name, "url", pageUrl == null ? "null" : pageUrl.toExternalForm(), "pageModernCss", pageModernCss == null ? "null" : pageModernCss.toExternalForm()));
+            URL componentCss = MainApplication.class.getResource("/com/teach/javafx/css/component.css");
+            URL layoutCss = MainApplication.class.getResource("/com/teach/javafx/css/layout.css");
+            debugLog("H5", "MainFrameController.loadPage:resolve", "resolved page url", Map.of("name", name, "url", pageUrl == null ? "null" : pageUrl.toExternalForm(), "pageModernCss", pageModernCss == null ? "null" : pageModernCss.toExternalForm(), "componentCss", componentCss == null ? "null" : componentCss.toExternalForm(), "layoutCss", layoutCss == null ? "null" : layoutCss.toExternalForm()));
             if (pageUrl == null) {
                 new Alert(Alert.AlertType.ERROR, "打开页面失败：" + name + "\n未找到对应的 FXML 文件").show();
                 return null;
@@ -249,7 +251,7 @@ public class MainFrameController {
             }
             return root;
         } catch (IOException ex) {
-            debugLog("H5", "MainFrameController.loadPage:error", "page load failed", Map.of("name", name, "error", ex.getMessage()));
+            debugLog("H5", "MainFrameController.loadPage:error", "page load failed", Map.of("name", name, "errorType", ex.getClass().getName(), "error", ex.getMessage()));
             new Alert(Alert.AlertType.ERROR, "打开页面失败：" + name + "\n" + ex.getMessage()).show();
             return null;
         }

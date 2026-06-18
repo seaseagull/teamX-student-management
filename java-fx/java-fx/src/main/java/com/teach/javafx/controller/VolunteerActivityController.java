@@ -235,67 +235,103 @@ public class VolunteerActivityController extends ToolController {
         stage.setTitle("添加志愿活动");
         stage.initModality(Modality.APPLICATION_MODAL);
 
+        VBox root = new VBox(16);
+        root.getStyleClass().add("page-root");
+        root.setPrefWidth(860);
+        root.setStyle("-fx-background-color: linear-gradient(to bottom right, rgba(250,252,255,0.98), rgba(236,242,250,0.94));");
+        root.setPadding(new Insets(18));
+
+        VBox header = new VBox(4);
+        Label titleLabel = new Label("添加志愿活动");
+        titleLabel.setStyle("-fx-font-size: 22px; -fx-font-weight: 700; -fx-text-fill: #102a43;");
+        Label subtitleLabel = new Label("完善活动信息后保存，界面风格与系统保持一致");
+        subtitleLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #667085;");
+        header.getChildren().addAll(titleLabel, subtitleLabel);
+
+        VBox card = new VBox(14);
+        card.setStyle("-fx-background-color: rgba(255, 255, 255, 0.94); -fx-background-radius: 22; -fx-border-color: rgba(226, 232, 240, 0.94); -fx-border-radius: 22; -fx-padding: 18; -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.14), 20, 0.16, 0, 6);");
+
         GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(12);
-        grid.setPadding(new Insets(20));
+        grid.setHgap(14);
+        grid.setVgap(14);
+        grid.setPadding(new Insets(2, 2, 2, 2));
+
+        ColumnConstraints labelColumn = new ColumnConstraints();
+        labelColumn.setPrefWidth(110);
+        labelColumn.setHalignment(javafx.geometry.HPos.RIGHT);
+        ColumnConstraints fieldColumn = new ColumnConstraints();
+        fieldColumn.setHgrow(Priority.ALWAYS);
+        grid.getColumnConstraints().addAll(labelColumn, fieldColumn);
 
         TextField nameField = new TextField();
-        nameField.setPrefWidth(350);
+        nameField.setPrefWidth(420);
+        nameField.setPromptText("请输入活动名称，例如：春季校园清洁活动");
 
         TextField locationField = new TextField();
-        locationField.setPrefWidth(350);
+        locationField.setPrefWidth(420);
+        locationField.setPromptText("请输入活动地点，例如：图书馆东门");
 
         DatePicker datePicker = new DatePicker();
-        datePicker.setPrefWidth(350);
-        datePicker.setPromptText("选择日期");
+        datePicker.setPrefWidth(420);
+        datePicker.setPromptText("请选择活动日期");
 
         HBox startTimePicker = createTimePicker("09", "00");
         HBox endTimePicker = createTimePicker("12", "00");
 
         HBox timeBox = new HBox(10,
-                new Label("开始:"), startTimePicker,
-                new Label("结束:"), endTimePicker);
+                createInlineFieldTitle("开始时间"), startTimePicker,
+                createInlineFieldTitle("结束时间"), endTimePicker);
+        timeBox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
         TextArea workField = new TextArea();
-        workField.setPrefHeight(60);
+        workField.setPrefRowCount(3);
         workField.setWrapText(true);
+        workField.setPromptText("请输入志愿工作内容，例如：引导签到、秩序维护、物资整理");
 
         TextField recruitField = new TextField();
+        recruitField.setPromptText("请输入招募人数，例如：20");
         TextField hoursField = new TextField();
+        hoursField.setPromptText("请输入志愿时长，例如：2.5");
 
-        HBox countBox = new HBox(10, recruitField, hoursField);
+        HBox countBox = new HBox(12,
+                createInlineFieldTitle("招募人数"), recruitField,
+                createInlineFieldTitle("志愿时长"), hoursField);
+        HBox.setHgrow(recruitField, Priority.ALWAYS);
+        HBox.setHgrow(hoursField, Priority.ALWAYS);
 
         TextArea requirementsField = new TextArea();
-        requirementsField.setPrefHeight(50);
+        requirementsField.setPrefRowCount(3);
         requirementsField.setWrapText(true);
+        requirementsField.setPromptText("请输入活动要求，例如：准时到场、服从安排、穿着志愿马甲");
 
         TextArea notesField = new TextArea();
-        notesField.setPrefHeight(50);
+        notesField.setPrefRowCount(3);
         notesField.setWrapText(true);
+        notesField.setPromptText("请输入注意事项，例如：活动当天请携带学生证，雨天活动顺延");
 
         DatePicker signupStartDate = new DatePicker();
-        signupStartDate.setPrefWidth(150);
+        signupStartDate.setPrefWidth(180);
+        signupStartDate.setPromptText("开始日期");
         HBox signupStartTimePicker = createTimePicker("00", "00");
-        HBox signupStartBox = new HBox(5, new Label("开始:"), signupStartDate, signupStartTimePicker);
+        HBox signupStartBox = new HBox(8, createInlineFieldTitle("开始时间"), signupStartDate, signupStartTimePicker);
 
-        // 报名截止时间
         DatePicker signupEndDate = new DatePicker();
-        signupEndDate.setPrefWidth(150);
+        signupEndDate.setPrefWidth(180);
+        signupEndDate.setPromptText("截止日期");
         HBox signupEndTimePicker = createTimePicker("23", "59");
-        HBox signupEndBox = new HBox(5, new Label("截止:"), signupEndDate, signupEndTimePicker);
+        HBox signupEndBox = new HBox(8, createInlineFieldTitle("截止时间"), signupEndDate, signupEndTimePicker);
 
-        VBox signupBox = new VBox(5, signupStartBox, signupEndBox);
+        VBox signupBox = new VBox(8, signupStartBox, signupEndBox);
 
-        grid.addRow(0, new Label("活动名称:"), nameField);
-        grid.addRow(1, new Label("活动地点:"), locationField);
-        grid.addRow(2, new Label("活动日期:"), datePicker);
-        grid.addRow(3, new Label("时间:"), timeBox);
-        grid.addRow(4, new Label("工作内容:"), workField);
-        grid.addRow(5, new Label("招募/时长:"), countBox);
-        grid.addRow(6, new Label("活动要求:"), requirementsField);
-        grid.addRow(7, new Label("注意事项:"), notesField);
-        grid.addRow(8, new Label("报名时间:"), signupBox);;
+        grid.addRow(0, createFieldTitle("活动名称", "请输入活动名称，例如：春季校园清洁活动"), nameField);
+        grid.addRow(1, createFieldTitle("活动地点", "请输入活动地点，例如：图书馆东门"), locationField);
+        grid.addRow(2, createFieldTitle("活动日期", "请选择志愿活动举行的日期"), datePicker);
+        grid.addRow(3, createFieldTitle("活动时间", "设置开始和结束时间"), timeBox);
+        grid.addRow(4, createFieldTitle("工作内容", "简要说明志愿者需要做什么"), workField);
+        grid.addRow(5, createFieldTitle("招募与时长", "填写招募人数与志愿服务时长"), countBox);
+        grid.addRow(6, createFieldTitle("活动要求", "如报名条件、着装要求等"), requirementsField);
+        grid.addRow(7, createFieldTitle("注意事项", "如集合地点、签到说明等"), notesField);
+        grid.addRow(8, createFieldTitle("报名时间", "设置可报名的起止时间"), signupBox);
 
         Button saveButton = ButtonFactory.createSaveButton("保存");
         Button cancelButton = ButtonFactory.createCancelButton("取消");
@@ -303,8 +339,8 @@ public class VolunteerActivityController extends ToolController {
         HBox buttons = new HBox(10, new Pane(), cancelButton, saveButton);
         HBox.setHgrow(buttons.getChildren().get(0), Priority.ALWAYS);
 
-        VBox root = new VBox(15, grid, new Separator(), buttons);
-        root.setPadding(new Insets(10));
+        card.getChildren().addAll(grid, new Separator(), buttons);
+        root.getChildren().addAll(header, card);
 
         saveButton.setOnAction(e -> {
             if (nameField.getText().isEmpty()) {
@@ -364,13 +400,77 @@ public class VolunteerActivityController extends ToolController {
 
         cancelButton.setOnAction(e -> stage.close());
         ScrollPane scrollPane = new ScrollPane(root);
-        stage.setScene(new Scene(scrollPane, 700, 600));
+        scrollPane.setFitToWidth(true);
+        scrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
+        root.setFillWidth(true);
+
+        stage.setScene(new Scene(scrollPane, 900, 760));
+        if (stage.getScene() != null) {
+            stage.getScene().getStylesheets().add(getClass().getResource("/com/teach/javafx/css/page-modern.css").toExternalForm());
+        }
         stage.showAndWait();
     }
 
     @Override
     public void doRefresh() {
         loadActivityList();  // 重新加载
+    }
+
+    private VBox createFieldTitle(String title, String hint) {
+        Label titleLabel = new Label(title);
+        titleLabel.setStyle("-fx-font-size: 13px; -fx-font-weight: 700; -fx-text-fill: #344054;");
+        Label hintLabel = new Label(hint);
+        hintLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #667085;");
+        hintLabel.setWrapText(true);
+        VBox box = new VBox(2, titleLabel, hintLabel);
+        box.setMinWidth(150);
+        return box;
+    }
+
+    private Label createInlineFieldTitle(String title) {
+        Label label = new Label(title + ":");
+        label.setStyle("-fx-font-size: 12px; -fx-font-weight: 600; -fx-text-fill: #475467;");
+        return label;
+    }
+
+    private void styleDatePicker(DatePicker datePicker) {
+        datePicker.setStyle("-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(208, 213, 221, 0.92); -fx-background-color: rgba(255, 255, 255, 0.92);");
+        datePicker.focusedProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue) {
+                datePicker.setStyle("-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #1677ff; -fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(22, 119, 255, 0.18), 10, 0.12, 0, 0);");
+            } else {
+                datePicker.setStyle("-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(208, 213, 221, 0.92); -fx-background-color: rgba(255, 255, 255, 0.92);");
+            }
+        });
+    }
+
+    private TextField createStyledTextField(String promptText) {
+        TextField field = new TextField();
+        field.setPrefWidth(420);
+        field.setPromptText(promptText);
+        field.focusedProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue) {
+                field.setStyle("-fx-background-color: white; -fx-border-color: #1677ff; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(22, 119, 255, 0.18), 10, 0.12, 0, 0);");
+            } else {
+                field.setStyle("");
+            }
+        });
+        return field;
+    }
+
+    private TextArea createStyledTextArea(String promptText) {
+        TextArea area = new TextArea();
+        area.setPrefRowCount(3);
+        area.setWrapText(true);
+        area.setPromptText(promptText);
+        area.focusedProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue) {
+                area.setStyle("-fx-background-color: white; -fx-border-color: #1677ff; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(22, 119, 255, 0.18), 10, 0.12, 0, 0);");
+            } else {
+                area.setStyle("");
+            }
+        });
+        return area;
     }
 
     // 时间选择器工具方法
@@ -380,19 +480,23 @@ public class VolunteerActivityController extends ToolController {
             hourBox.getItems().add(String.format("%02d", i));
         }
         hourBox.setValue(defaultHour != null ? defaultHour : "09");
-        hourBox.setPrefWidth(70);
+        hourBox.setPrefWidth(80);
 
         ComboBox<String> minuteBox = new ComboBox<>();
         for (int i = 0; i < 60; i += 5) {
             minuteBox.getItems().add(String.format("%02d", i));
         }
         minuteBox.setValue(defaultMinute != null ? defaultMinute : "00");
-        minuteBox.setPrefWidth(70);
+        minuteBox.setPrefWidth(80);
 
         hourBox.setId("hour");
         minuteBox.setId("minute");
 
-        HBox timePicker = new HBox(5, hourBox, new Label(":"), minuteBox);
+        hourBox.getStyleClass().add("combo-box");
+        minuteBox.getStyleClass().add("combo-box");
+
+        HBox timePicker = new HBox(6, hourBox, new Label(":"), minuteBox);
+        timePicker.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
         return timePicker;
     }
 

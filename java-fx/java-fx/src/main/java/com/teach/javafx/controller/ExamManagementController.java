@@ -8,6 +8,7 @@ import com.teach.javafx.request.DataResponse;
 import com.teach.javafx.request.HttpRequestUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -52,7 +53,8 @@ public class ExamManagementController {
         formatTableDateTime();
         examTable.setItems(examList);
 
-        // ❌ 绝对不要在这里加自动刷新！！！
+        // 页面初始化完成后自动刷新一次，避免首次打开为空
+        Platform.runLater(this::refreshExamList);
     }
 
     // ====================== 1. 刷新列表按钮（已修复）======================

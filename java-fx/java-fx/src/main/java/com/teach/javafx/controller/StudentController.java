@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import com.teach.javafx.request.DataRequest;
@@ -92,6 +93,8 @@ public class StudentController extends ToolController {
 
     @FXML
     private TextField numNameTextField;  //查询 姓名学号输入域
+    @FXML
+    private VBox detailVBox;
 
     private Integer personId = null;  //当前编辑修改的学生的主键
 
@@ -117,6 +120,10 @@ public class StudentController extends ToolController {
 
     @FXML
     public void initialize() {
+        if (detailVBox != null) {
+            detailVBox.setVisible(false);
+            detailVBox.setManaged(false);
+        }
         photoImageView = new ImageView();
         photoImageView.setFitHeight(100);
         photoImageView.setFitWidth(100);
@@ -201,7 +208,9 @@ public class StudentController extends ToolController {
      */
 
     public void onTableRowSelect(ListChangeListener.Change<? extends Integer> change) {
-        changeStudentInfo();
+        if (detailVBox != null && detailVBox.isVisible()) {
+            changeStudentInfo();
+        }
     }
 
     /**
@@ -226,6 +235,18 @@ public class StudentController extends ToolController {
     @FXML
     protected void onAddButtonClick() {
         clearPanel();
+        if (detailVBox != null) {
+            detailVBox.setVisible(true);
+            detailVBox.setManaged(true);
+        }
+    }
+
+    @FXML
+    protected void onBackToListClick() {
+        if (detailVBox != null) {
+            detailVBox.setVisible(false);
+            detailVBox.setManaged(false);
+        }
     }
 
     /**
@@ -295,7 +316,7 @@ public class StudentController extends ToolController {
      * doNew() doSave() doDelete() 重写 ToolController 中的方法， 实现选择 新建，保存，删除 对学生的增，删，改操作
      */
     public void doNew() {
-        clearPanel();
+        onAddButtonClick();
     }
 
     public void doSave() {
