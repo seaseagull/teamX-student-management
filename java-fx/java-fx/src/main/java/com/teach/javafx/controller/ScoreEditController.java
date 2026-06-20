@@ -29,6 +29,15 @@ public class ScoreEditController {
     private Integer scoreId= null;
     @FXML
     public void initialize() {
+        markField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null || newValue.isBlank()) {
+                return;
+            }
+            if (newValue.matches("\\d{0,3}(\\.\\d{0,2})?")) {
+                return;
+            }
+            markField.setText(oldValue);
+        });
     }
 
     @FXML
@@ -43,8 +52,23 @@ public class ScoreEditController {
         if(op != null) {
             data.put("courseId", Integer.parseInt(op.getValue()));
         }
+        String markText = markField.getText() == null ? "" : markField.getText().trim();
+        if (markText.isEmpty()) {
+            markField.requestFocus();
+            return;
+        }
+        try {
+            double mark = Double.parseDouble(markText);
+            if (mark < 0 || mark > 100) {
+                markField.requestFocus();
+                return;
+            }
+        } catch (NumberFormatException ex) {
+            markField.requestFocus();
+            return;
+        }
         data.put("scoreId",scoreId);
-        data.put("mark",markField.getText());
+        data.put("mark",markText);
         scoreTableController.doClose("ok",data);
     }
     @FXML
@@ -58,8 +82,8 @@ public class ScoreEditController {
     public void init(){
         studentList =scoreTableController.getStudentList();
         courseList = scoreTableController.getCourseList();
-        studentComboBox.getItems().addAll(studentList );
-        courseComboBox.getItems().addAll(courseList);
+        studentComboBox.getItems().setAll(studentList );
+        courseComboBox.getItems().setAll(courseList);
     }
     public void showDialog(Map data){
         if(data == null) {
@@ -76,6 +100,11 @@ public class ScoreEditController {
             studentComboBox.setDisable(true);
             courseComboBox.setDisable(true);
             markField.setText(CommonMethod.getString(data, "mark"));
+        }
+        if (studentComboBox.getSelectionModel().isEmpty() && !studentComboBox.isDisabled()) {
+            studentComboBox.requestFocus();
+        } else {
+            markField.requestFocus();
         }
     }
 }

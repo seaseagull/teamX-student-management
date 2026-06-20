@@ -8,6 +8,7 @@ import com.teach.javafx.request.HttpRequestUtil;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -136,65 +137,87 @@ public class WebsiteController extends ToolController {
     private void showAddDialog() {
         Stage stage = new Stage();
         stage.setTitle("添加网站");
+        stage.initOwner(contentVBox.getScene().getWindow());
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+
+        VBox root = new VBox(16);
+        root.getStyleClass().add("content-card");
+        root.setPadding(new Insets(18));
+
+        HBox header = new HBox();
+        header.setAlignment(Pos.CENTER_LEFT);
+        header.setSpacing(12);
+        VBox titleBox = new VBox(4);
+        Label title = new Label("添加网站");
+        title.getStyleClass().add("page-title");
+        Label subtitle = new Label("补充网站基础信息后保存");
+        subtitle.getStyleClass().add("page-subtitle");
+        titleBox.getChildren().addAll(title, subtitle);
+        HBox.setHgrow(titleBox, Priority.ALWAYS);
+        Button closeButton = new Button("×");
+        closeButton.getStyleClass().add("secondary-button");
+        closeButton.setOnAction(e -> stage.close());
+        header.getChildren().addAll(titleBox, closeButton);
 
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(12);
-        gridPane.setVgap(12);
-        gridPane.setPadding(new Insets(22));
+        gridPane.setHgap(14);
+        gridPane.setVgap(14);
+        ColumnConstraints labelCol = new ColumnConstraints();
+        labelCol.setMinWidth(76);
+        labelCol.setHalignment(javafx.geometry.HPos.RIGHT);
+        ColumnConstraints fieldCol = new ColumnConstraints();
+        fieldCol.setHgrow(Priority.ALWAYS);
+        gridPane.getColumnConstraints().addAll(labelCol, fieldCol);
 
         TextField nameField = new TextField();
         nameField.setPromptText("网站名称");
-        nameField.setPrefWidth(310);
         TextField urlField = new TextField();
         urlField.setPromptText("网址");
-        urlField.setPrefWidth(310);
         TextArea descField = new TextArea();
         descField.setPromptText("描述");
-        descField.setPrefWidth(310);
-        descField.setPrefHeight(72);
+        descField.setPrefRowCount(3);
         descField.setWrapText(true);
-
         ComboBox<String> categoryBox = new ComboBox<>();
         categoryBox.getItems().addAll("综合服务", "学习相关", "生活服务");
         categoryBox.getSelectionModel().selectFirst();
 
-        gridPane.addRow(0, new Label("名称:"), nameField);
-        gridPane.addRow(1, new Label("网址:"), urlField);
-        gridPane.addRow(2, new Label("描述:"), descField);
-        gridPane.addRow(3, new Label("分类:"), categoryBox);
+        nameField.setPrefHeight(40);
+        urlField.setPrefHeight(40);
+        categoryBox.setPrefHeight(40);
+        descField.setPrefHeight(92);
 
-        Button saveButton = new Button("保存");
-        saveButton.getStyleClass().add("primary-button");
+        gridPane.addRow(0, new Label("名称"), nameField);
+        gridPane.addRow(1, new Label("网址"), urlField);
+        gridPane.addRow(2, new Label("描述"), descField);
+        gridPane.addRow(3, new Label("分类"), categoryBox);
+
         Button cancelButton = new Button("取消");
         cancelButton.getStyleClass().add("secondary-button");
-        HBox buttons = new HBox(10, saveButton, cancelButton);
+        Button saveButton = new Button("保存");
+        saveButton.getStyleClass().add("primary-button");
+        HBox buttons = new HBox(10, cancelButton, saveButton);
         buttons.setAlignment(Pos.CENTER_RIGHT);
 
-        VBox root = new VBox(16, gridPane, new Separator(), buttons);
-        root.getStyleClass().add("content-card");
-        root.setPadding(new Insets(14));
+        root.getChildren().addAll(header, gridPane, buttons);
+        Scene scene = new Scene(root, 520, 380);
+        scene.getStylesheets().add(getClass().getResource("/com/teach/javafx/css/page-modern.css").toExternalForm());
+        stage.setScene(scene);
 
         saveButton.setOnAction(e -> {
             String name = nameField.getText().trim();
             String url = urlField.getText().trim();
             String desc = descField.getText().trim();
             String category = categoryBox.getValue();
-
-            if(name.isEmpty() || url.isEmpty()) {
+            if (name.isEmpty() || url.isEmpty()) {
                 return;
             }
-
             doSave(name, url, desc, category);
             stage.close();
+            loadWebistes();
         });
-
         cancelButton.setOnAction(e -> stage.close());
-
-        stage.setScene(new Scene(root, 430, 330));
         stage.showAndWait();
-
-        loadWebistes();
     }
 
     private void doSave(String name, String url, String desc, String category) {
@@ -204,51 +227,72 @@ public class WebsiteController extends ToolController {
         req.add("description", desc);
         req.add("category", category);
 
-        DataResponse res = HttpRequestUtil.request("/api/website/saveWebsite", req);
-
+        HttpRequestUtil.request("/api/website/saveWebsite", req);
     }
 
     private void showEditDialog(Map website) {
         Stage stage = new Stage();
         stage.setTitle("编辑网站");
+        stage.initOwner(contentVBox.getScene().getWindow());
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+
+        VBox root = new VBox(16);
+        root.getStyleClass().add("content-card");
+        root.setPadding(new Insets(18));
+
+        HBox header = new HBox();
+        header.setAlignment(Pos.CENTER_LEFT);
+        header.setSpacing(12);
+        VBox titleBox = new VBox(4);
+        Label title = new Label("编辑网站");
+        title.getStyleClass().add("page-title");
+        Label subtitle = new Label("可修改信息或删除该网站");
+        subtitle.getStyleClass().add("page-subtitle");
+        titleBox.getChildren().addAll(title, subtitle);
+        HBox.setHgrow(titleBox, Priority.ALWAYS);
+        Button closeButton = new Button("×");
+        closeButton.getStyleClass().add("secondary-button");
+        closeButton.setOnAction(e -> stage.close());
+        header.getChildren().addAll(titleBox, closeButton);
 
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(12);
-        gridPane.setVgap(12);
-        gridPane.setPadding(new Insets(22));
+        gridPane.setHgap(14);
+        gridPane.setVgap(14);
+        ColumnConstraints labelCol = new ColumnConstraints();
+        labelCol.setMinWidth(76);
+        labelCol.setHalignment(javafx.geometry.HPos.RIGHT);
+        ColumnConstraints fieldCol = new ColumnConstraints();
+        fieldCol.setHgrow(Priority.ALWAYS);
+        gridPane.getColumnConstraints().addAll(labelCol, fieldCol);
 
         TextField nameField = new TextField((String) website.get("name"));
         TextField urlField = new TextField((String) website.get("url"));
         TextArea descField = new TextArea((String) website.get("description"));
-
-        nameField.setPrefWidth(310);
-        urlField.setPrefWidth(310);
-        descField.setPrefWidth(310);
-        descField.setPrefHeight(72);
+        descField.setPrefRowCount(3);
         descField.setWrapText(true);
-
         ComboBox<String> categoryBox = new ComboBox<>();
         categoryBox.getItems().addAll("综合服务", "学习相关", "生活服务");
-        categoryBox.getSelectionModel().selectFirst();
+        categoryBox.getSelectionModel().select((String) website.getOrDefault("category", "综合服务"));
 
-        gridPane.addRow(0, new Label("名称:"), nameField);
-        gridPane.addRow(1, new Label("网址:"), urlField);
-        gridPane.addRow(2, new Label("描述:"), descField);
-        gridPane.addRow(3, new Label("分类:"), categoryBox);
+        gridPane.addRow(0, new Label("名称"), nameField);
+        gridPane.addRow(1, new Label("网址"), urlField);
+        gridPane.addRow(2, new Label("描述"), descField);
+        gridPane.addRow(3, new Label("分类"), categoryBox);
 
+        Button cancelButton = new Button("取消");
+        cancelButton.getStyleClass().add("secondary-button");
         Button saveButton = new Button("保存");
         saveButton.getStyleClass().add("primary-button");
         Button deleteButton = new Button("删除");
         deleteButton.getStyleClass().add("danger-button");
-        Button cancelButton = new Button("取消");
-        cancelButton.getStyleClass().add("secondary-button");
-        HBox buttons = new HBox(10, new Pane(), saveButton, cancelButton, deleteButton);
+        HBox buttons = new HBox(10, cancelButton, saveButton, deleteButton);
         buttons.setAlignment(Pos.CENTER_RIGHT);
 
-        VBox root = new VBox(16, gridPane, new Separator(), buttons);
-        root.getStyleClass().add("content-card");
-        root.setPadding(new Insets(14));
+        root.getChildren().addAll(header, gridPane, buttons);
+        Scene scene = new Scene(root, 540, 400);
+        scene.getStylesheets().add(getClass().getResource("/com/teach/javafx/css/page-modern.css").toExternalForm());
+        stage.setScene(scene);
 
         Object idObj = website.get("id");
         Integer id = idObj instanceof Double ? ((Double) idObj).intValue() : (Integer) idObj;
@@ -258,26 +302,20 @@ public class WebsiteController extends ToolController {
             String url = urlField.getText().trim();
             String desc = descField.getText().trim();
             String category = categoryBox.getValue();
-
-            if(name.isEmpty() || url.isEmpty()) {
+            if (name.isEmpty() || url.isEmpty()) {
                 return;
             }
-
             doSave(id, name, url, desc, category);
             stage.close();
+            loadWebistes();
         });
-
         deleteButton.setOnAction(e -> {
             doDelete(id);
             stage.close();
+            loadWebistes();
         });
-
         cancelButton.setOnAction(e -> stage.close());
-
-        stage.setScene(new Scene(root, 430, 330));
         stage.showAndWait();
-
-        loadWebistes();
     }
 
     private void doSave(Integer id, String name, String url, String desc, String category) {
@@ -288,7 +326,7 @@ public class WebsiteController extends ToolController {
         req.add("description", desc);
         req.add("category", category);
 
-        DataResponse res = HttpRequestUtil.request("/api/website/saveWebsite", req);
+        HttpRequestUtil.request("/api/website/saveWebsite", req);
     }
 
     private void doDelete(Integer id) {

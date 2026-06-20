@@ -148,13 +148,16 @@ public class ScoreTableController {
         Scene scene = null;
         try {
             fxmlLoader = new FXMLLoader(MainApplication.class.getResource("score-edit-dialog.fxml"));
-            scene = new Scene(fxmlLoader.load(), 260, 140);
+            scene = new Scene(fxmlLoader.load(), 560, 320);
             stage = new Stage();
             stage.initOwner(MainApplication.getMainStage());
-            stage.initModality(Modality.NONE);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
             stage.setAlwaysOnTop(true);
             stage.setScene(scene);
-            stage.setTitle("成绩录入对话框！");
+            stage.setTitle("成绩录入");
+            stage.setMinWidth(560);
+            stage.setMinHeight(320);
             stage.setOnCloseRequest(event ->{
                 MainApplication.setCanClose(true);
             });

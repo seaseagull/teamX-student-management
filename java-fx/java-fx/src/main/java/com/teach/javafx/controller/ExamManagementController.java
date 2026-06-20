@@ -10,9 +10,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -188,17 +197,40 @@ public class ExamManagementController {
 
     // ====================== 通用：新增/编辑对话框（已修复）======================
     private void showExamDialog(String title, Exam exam) {
-        Dialog<Exam> dialog = new Dialog<>();
-        dialog.setTitle(title);
-        dialog.setHeaderText(null);
+        Stage stage = new Stage(StageStyle.UNDECORATED);
+        stage.initOwner(examTable.getScene().getWindow());
+        stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+        stage.setTitle(title);
 
-        ButtonType saveButtonType = new ButtonType("保存", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+        VBox root = new VBox(16);
+        root.getStyleClass().add("content-card");
+        root.setPadding(new Insets(18));
+        root.setPrefSize(680, 520);
+
+        HBox header = new HBox();
+        header.setAlignment(Pos.CENTER_LEFT);
+        header.setSpacing(12);
+        Label titleLabel = new Label(title);
+        titleLabel.getStyleClass().add("page-title");
+        Label subtitleLabel = new Label("请补充考试基础信息后保存");
+        subtitleLabel.getStyleClass().add("page-subtitle");
+        VBox titleBox = new VBox(4, titleLabel, subtitleLabel);
+        HBox.setHgrow(titleBox, Priority.ALWAYS);
+        Button closeButton = new Button("×");
+        closeButton.getStyleClass().add("secondary-button");
+        closeButton.setOnAction(e -> stage.close());
+        header.getChildren().addAll(titleBox, closeButton);
 
         GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new javafx.geometry.Insets(20, 150, 10, 10));
+        grid.setHgap(14);
+        grid.setVgap(14);
+        ColumnConstraints labelCol = new ColumnConstraints();
+        labelCol.setHalignment(javafx.geometry.HPos.RIGHT);
+        labelCol.setMinWidth(96);
+        ColumnConstraints fieldCol = new ColumnConstraints();
+        fieldCol.setHgrow(Priority.ALWAYS);
+        fieldCol.setPrefWidth(460);
+        grid.getColumnConstraints().addAll(labelCol, fieldCol);
 
         TextField txtName = new TextField();
         TextField txtType = new TextField("期中考试");
@@ -207,6 +239,15 @@ public class ExamManagementController {
         TextField txtDuration = new TextField("120");
         TextField txtLocation = new TextField("教学楼A101");
         TextField txtStatus = new TextField("未开始");
+        List<TextField> allFields = List.of(txtName, txtType, txtStartTime, txtEndTime, txtDuration, txtLocation, txtStatus);
+        allFields.forEach(field -> field.setPrefHeight(40));
+        txtName.setPromptText("请输入考试名称");
+        txtType.setPromptText("请输入考试类型");
+        txtStartTime.setPromptText("yyyy-MM-dd HH:mm:ss");
+        txtEndTime.setPromptText("yyyy-MM-dd HH:mm:ss");
+        txtDuration.setPromptText("请输入分钟数");
+        txtLocation.setPromptText("请输入考试地点");
+        txtStatus.setPromptText("请输入状态");
 
         if (exam != null) {
             txtName.setText(exam.getExamName());
@@ -218,43 +259,64 @@ public class ExamManagementController {
             txtStatus.setText(exam.getStatus());
         }
 
-        grid.add(new Label("考试名称："), 0, 0);
-        grid.add(txtName, 1, 0);
-        grid.add(new Label("考试类型："), 0, 1);
-        grid.add(txtType, 1, 1);
-        grid.add(new Label("开始时间："), 0, 2);
-        grid.add(txtStartTime, 1, 2);
-        grid.add(new Label("结束时间："), 0, 3);
-        grid.add(txtEndTime, 1, 3);
-        grid.add(new Label("时长(分钟)："), 0, 4);
-        grid.add(txtDuration, 1, 4);
-        grid.add(new Label("考试地点："), 0, 5);
-        grid.add(txtLocation, 1, 5);
-        grid.add(new Label("状态："), 0, 6);
-        grid.add(txtStatus, 1, 6);
+        grid.addRow(0, new Label("考试名称"), txtName);
+        grid.addRow(1, new Label("考试类型"), txtType);
+        grid.addRow(2, new Label("开始时间"), txtStartTime);
+        grid.addRow(3, new Label("结束时间"), txtEndTime);
+        grid.addRow(4, new Label("时长(分钟)"), txtDuration);
+        grid.addRow(5, new Label("考试地点"), txtLocation);
+        grid.addRow(6, new Label("状态"), txtStatus);
 
-        dialog.getDialogPane().setContent(grid);
+        HBox footer = new HBox(10);
+        footer.setAlignment(Pos.CENTER_RIGHT);
+        Button cancelButton = new Button("取消");
+        cancelButton.getStyleClass().add("secondary-button");
+        Button saveButton = new Button("保存");
+        saveButton.getStyleClass().add("primary-button");
+        footer.getChildren().addAll(cancelButton, saveButton);
 
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == saveButtonType) {
-                Exam e = exam == null ? new Exam() : exam;
-                e.setExamName(txtName.getText().trim());
-                e.setExamType(txtType.getText().trim());
-                e.setStartTime(LocalDateTime.parse(txtStartTime.getText().trim(), formatter));
-                e.setEndTime(LocalDateTime.parse(txtEndTime.getText().trim(), formatter));
-                e.setDuration(Integer.parseInt(txtDuration.getText().trim()));
-                e.setLocation(txtLocation.getText().trim());
-                e.setStatus(txtStatus.getText().trim());
-                return e;
-            }
-            return null;
-        });
+        root.getChildren().addAll(header, grid, footer);
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/com/teach/javafx/css/page-modern.css").toExternalForm());
+        stage.setScene(scene);
 
-        Optional<Exam> result = dialog.showAndWait();
-        result.ifPresent(e -> {
+        Runnable submit = () -> {
             try {
+                String name = txtName.getText().trim();
+                String type = txtType.getText().trim();
+                String startTimeText = txtStartTime.getText().trim();
+                String endTimeText = txtEndTime.getText().trim();
+                String durationText = txtDuration.getText().trim();
+                String location = txtLocation.getText().trim();
+                String status = txtStatus.getText().trim();
+
+                if (name.isEmpty()) { txtName.requestFocus(); return; }
+                if (type.isEmpty()) { txtType.requestFocus(); return; }
+                if (location.isEmpty()) { txtLocation.requestFocus(); return; }
+                if (status.isEmpty()) { txtStatus.requestFocus(); return; }
+
+                LocalDateTime startTime = LocalDateTime.parse(startTimeText, formatter);
+                LocalDateTime endTime = LocalDateTime.parse(endTimeText, formatter);
+                int duration = Integer.parseInt(durationText);
+                if (duration <= 0) {
+                    txtDuration.requestFocus();
+                    return;
+                }
+                if (!endTime.isAfter(startTime)) {
+                    txtEndTime.requestFocus();
+                    return;
+                }
+
+                Exam e = exam == null ? new Exam() : exam;
+                e.setExamName(name);
+                e.setExamType(type);
+                e.setStartTime(startTime);
+                e.setEndTime(endTime);
+                e.setDuration(duration);
+                e.setLocation(location);
+                e.setStatus(status);
+
                 DataRequest req = new DataRequest();
-                // ✅ 修正：匹配后端要求的form嵌套结构
                 Map<String, Object> form = new HashMap<>();
                 form.put("examId", e.getExamId());
                 form.put("examName", e.getExamName());
@@ -269,6 +331,7 @@ public class ExamManagementController {
                 DataResponse res = HttpRequestUtil.request("/api/exam/examEditSave", req);
                 if (isSuccess(res)) {
                     showAlert(Alert.AlertType.INFORMATION, title + "成功");
+                    stage.close();
                     refreshExamList();
                 } else {
                     showAlert(Alert.AlertType.ERROR, getErrorMsg(res));
@@ -277,7 +340,17 @@ public class ExamManagementController {
                 showAlert(Alert.AlertType.ERROR, title + "失败：" + ex.getMessage());
                 ex.printStackTrace();
             }
+        };
+
+        saveButton.setOnAction(e -> submit.run());
+        cancelButton.setOnAction(e -> stage.close());
+        stage.getScene().getRoot().sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.getStylesheets().add(getClass().getResource("/com/teach/javafx/css/page-modern.css").toExternalForm());
+            }
         });
+        stage.setOnShown(e -> Platform.runLater(txtName::requestFocus));
+        stage.showAndWait();
     }
 
     // ====================== 工具方法（完全保留）======================

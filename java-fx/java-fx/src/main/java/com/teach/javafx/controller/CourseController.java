@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.text.Text;
 import com.teach.javafx.request.HttpRequestUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ import com.teach.javafx.request.DataRequest;
 import com.teach.javafx.request.DataResponse;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,7 +126,7 @@ public class CourseController {
         res = HttpRequestUtil.request("/api/course/getCourseList",req); //从后台获取所有学生信息列表集合
         debugLog("H3", "CourseController.onQueryButtonClick:response", "course list request finished", Map.of("responseNull", res == null, "responseCode", res == null ? -1 : res.getCode(), "responseDataClass", res != null && res.getData() != null ? res.getData().getClass().getName() : "null"));
         if(res != null && res.getCode()== 0) {
-            courseList = (List<Map<String, Object>>) res.getData();
+            courseList = res.getData() == null ? new ArrayList<>() : new ArrayList<>((List<Map<String, Object>>) res.getData());
         }
         setTableViewData();
     }
@@ -206,53 +208,80 @@ public class CourseController {
     }
 
     private void showAddDialog() {
-        Stage stage = new Stage();
+        Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.setTitle("添加课程");
+        stage.initOwner(dataTableView.getScene().getWindow());
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+
+        VBox root = new VBox(16);
+        root.getStyleClass().add("content-card");
+        root.setPadding(new Insets(18));
+
+        HBox header = new HBox();
+        header.setAlignment(Pos.CENTER_LEFT);
+        header.setSpacing(12);
+        Label headerTitle = new Label("添加课程");
+        headerTitle.getStyleClass().add("page-title");
+        Label headerSubtitle = new Label("补充课程基础信息并保存");
+        headerSubtitle.getStyleClass().add("page-subtitle");
+        VBox titleBox = new VBox(4, headerTitle, headerSubtitle);
+        HBox.setHgrow(titleBox, Priority.ALWAYS);
+        Button closeButton = new Button("×");
+        closeButton.getStyleClass().add("secondary-button");
+        closeButton.setOnAction(e -> stage.close());
+        header.getChildren().addAll(titleBox, closeButton);
 
         GridPane grid = new GridPane();
-        grid.setVgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20));
+        grid.setHgap(14);
+        grid.setVgap(14);
+        ColumnConstraints labelCol = new ColumnConstraints();
+        labelCol.setMinWidth(84);
+        labelCol.setPrefWidth(84);
+        labelCol.setHalignment(javafx.geometry.HPos.RIGHT);
+        ColumnConstraints fieldCol = new ColumnConstraints();
+        fieldCol.setHgrow(Priority.ALWAYS);
+        fieldCol.setPrefWidth(360);
+        grid.getColumnConstraints().addAll(labelCol, fieldCol);
 
         TextField numField = new TextField();
         numField.setPromptText("课程号");
-        numField.setPrefWidth(250);
-
+        numField.setPrefWidth(360);
         TextField nameField = new TextField();
         nameField.setPromptText("课程名");
-        nameField.setPrefWidth(250);
-
+        nameField.setPrefWidth(360);
         TextField creditField = new TextField();
         creditField.setPromptText("学分");
-        creditField.setPrefWidth(250);
+        creditField.setPrefWidth(360);
 
         ComboBox<OptionItem> teacherBox = new ComboBox<>();
-        teacherBox.getItems().addAll(teacherList);
-        teacherBox.setPrefWidth(250);
+        teacherBox.getItems().setAll(teacherList == null ? List.of() : teacherList);
+        teacherBox.setPrefWidth(360);
+        teacherBox.setPromptText("请选择教师");
 
         ComboBox<OptionItem> preCourseBox = new ComboBox<>();
-        preCourseBox.getItems().addAll(preCourseList);
-        preCourseBox.getSelectionModel().selectFirst();
-        preCourseBox.setPrefWidth(250);
+        preCourseBox.getItems().setAll(preCourseList == null ? List.of() : preCourseList);
+        preCourseBox.setPrefWidth(360);
+        preCourseBox.setPromptText("无");
+        if (!preCourseBox.getItems().isEmpty()) {
+            preCourseBox.getSelectionModel().selectFirst();
+        }
 
-
-
-        grid.addRow(0, new Label("课程号:"), numField);
-        grid.addRow(1, new Label("课程名:"), nameField);
-        grid.addRow(2, new Label("学分:"), creditField);
-        grid.addRow(3, new Label("教师:"), teacherBox);
-        grid.addRow(4, new Label("前序课:"), preCourseBox);
-
-        Button saveButton = ButtonFactory.createSaveButton("保存");
+        grid.addRow(0, new Label("课程号"), numField);
+        grid.addRow(1, new Label("课程名"), nameField);
+        grid.addRow(2, new Label("学分"), creditField);
+        grid.addRow(3, new Label("教师"), teacherBox);
+        grid.addRow(4, new Label("前序课"), preCourseBox);
 
         Button cancelButton = ButtonFactory.createCancelButton("取消");
+        cancelButton.getStyleClass().add("secondary-button");
+        Button saveButton = ButtonFactory.createSaveButton("保存");
+        saveButton.getStyleClass().add("primary-button");
 
-        HBox buttons = new HBox(10, new Pane(), cancelButton, saveButton);
-        HBox.setHgrow(buttons.getChildren().get(0), Priority.ALWAYS);
+        HBox buttons = new HBox(10, cancelButton, saveButton);
+        buttons.setAlignment(Pos.CENTER_RIGHT);
 
-        VBox root = new VBox(15, grid, new Separator(), buttons);
-        root.setPadding(new Insets(10));
+        root.getChildren().addAll(header, grid, new Separator(), buttons);
 
         saveButton.setOnAction(e -> {
             String num = numField.getText().trim();
@@ -261,45 +290,63 @@ public class CourseController {
 
             if (num.isEmpty()) {
                 MessageDialog.showDialog("课程号为必填项！");
+                numField.requestFocus();
                 return;
             }
             if (name.isEmpty()) {
                 MessageDialog.showDialog("课程名为必填项！");
+                nameField.requestFocus();
                 return;
             }
             if (credit.isEmpty()) {
                 MessageDialog.showDialog("学分为必填项！");
+                creditField.requestFocus();
                 return;
             }
             if (teacherBox.getSelectionModel().isEmpty()) {
                 MessageDialog.showDialog("教师为必填项！");
+                teacherBox.requestFocus();
+                return;
+            }
+
+            int creditValue;
+            try {
+                creditValue = Integer.parseInt(credit);
+            } catch (NumberFormatException ex) {
+                MessageDialog.showDialog("学分必须是整数！");
+                creditField.requestFocus();
                 return;
             }
 
             DataRequest req = new DataRequest();
             req.add("num", num);
             req.add("name", name);
-            req.add("credit", Integer.parseInt(credit));
+            req.add("credit", creditValue);
 
             OptionItem teacher = teacherBox.getSelectionModel().getSelectedItem();
             req.add("teacherId", Integer.parseInt(teacher.getValue()));
 
             OptionItem preCourse = preCourseBox.getSelectionModel().getSelectedItem();
-            if (preCourse != null && !"0".equals(preCourse.getValue())) {
+            if (preCourse != null && preCourse.getValue() != null && !"0".equals(preCourse.getValue())) {
                 req.add("preCourseId", Integer.parseInt(preCourse.getValue()));
             }
 
-            DataResponse res = HttpRequestUtil.request("/api/course/save", req);
-            if(res != null && res.getCode() == 0) {
+            DataResponse res = HttpRequestUtil.request("/api/course/courseSave", req);
+            if (res != null && res.getCode() == 0) {
                 MessageDialog.showDialog("添加成功！");
                 stage.close();
                 onQueryButtonClick();
+            } else {
+                MessageDialog.showDialog("保存失败，请稍后重试！");
             }
         });
 
         cancelButton.setOnAction(e -> stage.close());
 
-        stage.setScene(new Scene(root, 400, 320));
+        Scene scene = new Scene(root, 620, 420);
+        scene.getStylesheets().add(getClass().getResource("/com/teach/javafx/css/page-modern.css").toExternalForm());
+        stage.setScene(scene);
+        stage.centerOnScreen();
         stage.showAndWait();
     }
 

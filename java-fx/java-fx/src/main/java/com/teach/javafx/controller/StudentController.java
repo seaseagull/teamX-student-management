@@ -472,14 +472,25 @@ public class StudentController extends ToolController {
     }
     @FXML
     public void onImportFeeButtonClick(){
+        if (personId == null) {
+            MessageDialog.showDialog("请先选择一名学生，再导入费用数据");
+            return;
+        }
         FileChooser fileDialog = new FileChooser();
         fileDialog.setTitle("前选择消费数据表");
         fileDialog.setInitialDirectory(new File("C:/"));
         fileDialog.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("XLSX 文件", "*.xlsx"));
         File file = fileDialog.showOpenDialog(null);
+        if (file == null) {
+            return;
+        }
         String paras = "personId="+personId;
         DataResponse res =HttpRequestUtil.importData("/api/student/importFeeData",file.getPath(),paras);
+        if(res == null) {
+            MessageDialog.showDialog("导入失败，服务器未返回结果");
+            return;
+        }
         if(res.getCode() == 0) {
             MessageDialog.showDialog("上传成功！");
         }
